@@ -31,20 +31,13 @@ public class DatosLaborales extends javax.swing.JDialog
         labelPuesto = new javax.swing.JLabel();
         labelPlantel = new javax.swing.JLabel();
         labelExterno = new javax.swing.JLabel();
-        labelHoras = new javax.swing.JLabel();
-        labelTipoPuesto = new javax.swing.JLabel();
-        labelJefeInmediato = new javax.swing.JLabel();
-        labelCarreraArea = new javax.swing.JLabel();
         boxCargo = new javax.swing.JComboBox<>();
         boxPuesto = new javax.swing.JComboBox<>();
         boxPlantel = new javax.swing.JComboBox<>();
-        boxHoras = new javax.swing.JComboBox<>();
-        boxTipoPuesto = new javax.swing.JComboBox<>();
-        boxCarreraArea = new javax.swing.JComboBox<>();
         radioBotonExternoSi = new javax.swing.JRadioButton();
         radioBotonExternoNo = new javax.swing.JRadioButton();
-        txtJefeInmediato = new javax.swing.JTextField();
-        btnAgregar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         panelBotones = new javax.swing.JPanel();
         btnGuardarCambios = new javax.swing.JButton();
 
@@ -110,42 +103,6 @@ public class DatosLaborales extends javax.swing.JDialog
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         panelDatosLaborales.add(labelExterno, gridBagConstraints);
 
-        labelHoras.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        labelHoras.setForeground(new java.awt.Color(255, 255, 255));
-        labelHoras.setText("Horas");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        panelDatosLaborales.add(labelHoras, gridBagConstraints);
-
-        labelTipoPuesto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        labelTipoPuesto.setForeground(new java.awt.Color(255, 255, 255));
-        labelTipoPuesto.setText("Tipo de puesto  ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        panelDatosLaborales.add(labelTipoPuesto, gridBagConstraints);
-
-        labelJefeInmediato.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        labelJefeInmediato.setForeground(new java.awt.Color(255, 255, 255));
-        labelJefeInmediato.setText("Jefe inmediato");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        panelDatosLaborales.add(labelJefeInmediato, gridBagConstraints);
-
-        labelCarreraArea.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        labelCarreraArea.setForeground(new java.awt.Color(255, 255, 255));
-        labelCarreraArea.setText("Carrera o área");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        panelDatosLaborales.add(labelCarreraArea, gridBagConstraints);
-
         boxCargo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         boxCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione un cargo --" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -184,44 +141,6 @@ public class DatosLaborales extends javax.swing.JDialog
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
         panelDatosLaborales.add(boxPlantel, gridBagConstraints);
 
-        boxHoras.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        boxHoras.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione las horas --", "NO ESPECIFICADO", "MEDIO TIEMPO", "TIEMPO COMPLETO", "ASIGNATURA", "HORAS", "3/4 DE HORAS" }));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        panelDatosLaborales.add(boxHoras, gridBagConstraints);
-
-        boxTipoPuesto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        boxTipoPuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione su tipo de puesto --", "NO ESPECIFICADO", "DOCENTE", "APOYO A LA EDUCACIÓN" }));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
-        panelDatosLaborales.add(boxTipoPuesto, gridBagConstraints);
-
-        boxCarreraArea.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        boxCarreraArea.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione su carrera o área --" }));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
-        panelDatosLaborales.add(boxCarreraArea, gridBagConstraints);
-
         buttonGroup1.add(radioBotonExternoSi);
         radioBotonExternoSi.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         radioBotonExternoSi.setForeground(new java.awt.Color(255, 255, 255));
@@ -245,23 +164,23 @@ public class DatosLaborales extends javax.swing.JDialog
         gridBagConstraints.insets = new java.awt.Insets(3, 60, 3, 0);
         panelDatosLaborales.add(radioBotonExternoNo, gridBagConstraints);
 
-        txtJefeInmediato.setEditable(false);
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Jornada laboral  ");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(2, 2, 0, 0);
-        panelDatosLaborales.add(txtJefeInmediato, gridBagConstraints);
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelDatosLaborales.add(jLabel1, gridBagConstraints);
 
-        btnAgregar.setText("Agregar");
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione Jornada Laboral --" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
-        panelDatosLaborales.add(btnAgregar, gridBagConstraints);
+        panelDatosLaborales.add(jComboBox1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -339,22 +258,16 @@ public class DatosLaborales extends javax.swing.JDialog
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JComboBox<String> boxCargo;
-    public javax.swing.JComboBox<String> boxCarreraArea;
-    public javax.swing.JComboBox<String> boxHoras;
     public javax.swing.JComboBox<String> boxPlantel;
     public javax.swing.JComboBox<String> boxPuesto;
-    public javax.swing.JComboBox<String> boxTipoPuesto;
-    public javax.swing.JButton btnAgregar;
     public javax.swing.JButton btnGuardarCambios;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel labelCargo;
-    private javax.swing.JLabel labelCarreraArea;
     private javax.swing.JLabel labelExterno;
-    private javax.swing.JLabel labelHoras;
-    private javax.swing.JLabel labelJefeInmediato;
     private javax.swing.JLabel labelPlantel;
     private javax.swing.JLabel labelPuesto;
-    private javax.swing.JLabel labelTipoPuesto;
     private javax.swing.JLabel labelTitulo;
     private javax.swing.JPanel panelBotones;
     private javax.swing.JPanel panelDatosLaborales;
@@ -362,6 +275,5 @@ public class DatosLaborales extends javax.swing.JDialog
     private javax.swing.JPanel panelTitulo;
     public javax.swing.JRadioButton radioBotonExternoNo;
     public javax.swing.JRadioButton radioBotonExternoSi;
-    public javax.swing.JTextField txtJefeInmediato;
     // End of variables declaration//GEN-END:variables
 }

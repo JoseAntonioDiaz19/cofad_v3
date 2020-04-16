@@ -37,7 +37,6 @@ public class RegistrarPersonalController {
         vistaGestionarPersonal.txtApellidoPat.setDocument(new Bloq_Mayus());
         vistaGestionarPersonal.txtClavePresupuestal.setDocument(new Bloq_Mayus());
         vistaGestionarPersonal.txtCURP.setDocument(new Bloq_Mayus());
-        vistaGestionarPersonal.txtJefeInmediato.setDocument(new Bloq_Mayus());
         vistaGestionarPersonal.txtNombre.setDocument(new Bloq_Mayus());
         vistaGestionarPersonal.txtRFC.setDocument(new Bloq_Mayus());
         

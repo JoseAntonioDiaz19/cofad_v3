@@ -40,8 +40,6 @@ public class FormacionAcademica extends javax.swing.JDialog {
         textTitulacion = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         textCedula = new javax.swing.JTextField();
-        labelClaveCarrera = new javax.swing.JLabel();
-        textClaveCarrera = new javax.swing.JTextField();
         panelBotones = new javax.swing.JPanel();
         btnRegistrar = new javax.swing.JButton();
         btnGuardarCambios = new javax.swing.JButton();
@@ -159,29 +157,6 @@ public class FormacionAcademica extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(10, 5, 0, 0);
         panelDatos.add(textCedula, gridBagConstraints);
 
-        labelClaveCarrera.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        labelClaveCarrera.setForeground(new java.awt.Color(255, 255, 255));
-        labelClaveCarrera.setText("Clave de carrera");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        panelDatos.add(labelClaveCarrera, gridBagConstraints);
-
-        textClaveCarrera.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textClaveCarreraActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 0.5;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        panelDatos.add(textClaveCarrera, gridBagConstraints);
-
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -284,10 +259,6 @@ public class FormacionAcademica extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_textCedulaActionPerformed
 
-    private void textClaveCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textClaveCarreraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textClaveCarreraActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -341,7 +312,6 @@ public class FormacionAcademica extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JScrollPane jScrollTablaFormacionAcademica;
-    private javax.swing.JLabel labelClaveCarrera;
     private javax.swing.JLabel labelFormacionAcademica;
     private javax.swing.JLabel labelInstitucion;
     private javax.swing.JLabel labelTitulacion;
@@ -351,7 +321,6 @@ public class FormacionAcademica extends javax.swing.JDialog {
     private javax.swing.JPanel panelTabla;
     public javax.swing.JTable tblFormacionAcademica;
     public javax.swing.JTextField textCedula;
-    public javax.swing.JTextField textClaveCarrera;
     public javax.swing.JTextField textInstitucion;
     public javax.swing.JTextField textTitulacion;
     // End of variables declaration//GEN-END:variables

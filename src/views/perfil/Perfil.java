@@ -212,7 +212,7 @@ public class Perfil extends javax.swing.JPanel {
         botonHistorialMaterias.setBackground(new java.awt.Color(255, 86, 130));
         botonHistorialMaterias.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         botonHistorialMaterias.setForeground(new java.awt.Color(255, 255, 255));
-        botonHistorialMaterias.setText("Historial de materias");
+        botonHistorialMaterias.setText("Experiencia docente");
         botonHistorialMaterias.setBorderPainted(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

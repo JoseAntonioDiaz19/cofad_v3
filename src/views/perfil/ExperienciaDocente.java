@@ -9,12 +9,12 @@ package views.perfil;
  *
  * @author admin
  */
-public class Materias extends javax.swing.JDialog {
+public class ExperienciaDocente extends javax.swing.JDialog {
 
     /**
      * Creates new form Formacion_Academica
      */
-    public Materias(java.awt.Frame parent, boolean modal) {
+    public ExperienciaDocente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -33,11 +33,12 @@ public class Materias extends javax.swing.JDialog {
         labelTitulo = new javax.swing.JLabel();
         panelDatos = new javax.swing.JPanel();
         labelMateria = new javax.swing.JLabel();
-        boxMateria = new javax.swing.JComboBox<>();
         labelPeriodo = new javax.swing.JLabel();
-        boxPeriodo = new javax.swing.JComboBox<>();
         labelAño = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        fieldMateria = new javax.swing.JTextField();
+        chooserMesInicio = new com.toedter.calendar.JMonthChooser();
+        chooserMesFin = new com.toedter.calendar.JMonthChooser();
+        chooserAño = new com.toedter.calendar.JYearChooser();
         panelBotones = new javax.swing.JPanel();
         btnRegistrarUsuario = new javax.swing.JButton();
         btnGuardarCambios = new javax.swing.JButton();
@@ -55,7 +56,7 @@ public class Materias extends javax.swing.JDialog {
         labelTitulo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         labelTitulo.setForeground(new java.awt.Color(255, 255, 255));
         labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelTitulo.setText("Historial de materias");
+        labelTitulo.setText("Experiencia docente");
         labelTitulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -73,75 +74,75 @@ public class Materias extends javax.swing.JDialog {
         labelMateria.setText("Materia: ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
         panelDatos.add(labelMateria, gridBagConstraints);
-
-        boxMateria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Elegir materia --" }));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 0.5;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        panelDatos.add(boxMateria, gridBagConstraints);
 
         labelPeriodo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         labelPeriodo.setForeground(new java.awt.Color(255, 255, 255));
-        labelPeriodo.setText("Periodo: ");
+        labelPeriodo.setText("Periodo  ");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 10, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
         panelDatos.add(labelPeriodo, gridBagConstraints);
-
-        boxPeriodo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Periodo --" }));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 0.5;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        panelDatos.add(boxPeriodo, gridBagConstraints);
 
         labelAño.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         labelAño.setForeground(new java.awt.Color(255, 255, 255));
         labelAño.setText("Año: ");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 10, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
         panelDatos.add(labelAño, gridBagConstraints);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
+        fieldMateria.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 400;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+        panelDatos.add(fieldMateria, gridBagConstraints);
+
+        chooserMesInicio.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        chooserMesInicio.setMonth(7);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 0.2;
-        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
-        panelDatos.add(jTextField1, gridBagConstraints);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+        panelDatos.add(chooserMesInicio, gridBagConstraints);
+
+        chooserMesFin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        chooserMesFin.setMonth(11);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 120, 0, 0);
+        panelDatos.add(chooserMesFin, gridBagConstraints);
+
+        chooserAño.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
+        panelDatos.add(chooserAño, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
         jPanel1.add(panelDatos, gridBagConstraints);
 
@@ -234,10 +235,6 @@ public class Materias extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -255,14 +252,30 @@ public class Materias extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Materias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExperienciaDocente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Materias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExperienciaDocente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Materias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExperienciaDocente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Materias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExperienciaDocente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -283,7 +296,7 @@ public class Materias extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Materias dialog = new Materias(new javax.swing.JFrame(), true);
+                ExperienciaDocente dialog = new ExperienciaDocente(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -296,14 +309,15 @@ public class Materias extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> boxMateria;
-    private javax.swing.JComboBox<String> boxPeriodo;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnGuardarCambios;
     public javax.swing.JButton btnRegistrarUsuario;
+    private com.toedter.calendar.JYearChooser chooserAño;
+    private com.toedter.calendar.JMonthChooser chooserMesFin;
+    private com.toedter.calendar.JMonthChooser chooserMesInicio;
+    private javax.swing.JTextField fieldMateria;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JScrollPane jScrollTablaFormacionAcademica;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelAño;
     private javax.swing.JLabel labelMateria;
     private javax.swing.JLabel labelPeriodo;

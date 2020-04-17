@@ -10,11 +10,10 @@ import javax.swing.ImageIcon;
  */
 public class JDialog_GestionarPersonal extends javax.swing.JDialog
 {
-    public JDialog_GestionarPersonal(java.awt.Frame parent, boolean modal)
-    {
+    public JDialog_GestionarPersonal(java.awt.Frame parent, boolean modal){
         super(parent, modal);
         initComponents();
-        this.setTitle("GESTIONAR PERSONAL");
+        this.setTitle("Gestionar personal");
         this.setSize(950, 450);
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(new Color(0, 78, 97));

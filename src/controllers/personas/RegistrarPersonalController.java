@@ -1,13 +1,19 @@
 package controllers.personas;
 
 import java.awt.event.ActionEvent;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import models.dao.PersonasDAO;
+import models.dao.PlantelDAO;
+import models.dao.PuestosDAO;
 import models.implementation.PersonasDaoImpl;
+import models.implementation.PlantelDaoImpl;
+import models.implementation.PuestosDaoImpl;
 
 import views.personas.JDialog_GestionarPersonal;
 import models.pojo.Personas;
+import util.AlertMarket;
 
 import util.Bloq_Mayus;
 import util.Conexion;
@@ -15,8 +21,9 @@ import util.Conexion;
 public class RegistrarPersonalController {
     
     JDialog_GestionarPersonal vistaGestionarPersonal;
-    
     PersonasDAO personaDao;
+    
+    DefaultComboBoxModel modelCombo;
     
     public RegistrarPersonalController(JDialog_GestionarPersonal vista)
     {
@@ -42,8 +49,29 @@ public class RegistrarPersonalController {
         
         vistaGestionarPersonal.txtRFC.requestFocus();
         
+        cargar_comboPlanteles();
+        cargar_comboPuestos();
+        
         vistaGestionarPersonal.setVisible(true);
     }
+    
+    private void cargar_comboPlanteles()
+    {
+        PlantelDAO planteldao = new PlantelDaoImpl(Conexion.getConnection());
+        modelCombo = new DefaultComboBoxModel(planteldao.todasSubdirecciones());
+        vistaGestionarPersonal.cmbClavePlantel.setModel(modelCombo);
+        vistaGestionarPersonal.cmbClavePlantel.setSelectedIndex(0);
+    }
+    
+    private void cargar_comboPuestos()
+    {
+        PuestosDAO puestosdao = new PuestosDaoImpl(Conexion.getConnection());
+        modelCombo = new DefaultComboBoxModel(puestosdao.todosLosPuestos());
+        vistaGestionarPersonal.cmbPuesto.setModel(modelCombo);
+        vistaGestionarPersonal.cmbPuesto.setSelectedIndex(0);
+    }
+    
+    private void cargar_comboCargos(){}
     
     public void btnRegistrar(ActionEvent evt)
     {
@@ -63,8 +91,7 @@ public class RegistrarPersonalController {
         if(personaDao.Insert(nuevaPersona))
         {
             cleanFields();
-            JOptionPane.showMessageDialog(vistaGestionarPersonal, "Persona registrada correctamente",
-                    "Registro guardado", JOptionPane.INFORMATION_MESSAGE);
+            AlertMarket.GetInfoAlert(vistaGestionarPersonal, "Persona registrada correctamente", "Registro guardado");
         }
     }
     

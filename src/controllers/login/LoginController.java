@@ -1,10 +1,10 @@
 package controllers.login;
 
+import com.sun.awt.AWTUtilities;
 import views.login.Login;
 import views.dashboard.DashboardAdmin;
 import models.pojo.Personas;
 
-import com.sun.awt.AWTUtilities;
 import controllers.DashboardAdminController;
 import java.awt.event.ActionEvent;
 import java.awt.EventQueue;
@@ -17,11 +17,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.JOptionPane;
 import models.dao.PersonasDAO;
 import models.dao.UserDAO;
 import models.implementation.PersonasDaoImpl;
 import models.implementation.UserDaoImpl;
+import util.AlertMarket;
 import util.Conexion;
 
 
@@ -103,7 +103,7 @@ public class LoginController {
     {
         if(plog.txtUser.getText().isEmpty() || plog.txtPass.getText().isEmpty())
         {
-            JOptionPane.showMessageDialog(plog, "No puede haber campos vacíos", "Campos vacíos", JOptionPane.ERROR_MESSAGE);
+            AlertMarket.GetErrorAlert(plog, "No puede haber campos vacíos", "Campos vacíos");
         }
         else if(Userdao.buscarUsuario(plog.txtUser.getText(), plog.txtPass.getText()))
         {
@@ -117,13 +117,13 @@ public class LoginController {
             }
             else
             {
-                JOptionPane.showMessageDialog(plog, "El usuario no se encuentra activo", "Usuario suspendido", JOptionPane.ERROR_MESSAGE);
+                AlertMarket.GetErrorAlert(plog, "El usuario no se encuentra activo", "Usuario suspendido");
             }
             
         }
         else
         {
-            JOptionPane.showMessageDialog(plog, "Verifique sus credenciales", "Credenciales erroneas", JOptionPane.ERROR_MESSAGE);
+            AlertMarket.GetErrorAlert(plog, "Verifique sus credenciales", "Credenciales erroneas");
         }
     }
     

@@ -27,4 +27,9 @@ public class Cargos {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
+    
+    public String toString()
+    {
+        return "" + this.getCargo();
+    }
 }

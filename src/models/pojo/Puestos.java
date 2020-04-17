@@ -68,4 +68,9 @@ public class Puestos {
     public void setExtension(String extension) {
         this.extension = extension;
     }
+    
+    public String toString()
+    {
+        return "" + this.getPuesto();
+    }
 }

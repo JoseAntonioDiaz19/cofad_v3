@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import models.dao.PlantelDAO;
 import models.pojo.Plantel;
 
@@ -81,4 +82,24 @@ public class PlantelDaoImpl implements PlantelDAO{
     public boolean Delete(Plantel modelo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }   
+
+    @Override
+    public Vector<Plantel> todasSubdirecciones() {
+        Vector<Plantel>lista = new Vector<>();
+        try {
+            stmt = conexion.prepareStatement("SELECT * FROM plantel");
+            res = stmt.executeQuery();
+            lista.add(new Plantel("", "-Escoja una opcion-", ""));
+            while(res.next())
+                lista.add(new Plantel(
+                        res.getString("clave_plantel"),
+                        res.getString("plantel"),
+                        res.getString("telefono")
+                ));
+        } 
+        catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return lista;
+    }
 }

@@ -15,8 +15,7 @@ public class PersonasTblVistaDaoImpl implements PersonasTblVistaDao{
     PreparedStatement stmt;
     ResultSet res;
     
-    public PersonasTblVistaDaoImpl(Connection connection)
-    {
+    public PersonasTblVistaDaoImpl(Connection connection){
         conexion = connection;
     }
 

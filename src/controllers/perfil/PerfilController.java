@@ -5,8 +5,11 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import models.dao.PersonasDAO;
+import models.implementation.PersonasDaoImpl;
 import models.pojo.Personas;
 import models.pojo.Usuarios;
+import util.Conexion;
 import views.perfil.DatosLaborales;
 import views.perfil.DatosPersonales;
 import views.perfil.Experiencia_Laboral;
@@ -18,12 +21,12 @@ import views.dashboard.DashboardAdmin;
 import util.FrameHijo;
 
 public class PerfilController {
-    
+
     Personas personaLogueada;
     Perfil vistaPerfil;
     Usuarios modeloUsuario;
     DashboardAdmin mainView;
-    
+
     public PerfilController(Personas personaLogueada, Perfil vistaPerfil,
             DashboardAdmin mainView) {
         this.personaLogueada = personaLogueada;
@@ -40,36 +43,38 @@ public class PerfilController {
         initialize();
         vistaPerfil.setVisible(true);
     }
-    
-    private void initialize(){
+
+    private void initialize() {
+        PersonasDAO personaDAO = new PersonasDaoImpl(Conexion.getConnection());
+        String clavePlantel = personaDAO.obtenerNombrePlantel(personaLogueada.getClave_plantel());
+        String puesto = personaDAO.obtenerNombrePuesto(personaLogueada.getRfc());
+        String cargo = personaDAO.obtenerNombreCargo(personaLogueada.getRfc());
+
         vistaPerfil.labelNombre.setText("NOMBRE: " + personaLogueada.nombreCompleto());
         vistaPerfil.labelRFC.setText("RFC: " + personaLogueada.getRfc());
-        //vistaPerfil.labelPlantel.setText("PLATEL: " + sqlPersona.obtenerNombrePlantel(personaLogueada.getClave_plantel()));
-        //vistaPerfil.labelCarrera.setText("CARRERA: " + sqlPersona.obtenerNombreCarrera(personaLogueada.getClave_carrera()));
-        //vistaPerfil.labelCargo.setText("CARGO: " + sqlPersona.obtenerNombreCargo(personaLogueada.getId_cargo()));
-        //vistaPerfil.labelPuesto.setText("PUESTO: " + sqlPersona.obtenerNombreDepartamento(personaLogueada.getId_departamento()));
-        //System.out.println("Iddepartamento"+personaLogueada.getId_departamento());
-        //System.out.println("Cargo "+personaLogueada.getId_cargo());
+        vistaPerfil.labelPlantel.setText("PLATEL: " + clavePlantel);
+        vistaPerfil.labelPuesto.setText("PUESTO: " + puesto);
+        vistaPerfil.labelCargo.setText("CARGO: " + cargo);
     }
-    
+
     private void botonDatosPersonales(ActionEvent e) {
-        DatosPersonales vistaDatosPersonales = new DatosPersonales(FrameHijo.obtenerPadre(vistaPerfil),true);
-        //DatosPersonalesController controlDatosPersonales = new DatosPersonalesController(vistaDatosPersonales, personaLogueada, mainView, dataSource);
+        DatosPersonales vistaDatosPersonales = new DatosPersonales(FrameHijo.obtenerPadre(vistaPerfil), true);
+        DatosPersonalesController controlDatosPersonales = new DatosPersonalesController(vistaDatosPersonales, personaLogueada);
     }
 
     private void botonExperienciaLaboral(ActionEvent e) {
-        Experiencia_Laboral vistaExperienciaLaboral = new Experiencia_Laboral(FrameHijo.obtenerPadre(vistaPerfil),true);
+        Experiencia_Laboral vistaExperienciaLaboral = new Experiencia_Laboral(FrameHijo.obtenerPadre(vistaPerfil), true);
         //ExperienciaLaboralController controlExperienciaLaboral = new ExperienciaLaboralController(vistaExperienciaLaboral,personaLogueada);
     }
 
     private void FormacionAcademica(ActionEvent e) {
-       FormacionAcademica vistaFormacion_academica = new FormacionAcademica(FrameHijo.obtenerPadre(vistaPerfil),true);
-       //FormacionAcademicaController controlFormacionAcademica = new FormacionAcademicaController(vistaFormacion_academica, personaLogueada);
+        FormacionAcademica vistaFormacion_academica = new FormacionAcademica(FrameHijo.obtenerPadre(vistaPerfil), true);
+        //FormacionAcademicaController controlFormacionAcademica = new FormacionAcademicaController(vistaFormacion_academica, personaLogueada);
     }
 
     private void botonDatosLaborales(ActionEvent e) {
-       DatosLaborales vistaDatosLaborales = new DatosLaborales(FrameHijo.obtenerPadre(vistaPerfil),true);
-       //DatosLaboralesController controlDatosLaborales = new DatosLaboralesController(vistaDatosLaborales, personaLogueada);
+        DatosLaborales vistaDatosLaborales = new DatosLaborales(FrameHijo.obtenerPadre(vistaPerfil), true);
+        //DatosLaboralesController controlDatosLaborales = new DatosLaboralesController(vistaDatosLaborales, personaLogueada);
     }
 
     private void botonCambiarContraseña(ActionEvent e) {
@@ -78,14 +83,14 @@ public class PerfilController {
     }
 
     private void botonResumenCursos(ActionEvent e) {
-        
+
     }
-   
+
     private void botonProductos(ActionEvent e) {
-       
+
     }
 
     private void botonHistorialMaterias(ActionEvent e) {
-       
+
     }
 }

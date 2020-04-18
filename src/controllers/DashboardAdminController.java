@@ -112,13 +112,13 @@ public class DashboardAdminController {
         enableButton();
         mainView.btnPerfil.setEnabled(false);
         
-        Perfil vista = new Perfil();
-        PerfilController ctrl = new PerfilController(personaLogueada, vista, mainView);
+        Perfil vistaPerfil = new Perfil();
+        PerfilController ctrl = new PerfilController(personaLogueada, vistaPerfil, mainView);
          
         if (mainView.pnlMenu.getWidth() >= 200)
             new DashboardSlider(mainView).start();
         
-        new CambioPanel(mainView.pnlContenedor, vista);
+        new CambioPanel(mainView.pnlContenedor, vistaPerfil);
     }
     
     public void Personal(ActionEvent evt)

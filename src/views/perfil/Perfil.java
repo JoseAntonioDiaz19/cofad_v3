@@ -34,7 +34,6 @@ public class Perfil extends javax.swing.JPanel {
         labelNombre = new javax.swing.JLabel();
         labelRFC = new javax.swing.JLabel();
         labelPlantel = new javax.swing.JLabel();
-        labelCarrera = new javax.swing.JLabel();
         labelCargo = new javax.swing.JLabel();
         labelPuesto = new javax.swing.JLabel();
         panelEditarDatos = new javax.swing.JPanel();
@@ -109,20 +108,6 @@ public class Perfil extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 0);
         panelDatosGenerales.add(labelPlantel, gridBagConstraints);
 
-        labelCarrera.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        labelCarrera.setForeground(new java.awt.Color(255, 255, 255));
-        labelCarrera.setText("Carrera");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 0);
-        panelDatosGenerales.add(labelCarrera, gridBagConstraints);
-
         labelCargo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         labelCargo.setForeground(new java.awt.Color(255, 255, 255));
         labelCargo.setText("Cargo");
@@ -141,7 +126,7 @@ public class Perfil extends javax.swing.JPanel {
         labelPuesto.setText("Puesto");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -308,7 +293,6 @@ public class Perfil extends javax.swing.JPanel {
     public javax.swing.JButton botonProductos;
     public javax.swing.JButton botonResumenCursos;
     public javax.swing.JLabel labelCargo;
-    public javax.swing.JLabel labelCarrera;
     public javax.swing.JLabel labelNombre;
     public javax.swing.JLabel labelPlantel;
     public javax.swing.JLabel labelPuesto;

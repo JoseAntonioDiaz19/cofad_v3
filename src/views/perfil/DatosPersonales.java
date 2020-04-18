@@ -13,8 +13,9 @@ public class DatosPersonales extends javax.swing.JDialog
         initComponents();
         rbtHombre.setActionCommand("H");
         rbtMujer.setActionCommand("M");
+        chooserFechaNacimiento.setDateFormatString("YYYY/MM/dd");
         this.setTitle("Datos personales");
-        this.setSize(500, 420);
+        this.setSize(520, 620);
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(new Color(0, 78, 97));
     }
@@ -25,164 +26,167 @@ public class DatosPersonales extends javax.swing.JDialog
         java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroupSexo = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
-        txtRfc = new javax.swing.JTextField();
-        lbl1 = new javax.swing.JLabel();
+        buttonGroupExterno = new javax.swing.ButtonGroup();
+        panelPrincipal = new javax.swing.JPanel();
+        panelTitulo = new javax.swing.JPanel();
         labelTitulo = new javax.swing.JLabel();
-        lbl2 = new javax.swing.JLabel();
-        lbl3 = new javax.swing.JLabel();
-        lbl4 = new javax.swing.JLabel();
-        lbl5 = new javax.swing.JLabel();
-        lbl6 = new javax.swing.JLabel();
-        lbl7 = new javax.swing.JLabel();
-        lbl8 = new javax.swing.JLabel();
-        lbl9 = new javax.swing.JLabel();
-        lbl10 = new javax.swing.JLabel();
-        txtRFC1 = new javax.swing.JTextField();
+        panelDatosPersonales = new javax.swing.JPanel();
+        labelRFC = new javax.swing.JLabel();
+        labelCURP = new javax.swing.JLabel();
+        labelNombre = new javax.swing.JLabel();
+        labelApePaterno = new javax.swing.JLabel();
+        labelApeMaterno = new javax.swing.JLabel();
+        labelSexo = new javax.swing.JLabel();
+        labelCorreo = new javax.swing.JLabel();
+        labelTelefono = new javax.swing.JLabel();
+        labelClavePresupuestal = new javax.swing.JLabel();
+        labelNumTarjeta = new javax.swing.JLabel();
+        txtRfc = new javax.swing.JTextField();
         txtCurp = new javax.swing.JTextField();
+        boxTituloProfesional = new javax.swing.JComboBox<>();
         txtNombre = new javax.swing.JTextField();
         txtApPaterno = new javax.swing.JTextField();
         txtApMaterno = new javax.swing.JTextField();
-        txtCorreoElectronico = new javax.swing.JTextField();
         rbtHombre = new javax.swing.JRadioButton();
         rbtMujer = new javax.swing.JRadioButton();
+        labelFechaNacimiento = new javax.swing.JLabel();
+        txtCorreoElectronico = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JFormattedTextField();
-        txtNumTarjeta = new javax.swing.JFormattedTextField();
         txtClavePresupuestal = new javax.swing.JTextField();
+        txtNumTarjeta = new javax.swing.JFormattedTextField();
         btnGuardarCambios = new javax.swing.JButton();
+        chooserFechaNacimiento = new com.toedter.calendar.JDateChooser();
+        labelTituloProfesional = new javax.swing.JLabel();
+        labelExterno = new javax.swing.JLabel();
+        jRadioBotSi = new javax.swing.JRadioButton();
+        jRadioButNo = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        boxPlanteles = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.GridBagLayout());
+        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
-        jPanel1.setBackground(new java.awt.Color(0, 78, 97));
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        panelPrincipal.setBackground(new java.awt.Color(0, 78, 97));
+        panelPrincipal.setLayout(new java.awt.GridBagLayout());
 
-        txtRfc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        jPanel1.add(txtRfc, gridBagConstraints);
-
-        lbl1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl1.setForeground(new java.awt.Color(255, 255, 255));
-        lbl1.setText("RFC*");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
-        jPanel1.add(lbl1, gridBagConstraints);
+        panelTitulo.setBackground(new java.awt.Color(0, 78, 97));
 
         labelTitulo.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
         labelTitulo.setForeground(new java.awt.Color(255, 255, 255));
         labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTitulo.setText("Datos personales");
+        panelTitulo.add(labelTitulo);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
-        jPanel1.add(labelTitulo, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
+        panelPrincipal.add(panelTitulo, gridBagConstraints);
 
-        lbl2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl2.setForeground(new java.awt.Color(255, 255, 255));
-        lbl2.setText("CURP*");
+        panelDatosPersonales.setBackground(new java.awt.Color(0, 78, 97));
+        panelDatosPersonales.setLayout(new java.awt.GridBagLayout());
+
+        labelRFC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelRFC.setForeground(new java.awt.Color(255, 255, 255));
+        labelRFC.setText("RFC*");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel1.add(lbl2, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 0, 0);
+        panelDatosPersonales.add(labelRFC, gridBagConstraints);
 
-        lbl3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl3.setForeground(new java.awt.Color(255, 255, 255));
-        lbl3.setText("Nombre*");
+        labelCURP.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelCURP.setForeground(new java.awt.Color(255, 255, 255));
+        labelCURP.setText("CURP*");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel1.add(lbl3, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 0, 0);
+        panelDatosPersonales.add(labelCURP, gridBagConstraints);
 
-        lbl4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl4.setForeground(new java.awt.Color(255, 255, 255));
-        lbl4.setText("Apellido paterno*");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel1.add(lbl4, gridBagConstraints);
-
-        lbl5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl5.setForeground(new java.awt.Color(255, 255, 255));
-        lbl5.setText("Apellido materno*");
+        labelNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelNombre.setForeground(new java.awt.Color(255, 255, 255));
+        labelNombre.setText("Nombre*");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel1.add(lbl5, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 0, 0);
+        panelDatosPersonales.add(labelNombre, gridBagConstraints);
 
-        lbl6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl6.setForeground(new java.awt.Color(255, 255, 255));
-        lbl6.setText("Sexo*");
+        labelApePaterno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelApePaterno.setForeground(new java.awt.Color(255, 255, 255));
+        labelApePaterno.setText("Apellido paterno*");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel1.add(lbl6, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 0, 0);
+        panelDatosPersonales.add(labelApePaterno, gridBagConstraints);
 
-        lbl7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl7.setForeground(new java.awt.Color(255, 255, 255));
-        lbl7.setText("Correo*");
+        labelApeMaterno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelApeMaterno.setForeground(new java.awt.Color(255, 255, 255));
+        labelApeMaterno.setText("Apellido materno*");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 0, 0);
+        panelDatosPersonales.add(labelApeMaterno, gridBagConstraints);
+
+        labelSexo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelSexo.setForeground(new java.awt.Color(255, 255, 255));
+        labelSexo.setText("Sexo*");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel1.add(lbl7, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 0, 0);
+        panelDatosPersonales.add(labelSexo, gridBagConstraints);
 
-        lbl8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl8.setForeground(new java.awt.Color(255, 255, 255));
-        lbl8.setText("Teléfono*");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel1.add(lbl8, gridBagConstraints);
-
-        lbl9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl9.setForeground(new java.awt.Color(255, 255, 255));
-        lbl9.setText("Clave presupuestal  ");
+        labelCorreo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelCorreo.setForeground(new java.awt.Color(255, 255, 255));
+        labelCorreo.setText("Correo*");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel1.add(lbl9, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 0, 0);
+        panelDatosPersonales.add(labelCorreo, gridBagConstraints);
 
-        lbl10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl10.setForeground(new java.awt.Color(255, 255, 255));
-        lbl10.setText("Num. de tarjeta ");
+        labelTelefono.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelTelefono.setForeground(new java.awt.Color(255, 255, 255));
+        labelTelefono.setText("Teléfono*");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 11;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel1.add(lbl10, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 0, 0);
+        panelDatosPersonales.add(labelTelefono, gridBagConstraints);
 
-        txtRFC1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelClavePresupuestal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelClavePresupuestal.setForeground(new java.awt.Color(255, 255, 255));
+        labelClavePresupuestal.setText("Clave presupuestal  ");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
-        jPanel1.add(txtRFC1, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 0, 0);
+        panelDatosPersonales.add(labelClavePresupuestal, gridBagConstraints);
 
-        txtCurp.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelNumTarjeta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelNumTarjeta.setForeground(new java.awt.Color(255, 255, 255));
+        labelNumTarjeta.setText("Num. de tarjeta ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 0, 0);
+        panelDatosPersonales.add(labelNumTarjeta, gridBagConstraints);
+
+        txtRfc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -190,9 +194,9 @@ public class DatosPersonales extends javax.swing.JDialog
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        jPanel1.add(txtCurp, gridBagConstraints);
+        panelDatosPersonales.add(txtRfc, gridBagConstraints);
 
-        txtNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtCurp.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -200,19 +204,18 @@ public class DatosPersonales extends javax.swing.JDialog
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        jPanel1.add(txtNombre, gridBagConstraints);
+        panelDatosPersonales.add(txtCurp, gridBagConstraints);
 
-        txtApPaterno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        boxTituloProfesional.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        boxTituloProfesional.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione --" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        jPanel1.add(txtApPaterno, gridBagConstraints);
+        panelDatosPersonales.add(boxTituloProfesional, gridBagConstraints);
 
-        txtApMaterno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
@@ -220,17 +223,27 @@ public class DatosPersonales extends javax.swing.JDialog
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        jPanel1.add(txtApMaterno, gridBagConstraints);
+        panelDatosPersonales.add(txtNombre, gridBagConstraints);
 
-        txtCorreoElectronico.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtApPaterno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        jPanel1.add(txtCorreoElectronico, gridBagConstraints);
+        panelDatosPersonales.add(txtApPaterno, gridBagConstraints);
+
+        txtApMaterno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        panelDatosPersonales.add(txtApMaterno, gridBagConstraints);
 
         buttonGroupSexo.add(rbtHombre);
         rbtHombre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -243,10 +256,10 @@ public class DatosPersonales extends javax.swing.JDialog
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 3, 0);
-        jPanel1.add(rbtHombre, gridBagConstraints);
+        panelDatosPersonales.add(rbtHombre, gridBagConstraints);
 
         buttonGroupSexo.add(rbtMujer);
         rbtMujer.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -254,34 +267,21 @@ public class DatosPersonales extends javax.swing.JDialog
         rbtMujer.setText("Mujer");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 100, 3, 0);
-        jPanel1.add(rbtMujer, gridBagConstraints);
+        panelDatosPersonales.add(rbtMujer, gridBagConstraints);
 
-        txtTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-        txtTelefono.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelFechaNacimiento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelFechaNacimiento.setForeground(new java.awt.Color(255, 255, 255));
+        labelFechaNacimiento.setText("Fecha de nacimiento*  ");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        jPanel1.add(txtTelefono, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 0, 0);
+        panelDatosPersonales.add(labelFechaNacimiento, gridBagConstraints);
 
-        txtNumTarjeta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-        txtNumTarjeta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 11;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        jPanel1.add(txtNumTarjeta, gridBagConstraints);
-
-        txtClavePresupuestal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtCorreoElectronico.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 10;
@@ -289,42 +289,127 @@ public class DatosPersonales extends javax.swing.JDialog
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        jPanel1.add(txtClavePresupuestal, gridBagConstraints);
+        panelDatosPersonales.add(txtCorreoElectronico, gridBagConstraints);
+
+        txtTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtTelefono.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        panelDatosPersonales.add(txtTelefono, gridBagConstraints);
+
+        txtClavePresupuestal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        panelDatosPersonales.add(txtClavePresupuestal, gridBagConstraints);
+
+        txtNumTarjeta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtNumTarjeta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        panelDatosPersonales.add(txtNumTarjeta, gridBagConstraints);
 
         btnGuardarCambios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnGuardarCambios.setText("Guardar cambios");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridy = 14;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 5, 0);
-        jPanel1.add(btnGuardarCambios, gridBagConstraints);
+        panelDatosPersonales.add(btnGuardarCambios, gridBagConstraints);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Fecha de nacimiento*  ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        jPanel1.add(jLabel1, gridBagConstraints);
-
-        jDateChooser1.setDateFormatString("yyyy/MM/dd");
+        chooserFechaNacimiento.setDateFormatString("YYYY/MM/dd");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.ipadx = 50;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.ipadx = 100;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 0.5;
-        jPanel1.add(jDateChooser1, gridBagConstraints);
+        gridBagConstraints.weightx = 0.1;
+        panelDatosPersonales.add(chooserFechaNacimiento, gridBagConstraints);
 
+        labelTituloProfesional.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelTituloProfesional.setForeground(new java.awt.Color(255, 255, 255));
+        labelTituloProfesional.setText("Titulo profesional*");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 0, 0);
+        panelDatosPersonales.add(labelTituloProfesional, gridBagConstraints);
+
+        labelExterno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelExterno.setForeground(new java.awt.Color(255, 255, 255));
+        labelExterno.setText("Externo*");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 0, 0);
+        panelDatosPersonales.add(labelExterno, gridBagConstraints);
+
+        buttonGroupExterno.add(jRadioBotSi);
+        jRadioBotSi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioBotSi.setText("Si");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
+        panelDatosPersonales.add(jRadioBotSi, gridBagConstraints);
+
+        buttonGroupExterno.add(jRadioButNo);
+        jRadioButNo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButNo.setText("No");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 60, 0, 0);
+        panelDatosPersonales.add(jRadioButNo, gridBagConstraints);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Plantel");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 0, 0);
+        panelDatosPersonales.add(jLabel1, gridBagConstraints);
+
+        boxPlanteles.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        boxPlanteles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione --" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
+        panelDatosPersonales.add(boxPlanteles, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 10, 5, 10);
-        getContentPane().add(jPanel1, gridBagConstraints);
+        panelPrincipal.add(panelDatosPersonales, gridBagConstraints);
+
+        getContentPane().add(panelPrincipal);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -379,22 +464,32 @@ public class DatosPersonales extends javax.swing.JDialog
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JComboBox<String> boxPlanteles;
+    public javax.swing.JComboBox<String> boxTituloProfesional;
     public javax.swing.JButton btnGuardarCambios;
+    private javax.swing.ButtonGroup buttonGroupExterno;
     public javax.swing.ButtonGroup buttonGroupSexo;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    public com.toedter.calendar.JDateChooser chooserFechaNacimiento;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    public javax.swing.JRadioButton jRadioBotSi;
+    public javax.swing.JRadioButton jRadioButNo;
+    private javax.swing.JLabel labelApeMaterno;
+    private javax.swing.JLabel labelApePaterno;
+    private javax.swing.JLabel labelCURP;
+    private javax.swing.JLabel labelClavePresupuestal;
+    private javax.swing.JLabel labelCorreo;
+    private javax.swing.JLabel labelExterno;
+    private javax.swing.JLabel labelFechaNacimiento;
+    private javax.swing.JLabel labelNombre;
+    private javax.swing.JLabel labelNumTarjeta;
+    private javax.swing.JLabel labelRFC;
+    private javax.swing.JLabel labelSexo;
+    private javax.swing.JLabel labelTelefono;
     private javax.swing.JLabel labelTitulo;
-    private javax.swing.JLabel lbl1;
-    private javax.swing.JLabel lbl10;
-    private javax.swing.JLabel lbl2;
-    private javax.swing.JLabel lbl3;
-    private javax.swing.JLabel lbl4;
-    private javax.swing.JLabel lbl5;
-    private javax.swing.JLabel lbl6;
-    private javax.swing.JLabel lbl7;
-    private javax.swing.JLabel lbl8;
-    private javax.swing.JLabel lbl9;
+    private javax.swing.JLabel labelTituloProfesional;
+    private javax.swing.JPanel panelDatosPersonales;
+    private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JPanel panelTitulo;
     public javax.swing.JRadioButton rbtHombre;
     public javax.swing.JRadioButton rbtMujer;
     public javax.swing.JTextField txtApMaterno;
@@ -404,7 +499,6 @@ public class DatosPersonales extends javax.swing.JDialog
     public javax.swing.JTextField txtCurp;
     public javax.swing.JTextField txtNombre;
     public javax.swing.JFormattedTextField txtNumTarjeta;
-    public javax.swing.JTextField txtRFC1;
     public javax.swing.JTextField txtRfc;
     public javax.swing.JFormattedTextField txtTelefono;
     // End of variables declaration//GEN-END:variables

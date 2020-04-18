@@ -10,25 +10,23 @@ import java.util.Vector;
 import models.dao.PlantelDAO;
 import models.pojo.Plantel;
 
-public class PlantelDaoImpl implements PlantelDAO{
-    
+public class PlantelDaoImpl implements PlantelDAO {
+
     Connection conexion;
     PreparedStatement stmt;
     ResultSet res;
-    
-    public PlantelDaoImpl(Connection connection)
-    {
+
+    public PlantelDaoImpl(Connection connection) {
         conexion = connection;
     }
 
     @Override
     public List<Plantel> GetAll() {
-        List<Plantel>lista = new ArrayList<>();
+        List<Plantel> lista = new ArrayList<>();
         try {
             stmt = conexion.prepareStatement("SELECT * FROM plantel");
             res = stmt.executeQuery();
-            while(res.next())
-            {
+            while (res.next()) {
                 lista.add(new Plantel(
                         res.getString("clave_plantel"),
                         res.getString("plantel"),
@@ -55,8 +53,7 @@ public class PlantelDaoImpl implements PlantelDAO{
             stmt.setString(3, modelo.getTelefono());
             stmt.execute();
             return true;
-        } 
-        catch (SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
         return false;
@@ -71,8 +68,7 @@ public class PlantelDaoImpl implements PlantelDAO{
             stmt.setString(3, modelo.getClave_plantel());
             stmt.execute();
             return true;
-        } 
-        catch (SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
         return false;
@@ -81,25 +77,44 @@ public class PlantelDaoImpl implements PlantelDAO{
     @Override
     public boolean Delete(Plantel modelo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }   
+    }
 
     @Override
-    public Vector<Plantel> todasSubdirecciones() {
-        Vector<Plantel>lista = new Vector<>();
+    public Vector<Plantel> todosLosPlanteles() {
+        Vector<Plantel> lista = new Vector<>();
         try {
             stmt = conexion.prepareStatement("SELECT * FROM plantel");
             res = stmt.executeQuery();
             lista.add(new Plantel("", "-Escoja una opcion-", ""));
-            while(res.next())
+            while (res.next()) {
                 lista.add(new Plantel(
                         res.getString("clave_plantel"),
                         res.getString("plantel"),
                         res.getString("telefono")
                 ));
-        } 
-        catch (SQLException e) {
+            }
+        } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
         return lista;
+    }
+
+    @Override
+    public String obtenerNombrePlantel(String clave_plantel) {
+        String plantel = null;
+        try {
+            stmt = conexion.prepareStatement("SELECT plantel FROM plantel WHERE clave_plantel = ?");
+
+            stmt.setString(1, clave_plantel);
+
+            ResultSet resultado = stmt.executeQuery();
+            if (resultado.next()) {
+                plantel = resultado.getString("plantel");
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+
+        return plantel;
     }
 }

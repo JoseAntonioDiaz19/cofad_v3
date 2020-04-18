@@ -1,37 +1,39 @@
 package controllers.perfil;
-/*import controladores.modulos.login.LoginController;
 import java.awt.event.ActionEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
-import modelos.entidades.Persona;
-import modelos.entidades.Usuario;
-import modelos.sql.PersonaSQL;
-import modelos.sql.UsuarioSQL;
-import vistas.modulos.login.login;
-import vistas.modulos.perfil.DatosPersonales;
-import vistas.modulos.vistasPrincipales.Principal_GUI;
-
-import javax.sql.DataSource;
+import models.dao.Abreviatura_TituloDAO;
+import models.dao.PersonasDAO;
+import models.dao.PlantelDAO;
+import models.implementation.Abreviatura_TituloDAOImpl;
+import models.implementation.PersonasDaoImpl;
+import models.implementation.PlantelDaoImpl;
+import models.pojo.Abreviatura_Titulo;
+import models.pojo.Personas;
+import models.pojo.Plantel;
+import util.Conexion;
+import views.perfil.DatosPersonales;
 /**
  *
  * @author Jose Antonio Diaz
  */
 public class DatosPersonalesController {
-    /*
-    DataSource pool;
     
     DatosPersonales vistaDatosPersonales;
-    Persona personaLogueada;
-    Principal_GUI mainView;
+    Personas personaLogueada;
+    PersonasDAO personaDAO = new PersonasDaoImpl(Conexion.getConnection());
+    PlantelDAO plantelDAO = new PlantelDaoImpl(Conexion.getConnection());
+    ArrayList <Plantel> listaPlanteles;
+    ArrayList <Abreviatura_Titulo> listaAbreviatura_Tituo;
     
-
     DatosPersonalesController(DatosPersonales vistaDatosPersonales, 
-            Persona personaLogueada, Principal_GUI mainView, 
-            DataSource pool) {
+            Personas personaLogueada) {
        this.vistaDatosPersonales =  vistaDatosPersonales;
        this.personaLogueada = personaLogueada;     
-       this.mainView = mainView;
-       this.pool = pool;
        inicializar();
     }
     
@@ -40,24 +42,42 @@ public class DatosPersonalesController {
         vistaDatosPersonales.setAlwaysOnTop(true);
         vistaDatosPersonales.setLocationRelativeTo(null);
         vistaDatosPersonales.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        vistaDatosPersonales.setSize(850, 463);
+        vistaDatosPersonales.setSize(550, 620);
         llenarCampos();
         vistaDatosPersonales.btnGuardarCambios.addActionListener(this::guardarCambios);
         vistaDatosPersonales.setVisible(true);
     }
     
     private void llenarCampos(){
-        vistaDatosPersonales.txtRfc.setText(personaLogueada.getRFC());
-        vistaDatosPersonales.txtCurp.setText(personaLogueada.getCURP());
-        vistaDatosPersonales.txtNombre.setText(personaLogueada.getNombre());
-        vistaDatosPersonales.txtApPaterno.setText(personaLogueada.getaPaterno());
-        vistaDatosPersonales.txtApMaterno.setText(personaLogueada.getaMaterno());
-        vistaDatosPersonales.txtCorreoElectronico.setText(personaLogueada.getCorreo_electronico());
-        vistaDatosPersonales.txtTelefono.setText(personaLogueada.getNoTelefono());
-        vistaDatosPersonales.txtClavePresupuestal.setText((personaLogueada.getClave_presupuestal()));
-        vistaDatosPersonales.txtNumTarjeta.setText(personaLogueada.getNo_tarjeta());
-        String sexo = personaLogueada.getSexo();
+        personaLogueada = personaDAO.obtenerDatosUsuario(personaLogueada.getRfc());
+        llenarComboPlanteles();
+        llenarComboTituloProfesional();
+       
+        vistaDatosPersonales.jRadioBotSi.setEnabled(false);
+        vistaDatosPersonales.jRadioButNo.setEnabled(false);
+        vistaDatosPersonales.txtRfc.setEditable(false);
         
+        if (personaLogueada.isEs_externo()) {
+            vistaDatosPersonales.jRadioBotSi.setSelected(true);
+        }else{
+            vistaDatosPersonales.jRadioButNo.setSelected(true);
+        }
+        
+       vistaDatosPersonales.boxPlanteles.setSelectedItem
+        (plantelDAO.obtenerNombrePlantel(personaLogueada.getClave_plantel()));
+        vistaDatosPersonales.txtRfc.setText(personaLogueada.getRfc());
+        vistaDatosPersonales.txtCurp.setText(personaLogueada.getCurp());
+        vistaDatosPersonales.boxTituloProfesional.setSelectedItem(personaLogueada.getIdAbreviatura_Titulo());
+        vistaDatosPersonales.txtNombre.setText(personaLogueada.getNombre());
+        vistaDatosPersonales.txtApPaterno.setText(personaLogueada.getApe_paterno());
+        vistaDatosPersonales.txtApMaterno.setText(personaLogueada.getApe_materno());
+        vistaDatosPersonales.txtCorreoElectronico.setText(personaLogueada.getCorreo());
+        vistaDatosPersonales.txtTelefono.setText(personaLogueada.getTelefono());
+        vistaDatosPersonales.txtClavePresupuestal.setText((personaLogueada.getClave_presupuestal()));
+        vistaDatosPersonales.txtNumTarjeta.setText(personaLogueada.getNum_tarjeta());
+        vistaDatosPersonales.chooserFechaNacimiento.setDate(ParseFecha(personaLogueada.getFecha_nac()));
+        
+        String sexo = personaLogueada.getSexo();
         if ("H".equals(sexo)) {
             vistaDatosPersonales.rbtHombre.setSelected(true);
         }else{
@@ -71,15 +91,20 @@ public class DatosPersonalesController {
     }
     public void guardarCambios(ActionEvent e){
         String rfc = vistaDatosPersonales.txtRfc.getText().toUpperCase();
+        int indicePlantel = Integer.parseInt(String.valueOf(vistaDatosPersonales.boxPlanteles.getSelectedIndex()));
+        String clave_plantel = listaPlanteles.get(indicePlantel - 1).getClave_plantel();
+        String idabreviatura_titulo = String.valueOf(vistaDatosPersonales.boxTituloProfesional.getSelectedItem());
         String curp = vistaDatosPersonales.txtCurp.getText().toUpperCase();
         String nombre = vistaDatosPersonales.txtNombre.getText().toUpperCase();
         String ape_paterno = vistaDatosPersonales.txtApPaterno.getText().toUpperCase();
         String ape_materno = vistaDatosPersonales.txtApMaterno.getText().toUpperCase();
+        String sexo = vistaDatosPersonales.buttonGroupSexo.getSelection().getActionCommand();
+        String fecha_nacimiento = capturarFecha(vistaDatosPersonales.chooserFechaNacimiento.getDate());
         String correo_electronico = vistaDatosPersonales.txtCorreoElectronico.getText();
         String telefono = vistaDatosPersonales.txtTelefono.getText();
         String clave_presupuestal = vistaDatosPersonales.txtClavePresupuestal.getText().toUpperCase();
         String num_tarjeta = vistaDatosPersonales.txtNumTarjeta.getText();
-        String sexo = vistaDatosPersonales.buttonGroupSexo.getSelection().getActionCommand();
+       
         boolean todoCorrecto = false;
         
         if (clave_presupuestal.equals("")) {
@@ -90,17 +115,20 @@ public class DatosPersonalesController {
             num_tarjeta = "XXXX";
         }
         
-        Persona personaActualizar = new Persona();
-        personaActualizar.setRFC(rfc);
-        personaActualizar.setCURP(curp);
+        Personas personaActualizar = new Personas();
+        personaActualizar.setRfc(rfc);
+        personaActualizar.setClave_plantel(clave_plantel);
+        personaActualizar.setIdAbreviatura_Titulo(idabreviatura_titulo);
+        personaActualizar.setCurp(curp);
         personaActualizar.setNombre(nombre);
-        personaActualizar.setaPaterno(ape_materno);
-        personaActualizar.setaMaterno(ape_materno);
-        personaActualizar.setCorreo_electronico(correo_electronico);
-        personaActualizar.setNoTelefono(telefono);
+        personaActualizar.setApe_paterno(ape_materno);
+        personaActualizar.setApe_materno(ape_materno);
+        personaActualizar.setCorreo(correo_electronico);
+        personaActualizar.setTelefono(telefono);
         personaActualizar.setClave_presupuestal(clave_presupuestal);
-        personaActualizar.setNo_tarjeta(num_tarjeta);
+        personaActualizar.setNum_tarjeta(num_tarjeta);
         personaActualizar.setSexo(sexo);
+        personaActualizar.setFecha_nac(fecha_nacimiento);
         
         if (!rfc.equals("")) {
             if (!curp.equals("")) {
@@ -123,17 +151,50 @@ public class DatosPersonalesController {
         
         
         if (todoCorrecto) {
-            PersonaSQL sqlPersona = new PersonaSQL();
-            sqlPersona.setDataSource(pool);
-            sqlPersona.modificarMisDatosPersonales(personaActualizar, personaLogueada.getRFC());
+            personaDAO.modificarMisDatosPersonales(personaActualizar, personaLogueada.getRfc());
             JOptionPane.showMessageDialog(vistaDatosPersonales, "Datos actualizados correctamente");
             vistaDatosPersonales.dispose();
             JOptionPane.showMessageDialog(vistaDatosPersonales, "Inicie sesión de nuevo para aplicar los cambios");
-            cerrarSesion();
         }
         
     }
     
+    private void llenarComboPlanteles(){
+        listaPlanteles = (ArrayList<Plantel>) plantelDAO.GetAll();
+        int iteraciones = listaPlanteles.size();
+        for (int i = 0; i < iteraciones; i++) {
+            vistaDatosPersonales.boxPlanteles.addItem(listaPlanteles.get(i).getPlantel());
+        } 
+    } 
+    
+    public void llenarComboTituloProfesional(){
+        Abreviatura_TituloDAO abrevitura_titulo = new Abreviatura_TituloDAOImpl(Conexion.getConnection());
+        listaAbreviatura_Tituo = (ArrayList<Abreviatura_Titulo>) abrevitura_titulo.GetAll();
+        int iteraciones = listaAbreviatura_Tituo.size();
+        for (int i = 0; i < iteraciones; i++) {
+            vistaDatosPersonales.boxTituloProfesional.addItem(listaAbreviatura_Tituo.get(i).getIdabreviatura_titulo());
+        }
+    }
+    
+    public static Date ParseFecha(String fecha){
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        Date fechaDate = null;
+        try {
+            fechaDate = formato.parse(fecha);
+        } 
+        catch (ParseException ex) {
+            System.out.println(ex);
+        }
+        return fechaDate;
+    }
+    
+    private String capturarFecha(Date fecha){
+        String formato = "YYYY/MM/dd";
+        Date fechaInicio = fecha;
+        SimpleDateFormat sdf  = new SimpleDateFormat(formato);
+        return sdf.format(fechaInicio);
+    }
+/*
     public void cerrarSesion(){
             login plog = new login();
             Usuario modeloUsuario = new Usuario();

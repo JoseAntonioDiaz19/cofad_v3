@@ -5,12 +5,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import models.dao.PersonasDAO;
 import models.dao.PuestoPersonaDAO;
 import models.pojo.Personas;
 import models.pojo.PuestoPersona;
-import util.Conexion;
 
 public class PersonasDaoImpl implements PersonasDAO{
     
@@ -133,4 +135,135 @@ public class PersonasDaoImpl implements PersonasDAO{
         return false;
     }
     
+    @Override
+    public String obtenerNombrePlantel(String clave_plantel) {
+        String nombrePlantel = null;
+        try {
+           
+            stmt = conexion.prepareStatement("SELECT plantel FROM plantel WHERE clave_plantel = ?");
+
+            stmt.setString(1, clave_plantel);
+
+            ResultSet resultado = stmt.executeQuery();
+            if (resultado.next()) {
+                nombrePlantel = resultado.getString("plantel");
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        } 
+        return nombrePlantel;
+    }
+    
+    @Override
+    public String obtenerNombreCargo(String rfc) {
+        String cargo = null;
+        try {
+            stmt = conexion.prepareStatement("SELECT cargo From persona "
+                    + "INNER JOIN puesto_persona "
+                    + "ON persona.rfc = puesto_persona.rfc "
+                    + "INNER JOIN cargo "
+                    + "ON puesto_persona.idcargo = cargo.idcargo "
+                    + "WHERE puesto_persona.rfc = ? "
+                    + "AND idjornada_laboral = (SELECT Max(idjornada_laboral) "
+                                    + "FROM persona INNER JOIN puesto_persona "
+                                    + "ON persona.rfc = puesto_persona.rfc "
+                                    + "WHERE puesto_persona.rfc = ?)");
+
+            stmt.setString(1, rfc);
+            stmt.setString(2, rfc);
+
+            ResultSet resultado = stmt.executeQuery();
+            if (resultado.next()) {
+                cargo = resultado.getString("cargo");
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        } 
+        return cargo;
+    }
+    
+    @Override
+    public String obtenerNombrePuesto(String rfc) {
+        String nombrePuesto = null;
+        try {
+            stmt = conexion.prepareStatement("SELECT puesto FROM persona "
+                    + "INNER JOIN puesto_persona "
+                    + "ON persona.rfc = puesto_persona.rfc "
+                    + "INNER JOIN puesto "
+                    + "ON puesto_persona.idpuesto = puesto.idpuesto "
+                    + "WHERE puesto_persona.rfc = ? "
+                    + "AND idjornada_laboral = ( SELECT MAX ( idjornada_laboral ) "
+                                + "FROM persona INNER JOIN puesto_persona "
+                                + "ON persona.rfc = puesto_persona.rfc "
+                                + "WHERE puesto_persona.rfc = ?) ");
+
+            stmt.setString(1, rfc);
+            stmt.setString(2, rfc);
+
+            ResultSet resultado = stmt.executeQuery();
+            if (resultado.next()) {
+                nombrePuesto = resultado.getString("puesto");
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        } 
+        
+        return nombrePuesto;
+    }
+    
+    @Override
+    public boolean modificarMisDatosPersonales(Personas modelo, String rfcActual) {
+        Date fecha_nac = ParseFecha(modelo.getFecha_nac());
+        try {
+            String consulta = "UPDATE persona SET rfc = ?, " +
+                                "clave_plantel = ?, " +
+                                "idabreviatura_titulo = ?, " +
+                                "curp = ?, " +
+                                "nombre = ?, " +
+                                "ape_paterno = ?, " +
+                                "ape_materno = ?, " +
+                                "sexo = ?, " +
+                                "fecha_nacimiento = ?, " +
+                                "correo = ?, " +
+                                "telefono = ?, " +
+                                "clave_presupuestal = ?, " +
+                                "num_tarjeta = ? " +
+                                "WHERE rfc = ?";
+            
+            cstmt = conexion.prepareCall(consulta);
+
+            cstmt.setString(1, modelo.getRfc());
+            cstmt.setString(2, modelo.getClave_plantel());
+            cstmt.setString(3, modelo.getIdAbreviatura_Titulo());
+            cstmt.setString(4, modelo.getCurp());
+            cstmt.setString(5, modelo.getNombre());
+            cstmt.setString(6, modelo.getApe_paterno());
+            cstmt.setString(7, modelo.getApe_materno());
+            cstmt.setString(8, modelo.getSexo());
+            cstmt.setDate(9, (java.sql.Date) fecha_nac);
+            cstmt.setString(10, modelo.getCorreo());
+            cstmt.setString(11, modelo.getTelefono());
+            cstmt.setString(12, modelo.getClave_presupuestal());
+            cstmt.setString(13, modelo.getNum_tarjeta());
+            cstmt.setString(14, rfcActual);
+            cstmt.execute();
+            
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        } 
+    }
+    
+    public static Date ParseFecha(String fecha){
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        Date fechaDate = null;
+        try {
+            fechaDate = formato.parse(fecha);
+        } 
+        catch (ParseException ex) {
+            System.out.println(ex);
+        }
+        return fechaDate;
+    }
 }

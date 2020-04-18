@@ -58,7 +58,7 @@ public class RegistrarPersonalController {
     private void cargar_comboPlanteles()
     {
         PlantelDAO planteldao = new PlantelDaoImpl(Conexion.getConnection());
-        modelCombo = new DefaultComboBoxModel(planteldao.todasSubdirecciones());
+        modelCombo = new DefaultComboBoxModel(planteldao.todosLosPlanteles());
         vistaGestionarPersonal.cmbClavePlantel.setModel(modelCombo);
         vistaGestionarPersonal.cmbClavePlantel.setSelectedIndex(0);
     }

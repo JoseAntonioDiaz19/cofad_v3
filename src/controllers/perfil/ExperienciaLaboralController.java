@@ -1,27 +1,28 @@
 package controllers.perfil;
-
-/*import java.awt.event.ActionEvent;
+import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
-import modelos.entidades.ExperienciaLaboral;
-import modelos.entidades.Persona;
-import modelos.sql.ExperienciaLaboralSQL;
-import vistas.modulos.perfil.Experiencia_Laboral;
-
+import models.dao.Experiencia_LaboralDAO;
+import models.implementation.Experiencia_LaboralDAOImpl;
+import models.pojo.Experiencia_Laboral;
+import models.pojo.Personas;
+import views.perfil.Experiencia_LaboralVista;
+import util.Conexion;
 /**
  * @author Jose Antonio Diaz
  */
 
 public class ExperienciaLaboralController {
-    /*
-    Experiencia_Laboral vistaExperienciaLaboral;
-    Persona personaLogueada;
-    DefaultTableModel modelTablaExperienciaLaboral;
-    ExperienciaLaboralSQL sqlExperienciaLaboral = new ExperienciaLaboralSQL();
     
-    ExperienciaLaboralController(Experiencia_Laboral vistaExperienciaLaboral, Persona personaLogueada) {
+    Experiencia_LaboralVista vistaExperienciaLaboral;
+    Personas personaLogueada;
+    DefaultTableModel modelTablaExperienciaLaboral;
+    Experiencia_LaboralDAO sqlExperienciaLaboral = new Experiencia_LaboralDAOImpl(Conexion.getConnection());
+    
+    ExperienciaLaboralController(Experiencia_LaboralVista vistaExperienciaLaboral, Personas personaLogueada) {
         this.vistaExperienciaLaboral = vistaExperienciaLaboral;
         this.personaLogueada = personaLogueada;
         modelTablaExperienciaLaboral = (DefaultTableModel)this.vistaExperienciaLaboral.tblExperienciaLaboral.getModel();
@@ -31,7 +32,7 @@ public class ExperienciaLaboralController {
          vistaExperienciaLaboral.tblExperienciaLaboral.addMouseListener(new java.awt.event.MouseAdapter() {
        @Override
         public void mouseClicked(java.awt.event.MouseEvent e) {
-             if(e.getClickCount()==2){
+             if(e.getClickCount()== 2){
                 llenarCampos();
               }
         }});
@@ -51,7 +52,7 @@ public class ExperienciaLaboralController {
     private void llenarTablaExperienciaLaboral(){
       
         modelTablaExperienciaLaboral.setNumRows(0);
-        List<ExperienciaLaboral>lista = sqlExperienciaLaboral.listaExperienciaLaboral(personaLogueada.getRFC());
+        List<Experiencia_Laboral>lista = sqlExperienciaLaboral.GetAllBy(personaLogueada.getRfc());
         for (int i = 0; i < lista.size(); i++) {
             modelTablaExperienciaLaboral.addRow(new Object[]{
                 lista.get(i).getIdexperiencia_laboral(),
@@ -63,11 +64,11 @@ public class ExperienciaLaboralController {
             });   
         }
     }
-
+    
     private void Registrar(ActionEvent e) {
       
        int permanencia;
-       String rfc = personaLogueada.getRFC();
+       String rfc = personaLogueada.getRfc();
        String empresa = vistaExperienciaLaboral.textEmpresa.getText();
     	
        try{
@@ -80,10 +81,23 @@ public class ExperienciaLaboralController {
        String actividades = vistaExperienciaLaboral.textActividades.getText();
        String puesto = vistaExperienciaLaboral.textPuesto.getText();
        
+       Experiencia_Laboral VOExperiencia_laboral = new Experiencia_Laboral();
+       VOExperiencia_laboral.setRfc(rfc);
+       VOExperiencia_laboral.setEmpresa(empresa);
+       VOExperiencia_laboral.setPermanencia(permanencia);
+       VOExperiencia_laboral.setActividades(actividades);
+       VOExperiencia_laboral.setPuesto(puesto);
+       
         if (!empresa.equals("")) {
             if (!actividades.equals("")) {
                 if (!puesto.equals("")) {
-                    sqlExperienciaLaboral.registrarExperienciaLaboral(rfc, empresa, permanencia, actividades, puesto);
+                    
+                    try {
+                        sqlExperienciaLaboral.Insert(VOExperiencia_laboral);
+                    } catch (SQLException ex) {
+                        System.out.println(ex);
+                    }
+                    
                     JOptionPane.showMessageDialog(vistaExperienciaLaboral, "Operacion completada correctamente");
                     llenarTablaExperienciaLaboral();
                     vaciarCampos();
@@ -99,7 +113,7 @@ public class ExperienciaLaboralController {
         int idexperiencia_laboral = Integer.parseInt(String.valueOf(vistaExperienciaLaboral.tblExperienciaLaboral.getValueAt(filaSeleccionadaHorario, 0)));
         int permanencia;
        
-       String rfc = personaLogueada.getRFC();
+       String rfc = personaLogueada.getRfc();
        String empresa = vistaExperienciaLaboral.textEmpresa.getText();
     	
        try{
@@ -112,10 +126,25 @@ public class ExperienciaLaboralController {
        String actividades = vistaExperienciaLaboral.textActividades.getText();
        String puesto = vistaExperienciaLaboral.textPuesto.getText();
        
+       Experiencia_Laboral VOExperiencia_laboral = new Experiencia_Laboral();
+       VOExperiencia_laboral.setIdexperiencia_laboral(idexperiencia_laboral);
+       VOExperiencia_laboral.setRfc(rfc);
+       VOExperiencia_laboral.setEmpresa(empresa);
+       VOExperiencia_laboral.setPermanencia(permanencia);
+       VOExperiencia_laboral.setActividades(actividades);
+       VOExperiencia_laboral.setPuesto(puesto);
+       
         if (!empresa.equals("")) {
             if (!actividades.equals("")) {
                 if (!puesto.equals("")) {
-                    sqlExperienciaLaboral.editarExperienciaLaboral(idexperiencia_laboral, empresa, permanencia, actividades, puesto);
+                   
+                    try {
+                        sqlExperienciaLaboral.Update(VOExperiencia_laboral);
+                        System.out.println("");
+                    } catch (SQLException ex) {
+                        System.out.println(ex);
+                    }
+                    
                     JOptionPane.showMessageDialog(vistaExperienciaLaboral, "Operacion completada correctamente");
                     llenarTablaExperienciaLaboral();
                     vaciarCampos();
@@ -131,9 +160,10 @@ public class ExperienciaLaboralController {
         int filaSeleccionadaHorario = vistaExperienciaLaboral.tblExperienciaLaboral.getSelectedRow();
         int idexperiencia_laboral = Integer.parseInt(String.valueOf(vistaExperienciaLaboral.tblExperienciaLaboral.getValueAt(filaSeleccionadaHorario, 0)));
         int res = JOptionPane.showConfirmDialog(vistaExperienciaLaboral, "Confirmar eliminación");
-       
+       Experiencia_Laboral VOExperiencia_laboral = new Experiencia_Laboral();
+       VOExperiencia_laboral.setIdexperiencia_laboral(idexperiencia_laboral);
         if (res == JOptionPane.YES_OPTION) {
-            sqlExperienciaLaboral.eliminarExperienciaLaboral(idexperiencia_laboral);
+            sqlExperienciaLaboral.Delete(VOExperiencia_laboral);
             JOptionPane.showMessageDialog(vistaExperienciaLaboral, "Operacion completada correctamente");
             llenarTablaExperienciaLaboral();
         }
@@ -145,7 +175,7 @@ public class ExperienciaLaboralController {
         int filaSeleccionadaHorario = vistaExperienciaLaboral.tblExperienciaLaboral.getSelectedRow();
         int idexperiencia_laboral = Integer.parseInt(String.valueOf(vistaExperienciaLaboral.tblExperienciaLaboral.getValueAt(filaSeleccionadaHorario, 0)));
         
-        ExperienciaLaboral experienciaLaboral = sqlExperienciaLaboral.datosExperienciaLaboral(idexperiencia_laboral);
+        Experiencia_Laboral experienciaLaboral = sqlExperienciaLaboral.datosExperienciaLaboral(idexperiencia_laboral);
         vistaExperienciaLaboral.textActividades.setText(experienciaLaboral.getActividades());
         vistaExperienciaLaboral.textEmpresa.setText(experienciaLaboral.getEmpresa());
         vistaExperienciaLaboral.textPermanencia.setText(""+experienciaLaboral.getPermanencia());
@@ -157,5 +187,5 @@ public class ExperienciaLaboralController {
         vistaExperienciaLaboral.textEmpresa.setText("");
         vistaExperienciaLaboral.textPermanencia.setText("");
         vistaExperienciaLaboral.textPuesto.setText("");
-    }*/
+    }
 }

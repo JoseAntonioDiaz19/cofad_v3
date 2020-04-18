@@ -7,7 +7,7 @@ import models.pojo.Usuarios;
 import util.Conexion;
 import views.perfil.DatosLaborales;
 import views.perfil.DatosPersonales;
-import views.perfil.Experiencia_Laboral;
+import views.perfil.Experiencia_LaboralVista;
 import views.perfil.FormacionAcademica;
 import views.perfil.Perfil;
 //import views.usuarios.CambiarContraseña;
@@ -59,8 +59,8 @@ public class PerfilController {
     }
 
     private void botonExperienciaLaboral(ActionEvent e) {
-        Experiencia_Laboral vistaExperienciaLaboral = new Experiencia_Laboral(FrameHijo.obtenerPadre(vistaPerfil), true);
-        //ExperienciaLaboralController controlExperienciaLaboral = new ExperienciaLaboralController(vistaExperienciaLaboral,personaLogueada);
+        Experiencia_LaboralVista vistaExperienciaLaboral = new Experiencia_LaboralVista(FrameHijo.obtenerPadre(vistaPerfil), true);
+        ExperienciaLaboralController controlExperienciaLaboral = new ExperienciaLaboralController(vistaExperienciaLaboral,personaLogueada);
     }
 
     private void FormacionAcademica(ActionEvent e) {

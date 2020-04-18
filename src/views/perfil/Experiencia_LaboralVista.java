@@ -11,12 +11,12 @@ import java.awt.Color;
  *
  * @author admin
  */
-public class Experiencia_Laboral extends javax.swing.JDialog {
+public class Experiencia_LaboralVista extends javax.swing.JDialog {
 
     /**
      * Creates new form Formacion_Academica
      */
-    public Experiencia_Laboral(java.awt.Frame parent, boolean modal) {
+    public Experiencia_LaboralVista(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
          jScrollTablaExperienciaLaboral.getViewport().setBackground(new Color(0, 78, 97));
@@ -52,7 +52,6 @@ public class Experiencia_Laboral extends javax.swing.JDialog {
         tblExperienciaLaboral = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(850, 463));
         getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel1.setBackground(new java.awt.Color(0, 78, 97));
@@ -267,14 +266,22 @@ public class Experiencia_Laboral extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Experiencia_Laboral.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Experiencia_LaboralVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Experiencia_Laboral.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Experiencia_LaboralVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Experiencia_Laboral.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Experiencia_LaboralVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Experiencia_Laboral.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Experiencia_LaboralVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -287,7 +294,7 @@ public class Experiencia_Laboral extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Experiencia_Laboral dialog = new Experiencia_Laboral(new javax.swing.JFrame(), true);
+                Experiencia_LaboralVista dialog = new Experiencia_LaboralVista(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

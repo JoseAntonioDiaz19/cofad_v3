@@ -1,10 +1,5 @@
 package controllers.perfil;
-
-import java.awt.Frame;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import models.dao.PersonasDAO;
 import models.implementation.PersonasDaoImpl;
 import models.pojo.Personas;
@@ -46,20 +41,21 @@ public class PerfilController {
 
     private void initialize() {
         PersonasDAO personaDAO = new PersonasDaoImpl(Conexion.getConnection());
-        String clavePlantel = personaDAO.obtenerNombrePlantel(personaLogueada.getClave_plantel());
+        String plantel = personaDAO.obtenerNombrePlantel(personaLogueada.getClave_plantel());
         String puesto = personaDAO.obtenerNombrePuesto(personaLogueada.getRfc());
         String cargo = personaDAO.obtenerNombreCargo(personaLogueada.getRfc());
 
         vistaPerfil.labelNombre.setText("NOMBRE: " + personaLogueada.nombreCompleto());
         vistaPerfil.labelRFC.setText("RFC: " + personaLogueada.getRfc());
-        vistaPerfil.labelPlantel.setText("PLATEL: " + clavePlantel);
+        vistaPerfil.labelPlantel.setText("PLATEL: " + plantel);
         vistaPerfil.labelPuesto.setText("PUESTO: " + puesto);
         vistaPerfil.labelCargo.setText("CARGO: " + cargo);
     }
 
     private void botonDatosPersonales(ActionEvent e) {
         DatosPersonales vistaDatosPersonales = new DatosPersonales(FrameHijo.obtenerPadre(vistaPerfil), true);
-        DatosPersonalesController controlDatosPersonales = new DatosPersonalesController(vistaDatosPersonales, personaLogueada);
+        DatosPersonalesController controlDatosPersonales = new 
+            DatosPersonalesController(vistaDatosPersonales, personaLogueada, vistaPerfil);
     }
 
     private void botonExperienciaLaboral(ActionEvent e) {

@@ -213,7 +213,6 @@ public class PersonasDaoImpl implements PersonasDAO{
     
     @Override
     public boolean modificarMisDatosPersonales(Personas modelo, String rfcActual) {
-        Date fecha_nac = ParseFecha(modelo.getFecha_nac());
         try {
             String consulta = "UPDATE persona SET rfc = ?, " +
                                 "clave_plantel = ?, " +
@@ -223,7 +222,7 @@ public class PersonasDaoImpl implements PersonasDAO{
                                 "ape_paterno = ?, " +
                                 "ape_materno = ?, " +
                                 "sexo = ?, " +
-                                "fecha_nacimiento = ?, " +
+                                "fecha_nacimiento = '" +modelo.getFecha_nac()+"',"+
                                 "correo = ?, " +
                                 "telefono = ?, " +
                                 "clave_presupuestal = ?, " +
@@ -240,12 +239,11 @@ public class PersonasDaoImpl implements PersonasDAO{
             cstmt.setString(6, modelo.getApe_paterno());
             cstmt.setString(7, modelo.getApe_materno());
             cstmt.setString(8, modelo.getSexo());
-            cstmt.setDate(9, (java.sql.Date) fecha_nac);
-            cstmt.setString(10, modelo.getCorreo());
-            cstmt.setString(11, modelo.getTelefono());
-            cstmt.setString(12, modelo.getClave_presupuestal());
-            cstmt.setString(13, modelo.getNum_tarjeta());
-            cstmt.setString(14, rfcActual);
+            cstmt.setString(9, modelo.getCorreo());
+            cstmt.setString(10, modelo.getTelefono());
+            cstmt.setString(11, modelo.getClave_presupuestal());
+            cstmt.setString(12, modelo.getNum_tarjeta());
+            cstmt.setString(13, rfcActual);
             cstmt.execute();
             
             return true;

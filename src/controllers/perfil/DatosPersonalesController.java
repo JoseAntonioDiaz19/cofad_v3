@@ -17,6 +17,7 @@ import models.pojo.Personas;
 import models.pojo.Plantel;
 import util.Conexion;
 import views.perfil.DatosPersonales;
+import views.perfil.Perfil;
 /**
  *
  * @author Jose Antonio Diaz
@@ -29,11 +30,13 @@ public class DatosPersonalesController {
     PlantelDAO plantelDAO = new PlantelDaoImpl(Conexion.getConnection());
     ArrayList <Plantel> listaPlanteles;
     ArrayList <Abreviatura_Titulo> listaAbreviatura_Tituo;
+    Perfil vistaPerfil;
     
     DatosPersonalesController(DatosPersonales vistaDatosPersonales, 
-            Personas personaLogueada) {
+            Personas personaLogueada, Perfil vistaPerfil) {
        this.vistaDatosPersonales =  vistaDatosPersonales;
-       this.personaLogueada = personaLogueada;     
+       this.personaLogueada = personaLogueada;   
+       this.vistaPerfil = vistaPerfil;
        inicializar();
     }
     
@@ -63,8 +66,14 @@ public class DatosPersonalesController {
             vistaDatosPersonales.jRadioButNo.setSelected(true);
         }
         
-       vistaDatosPersonales.boxPlanteles.setSelectedItem
-        (plantelDAO.obtenerNombrePlantel(personaLogueada.getClave_plantel()));
+        if (personaLogueada.getClave_plantel() == null) {
+            vistaDatosPersonales.boxPlanteles.setSelectedIndex(0);
+        }else{
+            vistaDatosPersonales.boxPlanteles.setSelectedItem
+                (plantelDAO.obtenerNombrePlantel(personaLogueada.getClave_plantel()));
+            
+        }
+      
         vistaDatosPersonales.txtRfc.setText(personaLogueada.getRfc());
         vistaDatosPersonales.txtCurp.setText(personaLogueada.getCurp());
         vistaDatosPersonales.boxTituloProfesional.setSelectedItem(personaLogueada.getIdAbreviatura_Titulo());
@@ -75,7 +84,10 @@ public class DatosPersonalesController {
         vistaDatosPersonales.txtTelefono.setText(personaLogueada.getTelefono());
         vistaDatosPersonales.txtClavePresupuestal.setText((personaLogueada.getClave_presupuestal()));
         vistaDatosPersonales.txtNumTarjeta.setText(personaLogueada.getNum_tarjeta());
-        vistaDatosPersonales.chooserFechaNacimiento.setDate(ParseFecha(personaLogueada.getFecha_nac()));
+        
+        if (personaLogueada.getFecha_nac() != null) {
+            vistaDatosPersonales.chooserFechaNacimiento.setDate(ParseFecha(personaLogueada.getFecha_nac()));
+        }
         
         String sexo = personaLogueada.getSexo();
         if ("H".equals(sexo)) {
@@ -83,23 +95,32 @@ public class DatosPersonalesController {
         }else{
             if ("M".equals(sexo)) {
                 vistaDatosPersonales.rbtMujer.setSelected(true);
-            }else{
-                //No se selecciona ninguno
             }
         }
-    
     }
+    
     public void guardarCambios(ActionEvent e){
         String rfc = vistaDatosPersonales.txtRfc.getText().toUpperCase();
         int indicePlantel = Integer.parseInt(String.valueOf(vistaDatosPersonales.boxPlanteles.getSelectedIndex()));
-        String clave_plantel = listaPlanteles.get(indicePlantel - 1).getClave_plantel();
+        String clave_plantel;
+        if (indicePlantel == 0) {
+            clave_plantel = null;
+        }else{
+            clave_plantel = listaPlanteles.get(indicePlantel - 1).getClave_plantel();
+        }
+       
         String idabreviatura_titulo = String.valueOf(vistaDatosPersonales.boxTituloProfesional.getSelectedItem());
         String curp = vistaDatosPersonales.txtCurp.getText().toUpperCase();
         String nombre = vistaDatosPersonales.txtNombre.getText().toUpperCase();
         String ape_paterno = vistaDatosPersonales.txtApPaterno.getText().toUpperCase();
         String ape_materno = vistaDatosPersonales.txtApMaterno.getText().toUpperCase();
         String sexo = vistaDatosPersonales.buttonGroupSexo.getSelection().getActionCommand();
-        String fecha_nacimiento = capturarFecha(vistaDatosPersonales.chooserFechaNacimiento.getDate());
+       
+        String fecha_nacimiento = null;
+        if (vistaDatosPersonales.chooserFechaNacimiento.getDate() != null) {
+            capturarFecha(vistaDatosPersonales.chooserFechaNacimiento.getDate());
+        }
+        
         String correo_electronico = vistaDatosPersonales.txtCorreoElectronico.getText();
         String telefono = vistaDatosPersonales.txtTelefono.getText();
         String clave_presupuestal = vistaDatosPersonales.txtClavePresupuestal.getText().toUpperCase();
@@ -139,7 +160,11 @@ public class DatosPersonalesController {
                                 if (!telefono.equals("")) {
                                     if (vistaDatosPersonales.rbtHombre.isSelected() || 
                                             vistaDatosPersonales.rbtMujer.isSelected()) {
-                                            todoCorrecto = true;
+                                        if (vistaDatosPersonales.chooserFechaNacimiento.getDate() != null) {
+                                            if (vistaDatosPersonales.boxTituloProfesional.getSelectedIndex() !=0) {
+                                                todoCorrecto = true;
+                                            }else{JOptionPane.showMessageDialog(vistaDatosPersonales, "Seleccione una abreviatura de titulo profesional");}
+                                        }else{JOptionPane.showMessageDialog(vistaDatosPersonales, "Seleccione una fecha");}
                                     }else{JOptionPane.showMessageDialog(vistaDatosPersonales, "Seleccione su sexo");}
                                 }else{JOptionPane.showMessageDialog(vistaDatosPersonales, "Debe escribir un número de telefono");}
                             }else{JOptionPane.showMessageDialog(vistaDatosPersonales, "Debe escribir su correo electrónico");}
@@ -153,10 +178,13 @@ public class DatosPersonalesController {
         if (todoCorrecto) {
             personaDAO.modificarMisDatosPersonales(personaActualizar, personaLogueada.getRfc());
             JOptionPane.showMessageDialog(vistaDatosPersonales, "Datos actualizados correctamente");
+            
+            String nombre_plantel = personaDAO.obtenerNombrePlantel(clave_plantel);
+            vistaPerfil.labelNombre.setText("NOMBRE: " + nombre +" "+ ape_paterno +" "+ ape_materno);
+            vistaPerfil.labelRFC.setText("RFC: " + rfc);
+            vistaPerfil.labelPlantel.setText("PLATEL: " + nombre_plantel);
             vistaDatosPersonales.dispose();
-            JOptionPane.showMessageDialog(vistaDatosPersonales, "Inicie sesión de nuevo para aplicar los cambios");
         }
-        
     }
     
     private void llenarComboPlanteles(){
@@ -189,19 +217,9 @@ public class DatosPersonalesController {
     }
     
     private String capturarFecha(Date fecha){
-        String formato = "YYYY/MM/dd";
+        String formato = "yyyy-MM-dd";
         Date fechaInicio = fecha;
         SimpleDateFormat sdf  = new SimpleDateFormat(formato);
         return sdf.format(fechaInicio);
     }
-/*
-    public void cerrarSesion(){
-            login plog = new login();
-            Usuario modeloUsuario = new Usuario();
-            UsuarioSQL sqlUsuario = new UsuarioSQL();
-        
-            LoginController ctrl = new LoginController(plog, modeloUsuario, sqlUsuario, pool);
-            mainView.dispose();
-    }
-*/
 }

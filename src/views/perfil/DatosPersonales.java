@@ -13,7 +13,6 @@ public class DatosPersonales extends javax.swing.JDialog
         initComponents();
         rbtHombre.setActionCommand("H");
         rbtMujer.setActionCommand("M");
-        chooserFechaNacimiento.setDateFormatString("YYYY/MM/dd");
         this.setTitle("Datos personales");
         this.setSize(520, 620);
         this.setLocationRelativeTo(null);
@@ -332,7 +331,7 @@ public class DatosPersonales extends javax.swing.JDialog
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 5, 0);
         panelDatosPersonales.add(btnGuardarCambios, gridBagConstraints);
 
-        chooserFechaNacimiento.setDateFormatString("YYYY/MM/dd");
+        chooserFechaNacimiento.setDateFormatString("yyyy-MM-dd");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 9;
@@ -353,7 +352,7 @@ public class DatosPersonales extends javax.swing.JDialog
 
         labelExterno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         labelExterno.setForeground(new java.awt.Color(255, 255, 255));
-        labelExterno.setText("Externo*");
+        labelExterno.setText("Externo");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;

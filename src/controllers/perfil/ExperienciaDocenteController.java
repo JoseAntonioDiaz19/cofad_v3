@@ -48,17 +48,19 @@ public class ExperienciaDocenteController {
         vistaExperienciaDocente.setLocationRelativeTo(null);
         vistaExperienciaDocente.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         vistaExperienciaDocente.setSize(850, 463);
-        llenarTablaExperienciaDocente();
+        llenarTablaExperienciaDocente(); 
+        vistaExperienciaDocente.btnGuardarCambios.setEnabled(false);
+        vistaExperienciaDocente.btnEliminar.setEnabled(false);
         vistaExperienciaDocente.setVisible(true);
     }
 
     private void llenarTablaExperienciaDocente() {
         modelTablaExperienciaDocente.setNumRows(0);
         lista = sqlExperienciaDocente.GetAllBy(personaLogueada.getRfc());
-        int id = 0;
+        int id = 1;
         for (int i = 0; i < lista.size(); i++) {
             modelTablaExperienciaDocente.addRow(new Object[]{
-                id + 1,
+                id++,
                 lista.get(i).getMateria(),
                 lista.get(i).getMes_inicio() + "-" + lista.get(i).getMes_fin(),
                 lista.get(i).getAño()
@@ -120,8 +122,6 @@ public class ExperienciaDocenteController {
                 if (registroCorrecto) {
                     JOptionPane.showMessageDialog(vistaExperienciaDocente, "La experiencia docente fue guardada correctamente");
                     vistaExperienciaDocente.fieldMateria.setText("");
-                    vistaExperienciaDocente.btnGuardarCambios.setEnabled(false);
-                    vistaExperienciaDocente.btnEliminar.setEnabled(false);
                     llenarTablaExperienciaDocente();
                 }
             } catch (SQLException ex) {
@@ -132,7 +132,47 @@ public class ExperienciaDocenteController {
 
 
     private void botonGuardarCambios(ActionEvent e) {
-       
+        String rfc = personaLogueada.getRfc();
+        String materia = vistaExperienciaDocente.fieldMateria.getText();
+        String mes_inicio = obtenerNombreMes(vistaExperienciaDocente.chooserMesInicio.getMonth() + 1);
+        String mes_fin = obtenerNombreMes(vistaExperienciaDocente.chooserMesFin.getMonth() + 1);
+        int año = vistaExperienciaDocente.chooserAño.getYear();
+        
+        int filaSeleccionadaProducto = vistaExperienciaDocente.tblExperienciaDocente.getSelectedRow();
+        int id = Integer.parseInt(String.valueOf(vistaExperienciaDocente.tblExperienciaDocente.getValueAt(filaSeleccionadaProducto, 0)));
+        
+        int idexperiencia_docente = lista.get(id - 1).getIdexperiencia_docente();
+        
+        boolean datosLlenos = false;
+        if (!materia.equals("")) {
+            datosLlenos = true;
+        }else{JOptionPane.showMessageDialog(vistaExperienciaDocente, "Debe de llenar el campo de materia");}
+        
+        if (datosLlenos) {
+            ExperienciaDocente nuevaExperienciaDocente = new ExperienciaDocente();
+            nuevaExperienciaDocente.setMateria(materia);
+            nuevaExperienciaDocente.setMes_inicio(mes_inicio);
+            nuevaExperienciaDocente.setMes_fin(mes_fin);
+            nuevaExperienciaDocente.setAño(año);
+            nuevaExperienciaDocente.setRfc(rfc);
+            nuevaExperienciaDocente.setIdexperiencia_docente(idexperiencia_docente);
+            
+            boolean registroCorrecto;
+            try {
+                registroCorrecto =sqlExperienciaDocente.Update(nuevaExperienciaDocente);
+                if (registroCorrecto) {
+                    JOptionPane.showMessageDialog(vistaExperienciaDocente, "La experiencia docente fue guardada correctamente");
+                    vistaExperienciaDocente.fieldMateria.setText("");
+                    vistaExperienciaDocente.btnGuardarCambios.setEnabled(false);
+                    vistaExperienciaDocente.btnEliminar.setEnabled(false);
+                    vistaExperienciaDocente.btnRegistrar.setEnabled(true);
+                    llenarTablaExperienciaDocente();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        }
+      
     }
 
     private void botonEliminar(ActionEvent e) {
@@ -151,7 +191,7 @@ public class ExperienciaDocenteController {
             vistaExperienciaDocente.fieldMateria.setText("");
             vistaExperienciaDocente.btnGuardarCambios.setEnabled(false);
             vistaExperienciaDocente.btnEliminar.setEnabled(false);
-            vistaExperienciaDocente.btnRegistrar.setEnabled(false);
+            vistaExperienciaDocente.btnRegistrar.setEnabled(true);
             llenarTablaExperienciaDocente();
         }
     }

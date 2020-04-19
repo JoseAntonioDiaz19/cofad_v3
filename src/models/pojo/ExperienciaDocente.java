@@ -62,7 +62,7 @@ public class ExperienciaDocente {
      * @param materia the materia to set
      */
     public void setMateria(String materia) {
-        this.materia = materia;
+        this.materia = materia.toUpperCase();
     }
 
     /**
@@ -76,7 +76,7 @@ public class ExperienciaDocente {
      * @param mes_inicio the mes_inicio to set
      */
     public void setMes_inicio(String mes_inicio) {
-        this.mes_inicio = mes_inicio;
+        this.mes_inicio = mes_inicio.toUpperCase();
     }
 
     /**
@@ -90,7 +90,7 @@ public class ExperienciaDocente {
      * @param mes_fin the mes_fin to set
      */
     public void setMes_fin(String mes_fin) {
-        this.mes_fin = mes_fin;
+        this.mes_fin = mes_fin.toUpperCase();
     }
 
     /**

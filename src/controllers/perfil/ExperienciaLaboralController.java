@@ -45,6 +45,8 @@ public class ExperienciaLaboralController {
         vistaExperienciaLaboral.setLocationRelativeTo(null);
         vistaExperienciaLaboral.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         vistaExperienciaLaboral.setSize(850, 463);
+        vistaExperienciaLaboral.btnEliminar.setEnabled(false);
+        vistaExperienciaLaboral.btnGuardarCambios.setEnabled(false);
         llenarTablaExperienciaLaboral();
         vistaExperienciaLaboral.setVisible(true);
     }
@@ -101,7 +103,6 @@ public class ExperienciaLaboralController {
                     JOptionPane.showMessageDialog(vistaExperienciaLaboral, "Operacion completada correctamente");
                     llenarTablaExperienciaLaboral();
                     vaciarCampos();
-                    vistaExperienciaLaboral.btnGuardarCambios.setEnabled(true);
                 }else{JOptionPane.showMessageDialog(vistaExperienciaLaboral, "Debe escribir el puesto");}
             }else{JOptionPane.showMessageDialog(vistaExperienciaLaboral, "Debe escribir las actividades");}
         }else{JOptionPane.showMessageDialog(vistaExperienciaLaboral, "Debe escribir el nombre de la empresa");}
@@ -146,10 +147,11 @@ public class ExperienciaLaboralController {
                     }
                     
                     JOptionPane.showMessageDialog(vistaExperienciaLaboral, "Operacion completada correctamente");
-                    llenarTablaExperienciaLaboral();
                     vaciarCampos();
                     vistaExperienciaLaboral.btnRegistrar.setEnabled(true);
                     vistaExperienciaLaboral.btnGuardarCambios.setEnabled(false);
+                    vistaExperienciaLaboral.btnEliminar.setEnabled(false);
+                    llenarTablaExperienciaLaboral();
                 }else{JOptionPane.showMessageDialog(vistaExperienciaLaboral, "Debe escribir el puesto");}
             }else{JOptionPane.showMessageDialog(vistaExperienciaLaboral, "Debe escribir las actividades");}
         }else{JOptionPane.showMessageDialog(vistaExperienciaLaboral, "Debe escribir el nombre de la empresa");}
@@ -165,13 +167,18 @@ public class ExperienciaLaboralController {
         if (res == JOptionPane.YES_OPTION) {
             sqlExperienciaLaboral.Delete(VOExperiencia_laboral);
             JOptionPane.showMessageDialog(vistaExperienciaLaboral, "Operacion completada correctamente");
+            vistaExperienciaLaboral.btnRegistrar.setEnabled(true);
+            vistaExperienciaLaboral.btnGuardarCambios.setEnabled(false);
+            vistaExperienciaLaboral.btnEliminar.setEnabled(false);
+            llenarCampos();
             llenarTablaExperienciaLaboral();
         }
     }
     
     private void llenarCampos(){
-        vistaExperienciaLaboral.btnRegistrar.setEnabled(false);
+        vistaExperienciaLaboral.btnEliminar.setEnabled(true);
         vistaExperienciaLaboral.btnGuardarCambios.setEnabled(true);
+        vistaExperienciaLaboral.btnRegistrar.setEnabled(false);
         int filaSeleccionadaHorario = vistaExperienciaLaboral.tblExperienciaLaboral.getSelectedRow();
         int idexperiencia_laboral = Integer.parseInt(String.valueOf
             (vistaExperienciaLaboral.tblExperienciaLaboral.getValueAt(filaSeleccionadaHorario, 0)));
@@ -181,6 +188,10 @@ public class ExperienciaLaboralController {
         vistaExperienciaLaboral.textEmpresa.setText(experienciaLaboral.getEmpresa());
         vistaExperienciaLaboral.textPermanencia.setText(""+experienciaLaboral.getPermanencia());
         vistaExperienciaLaboral.textPuesto.setText(experienciaLaboral.getPuesto());
+        
+        vistaExperienciaLaboral.btnGuardarCambios.setEnabled(true);
+        vistaExperienciaLaboral.btnEliminar.setEnabled(true);
+        vistaExperienciaLaboral.btnRegistrar.setEnabled(false);
     }
     
     private void vaciarCampos(){

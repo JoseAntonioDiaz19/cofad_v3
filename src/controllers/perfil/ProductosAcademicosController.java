@@ -132,8 +132,6 @@ public class ProductosAcademicosController {
                     JOptionPane.showMessageDialog(vistaProductos, "Producto/Actividad agregado correctamente");
                     vistaProductos.fieldDescripcion.setText("");
                     vistaProductos.fieldProducto.setText("");        
-                    vistaProductos.btnGuardarCambios.setEnabled(false);
-                    vistaProductos.btnEliminar.setEnabled(false);
                     llenarTablaExperienciaLaboral();
                 }
             } catch (SQLException ex) {
@@ -160,7 +158,7 @@ public class ProductosAcademicosController {
             vistaProductos.fieldProducto.setText("");
             vistaProductos.btnGuardarCambios.setEnabled(false);
             vistaProductos.btnEliminar.setEnabled(false);
-            vistaProductos.btnRegistrarUsuario.setEnabled(false);
+            vistaProductos.btnRegistrarUsuario.setEnabled(true);
             llenarTablaExperienciaLaboral();
         }
     }

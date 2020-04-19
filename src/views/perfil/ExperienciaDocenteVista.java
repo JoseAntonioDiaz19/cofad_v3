@@ -221,9 +221,9 @@ public class ExperienciaDocenteVista extends javax.swing.JDialog {
             tblExperienciaDocente.getColumnModel().getColumn(0).setMinWidth(50);
             tblExperienciaDocente.getColumnModel().getColumn(0).setPreferredWidth(60);
             tblExperienciaDocente.getColumnModel().getColumn(0).setMaxWidth(100);
-            tblExperienciaDocente.getColumnModel().getColumn(2).setMinWidth(120);
-            tblExperienciaDocente.getColumnModel().getColumn(2).setPreferredWidth(120);
-            tblExperienciaDocente.getColumnModel().getColumn(2).setMaxWidth(140);
+            tblExperienciaDocente.getColumnModel().getColumn(2).setMinWidth(150);
+            tblExperienciaDocente.getColumnModel().getColumn(2).setPreferredWidth(150);
+            tblExperienciaDocente.getColumnModel().getColumn(2).setMaxWidth(200);
             tblExperienciaDocente.getColumnModel().getColumn(3).setMinWidth(60);
             tblExperienciaDocente.getColumnModel().getColumn(3).setPreferredWidth(70);
             tblExperienciaDocente.getColumnModel().getColumn(3).setMaxWidth(80);

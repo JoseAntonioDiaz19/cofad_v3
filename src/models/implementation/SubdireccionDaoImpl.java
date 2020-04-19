@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import models.dao.SubdireccionesDAO;
 import models.pojo.Subdireccion;
 
@@ -90,24 +89,5 @@ public class SubdireccionDaoImpl implements SubdireccionesDAO{
             System.err.println(e.getMessage());
         }
         return nombreSubdireccion;
-    }
-
-    @Override
-    public Vector<Subdireccion> todasSubdirecciones() {
-        Vector<Subdireccion>lista = new Vector<>();
-        try {
-            stmt = conexion.prepareStatement("SELECT * FROM subdireccion ORDER BY idsubdireccion ASC");
-            res = stmt.executeQuery();
-            lista.add(new Subdireccion(0, "-Escoja una opcion-"));
-            while(res.next())
-                lista.add(new Subdireccion(
-                        res.getInt("idsubdireccion"),
-                        res.getString("subdireccion")
-                ));
-        } 
-        catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-        return lista;
     }   
 }

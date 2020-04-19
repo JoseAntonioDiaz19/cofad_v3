@@ -4,6 +4,5 @@ import models.pojo.Plantel;
 
 public interface PlantelDAO extends CRUD<Plantel>{
     
-    Vector<Plantel>todosLosPlanteles();
     String obtenerNombrePlantel(String clave_plantel);
 }

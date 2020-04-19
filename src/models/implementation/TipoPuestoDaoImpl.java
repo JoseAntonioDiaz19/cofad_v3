@@ -58,5 +58,20 @@ public class TipoPuestoDaoImpl implements TipoPuestoDAO{
     public boolean Delete(TipoPuesto modelo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public int idTipoPuesto(String tipoPuesto) {
+        int idTipoPuesto = 0;
+        try {
+            stmt = conexion.prepareStatement("SELECT * FROM tipo_puesto WHERE tipo= ?");
+            stmt.setString(1, tipoPuesto);
+            res = stmt.executeQuery();
+            if(res.next())
+                idTipoPuesto = res.getInt("idtipo_puesto");
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return idTipoPuesto;
+    }
     
 }

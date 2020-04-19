@@ -1,8 +1,8 @@
 package controllers.personas;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import models.dao.PersonasDAO;
 import models.dao.PlantelDAO;
@@ -13,6 +13,7 @@ import models.implementation.PuestosDaoImpl;
 
 import views.personas.JDialog_GestionarPersonal;
 import models.pojo.Personas;
+import models.pojo.Plantel;
 import util.AlertMarket;
 
 import util.Bloq_Mayus;
@@ -58,9 +59,10 @@ public class RegistrarPersonalController {
     private void cargar_comboPlanteles()
     {
         PlantelDAO planteldao = new PlantelDaoImpl(Conexion.getConnection());
-        modelCombo = new DefaultComboBoxModel(planteldao.todosLosPlanteles());
-        vistaGestionarPersonal.cmbClavePlantel.setModel(modelCombo);
-        vistaGestionarPersonal.cmbClavePlantel.setSelectedIndex(0);
+        ArrayList<Plantel> listaPlanteles = (ArrayList<Plantel>)planteldao.GetAll();
+        for (int i = 0; i < listaPlanteles.size(); i++) {
+            vistaGestionarPersonal.cmbClavePlantel.addItem(listaPlanteles.get(i).getPlantel());
+        }
     }
     
     private void cargar_comboPuestos()

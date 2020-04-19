@@ -14,7 +14,7 @@ public class JDialog_GestionarPersonal extends javax.swing.JDialog
         super(parent, modal);
         initComponents();
         this.setTitle("Gestionar personal");
-        this.setSize(950, 450);
+        this.setSize(950, 530);
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(new Color(0, 78, 97));
     }

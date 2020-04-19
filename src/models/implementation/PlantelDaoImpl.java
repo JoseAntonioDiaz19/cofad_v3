@@ -82,26 +82,6 @@ public class PlantelDaoImpl implements PlantelDAO {
     }
 
     @Override
-    public Vector<Plantel> todosLosPlanteles() {
-        Vector<Plantel> lista = new Vector<>();
-        try {
-            stmt = conexion.prepareStatement("SELECT * FROM plantel");
-            res = stmt.executeQuery();
-            lista.add(new Plantel("", "-Escoja una opcion-", ""));
-            while (res.next()) {
-                lista.add(new Plantel(
-                        res.getString("clave_plantel"),
-                        res.getString("plantel"),
-                        res.getString("telefono")
-                ));
-            }
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-        return lista;
-    }
-
-    @Override
     public String obtenerNombrePlantel(String clave_plantel) {
         String plantel = null;
         try {

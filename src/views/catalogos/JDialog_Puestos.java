@@ -12,11 +12,11 @@ public class JDialog_Puestos extends javax.swing.JDialog
     {
         super(parent, modal);
         initComponents();
-        this.setSize(730, 500);
+        this.setSize(650, 500);
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(new Color(0, 78, 97));
         
-        new AjustarTablas_JDialogOtros(jScrollTablaDepartamentos, tblPuestos);
+        AjustarTablas_JDialogOtros ajustarTablas_JDialogOtros = new AjustarTablas_JDialogOtros(jScrollTablaDepartamentos, tblPuestos);
     }
 
     @SuppressWarnings("unchecked")
@@ -40,6 +40,8 @@ public class JDialog_Puestos extends javax.swing.JDialog
         jLabel1 = new javax.swing.JLabel();
         cmbTipoPuesto = new javax.swing.JComboBox<>();
         cmbSubdireccion = new javax.swing.JComboBox<>();
+        txtCorreo = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -54,7 +56,7 @@ public class JDialog_Puestos extends javax.swing.JDialog
         lblDepartamento.setText("Nombre del puesto :");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         pnlPrincipal.add(lblDepartamento, gridBagConstraints);
@@ -64,7 +66,7 @@ public class JDialog_Puestos extends javax.swing.JDialog
         labelId.setText("Id :");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         pnlPrincipal.add(labelId, gridBagConstraints);
@@ -75,8 +77,8 @@ public class JDialog_Puestos extends javax.swing.JDialog
         txtId.setMinimumSize(new java.awt.Dimension(60, 30));
         txtId.setPreferredSize(new java.awt.Dimension(60, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 5, 10, 5);
@@ -85,8 +87,8 @@ public class JDialog_Puestos extends javax.swing.JDialog
         btnRegistrar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnRegistrar.setText("Registrar");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 5, 10, 5);
         pnlPrincipal.add(btnRegistrar, gridBagConstraints);
@@ -112,9 +114,9 @@ public class JDialog_Puestos extends javax.swing.JDialog
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 4;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -134,8 +136,8 @@ public class JDialog_Puestos extends javax.swing.JDialog
         btnEditar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEditar.setText("Guardar cambios");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 5);
         pnlPrincipal.add(btnEditar, gridBagConstraints);
@@ -145,8 +147,8 @@ public class JDialog_Puestos extends javax.swing.JDialog
         txtPuesto.setMinimumSize(new java.awt.Dimension(180, 30));
         txtPuesto.setPreferredSize(new java.awt.Dimension(180, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
@@ -154,14 +156,16 @@ public class JDialog_Puestos extends javax.swing.JDialog
         pnlPrincipal.add(txtPuesto, gridBagConstraints);
 
         txtExtension.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtExtension.setMinimumSize(new java.awt.Dimension(50, 30));
-        txtExtension.setPreferredSize(new java.awt.Dimension(50, 30));
+        txtExtension.setMaximumSize(new java.awt.Dimension(60, 30));
+        txtExtension.setMinimumSize(new java.awt.Dimension(60, 30));
+        txtExtension.setPreferredSize(new java.awt.Dimension(60, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 20;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(10, 5, 10, 5);
+        gridBagConstraints.insets = new java.awt.Insets(10, 7, 10, 7);
         pnlPrincipal.add(txtExtension, gridBagConstraints);
 
         lblSubdireccion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -169,7 +173,7 @@ public class JDialog_Puestos extends javax.swing.JDialog
         lblSubdireccion.setText("Subdireccion : ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         pnlPrincipal.add(lblSubdireccion, gridBagConstraints);
@@ -178,9 +182,9 @@ public class JDialog_Puestos extends javax.swing.JDialog
         lblExtension.setForeground(new java.awt.Color(255, 255, 255));
         lblExtension.setText("Extension :");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(10, 50, 10, 10);
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(10, 20, 10, 0);
         pnlPrincipal.add(lblExtension, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -188,32 +192,53 @@ public class JDialog_Puestos extends javax.swing.JDialog
         jLabel1.setText("Tipo de puesto :");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         pnlPrincipal.add(jLabel1, gridBagConstraints);
 
         cmbTipoPuesto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmbTipoPuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Escoja una opcion-", "DIRECCION", "SUBDIRECCION", "DEPARTAMENTO", "COORDINACION" }));
-        cmbTipoPuesto.setLightWeightPopupEnabled(false);
-        cmbTipoPuesto.setMaximumSize(new java.awt.Dimension(35, 25));
-        cmbTipoPuesto.setMinimumSize(new java.awt.Dimension(35, 25));
-        cmbTipoPuesto.setPreferredSize(new java.awt.Dimension(35, 25));
+        cmbTipoPuesto.setMaximumSize(new java.awt.Dimension(250, 25));
+        cmbTipoPuesto.setMinimumSize(new java.awt.Dimension(250, 25));
+        cmbTipoPuesto.setPreferredSize(new java.awt.Dimension(250, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 5, 10, 5);
         pnlPrincipal.add(cmbTipoPuesto, gridBagConstraints);
 
         cmbSubdireccion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cmbSubdireccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Escoja una opcion-" }));
         cmbSubdireccion.setMaximumSize(new java.awt.Dimension(35, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 5, 10, 5);
         pnlPrincipal.add(cmbSubdireccion, gridBagConstraints);
+
+        txtCorreo.setMaximumSize(new java.awt.Dimension(180, 30));
+        txtCorreo.setMinimumSize(new java.awt.Dimension(180, 30));
+        txtCorreo.setPreferredSize(new java.awt.Dimension(180, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 10, 5);
+        pnlPrincipal.add(txtCorreo, gridBagConstraints);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Correo :");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        pnlPrincipal.add(jLabel2, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -279,6 +304,7 @@ public class JDialog_Puestos extends javax.swing.JDialog
     public javax.swing.JComboBox<String> cmbSubdireccion;
     public javax.swing.JComboBox<String> cmbTipoPuesto;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollTablaDepartamentos;
     private javax.swing.JLabel labelId;
     private javax.swing.JLabel labelTitulo;
@@ -287,6 +313,7 @@ public class JDialog_Puestos extends javax.swing.JDialog
     private javax.swing.JLabel lblSubdireccion;
     private javax.swing.JPanel pnlPrincipal;
     public javax.swing.JTable tblPuestos;
+    public javax.swing.JTextField txtCorreo;
     public javax.swing.JTextField txtExtension;
     public javax.swing.JTextField txtId;
     public javax.swing.JTextField txtPuesto;

@@ -182,7 +182,7 @@ public class Perfil extends javax.swing.JPanel {
         botonProductos.setBackground(new java.awt.Color(0, 102, 51));
         botonProductos.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         botonProductos.setForeground(new java.awt.Color(255, 255, 255));
-        botonProductos.setText("Productos");
+        botonProductos.setText("Productos académicos");
         botonProductos.setBorderPainted(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

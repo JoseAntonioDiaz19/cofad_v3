@@ -1,5 +1,6 @@
 package models.implementation;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,10 +14,11 @@ import models.pojo.Abreviatura_Titulo;
  * @author Jose Antonio Diaz
  */
 public class Abreviatura_TituloDAOImpl implements Abreviatura_TituloDAO{
-    
-    Connection conexion;
-    PreparedStatement stmt;
-    ResultSet res;
+   
+    private final Connection conexion;
+    private ResultSet res;
+    private CallableStatement cstmt;
+    private PreparedStatement stmt;
 
     public Abreviatura_TituloDAOImpl(Connection connection) {
         conexion = connection;

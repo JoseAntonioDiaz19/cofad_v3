@@ -1,5 +1,6 @@
 package models.implementation;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,9 +13,10 @@ import models.pojo.Plantel;
 
 public class PlantelDaoImpl implements PlantelDAO {
 
-    Connection conexion;
-    PreparedStatement stmt;
-    ResultSet res;
+    private final Connection conexion;
+    private ResultSet res;
+    private CallableStatement cstmt;
+    private PreparedStatement stmt;
 
     public PlantelDaoImpl(Connection connection) {
         conexion = connection;

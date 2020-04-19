@@ -332,6 +332,7 @@ public class DatosPersonales extends javax.swing.JDialog
         panelDatosPersonales.add(btnGuardarCambios, gridBagConstraints);
 
         chooserFechaNacimiento.setDateFormatString("yyyy-MM-dd");
+        chooserFechaNacimiento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 9;
@@ -362,6 +363,7 @@ public class DatosPersonales extends javax.swing.JDialog
 
         buttonGroupExterno.add(jRadioBotSi);
         jRadioBotSi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioBotSi.setForeground(new java.awt.Color(255, 255, 255));
         jRadioBotSi.setText("Si");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -372,6 +374,7 @@ public class DatosPersonales extends javax.swing.JDialog
 
         buttonGroupExterno.add(jRadioButNo);
         jRadioButNo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButNo.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButNo.setText("No");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;

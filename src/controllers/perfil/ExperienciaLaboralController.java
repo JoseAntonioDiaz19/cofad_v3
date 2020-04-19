@@ -29,7 +29,7 @@ public class ExperienciaLaboralController {
         vistaExperienciaLaboral.btnRegistrar.addActionListener(this::Registrar);
         vistaExperienciaLaboral.btnGuardarCambios.addActionListener(this::guardarCambios);
         vistaExperienciaLaboral.btnEliminar.addActionListener(this::eliminar);
-         vistaExperienciaLaboral.tblExperienciaLaboral.addMouseListener(new java.awt.event.MouseAdapter() {
+        vistaExperienciaLaboral.tblExperienciaLaboral.addMouseListener(new java.awt.event.MouseAdapter() {
        @Override
         public void mouseClicked(java.awt.event.MouseEvent e) {
              if(e.getClickCount()== 2){
@@ -173,7 +173,8 @@ public class ExperienciaLaboralController {
         vistaExperienciaLaboral.btnRegistrar.setEnabled(false);
         vistaExperienciaLaboral.btnGuardarCambios.setEnabled(true);
         int filaSeleccionadaHorario = vistaExperienciaLaboral.tblExperienciaLaboral.getSelectedRow();
-        int idexperiencia_laboral = Integer.parseInt(String.valueOf(vistaExperienciaLaboral.tblExperienciaLaboral.getValueAt(filaSeleccionadaHorario, 0)));
+        int idexperiencia_laboral = Integer.parseInt(String.valueOf
+            (vistaExperienciaLaboral.tblExperienciaLaboral.getValueAt(filaSeleccionadaHorario, 1)));
         
         Experiencia_Laboral experienciaLaboral = sqlExperienciaLaboral.datosExperienciaLaboral(idexperiencia_laboral);
         vistaExperienciaLaboral.textActividades.setText(experienciaLaboral.getActividades());

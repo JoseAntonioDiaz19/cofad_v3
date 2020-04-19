@@ -9,12 +9,12 @@ package views.perfil;
  *
  * @author admin
  */
-public class Productos extends javax.swing.JDialog {
+public class ProductosAcademicosVista extends javax.swing.JDialog {
 
     /**
      * Creates new form Formacion_Academica
      */
-    public Productos(java.awt.Frame parent, boolean modal) {
+    public ProductosAcademicosVista(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -29,18 +29,23 @@ public class Productos extends javax.swing.JDialog {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
+        panelPrincipal = new javax.swing.JPanel();
         labelTitulo = new javax.swing.JLabel();
         panelDatos = new javax.swing.JPanel();
-        labelProductoActividad = new javax.swing.JLabel();
-        textProductoActividad = new javax.swing.JTextField();
+        labelProducto = new javax.swing.JLabel();
         labelDescripcion = new javax.swing.JLabel();
-        labelDescripcion1 = new javax.swing.JLabel();
-        textDescripcion1 = new javax.swing.JTextField();
+        labelFecha = new javax.swing.JLabel();
+        fieldProducto = new javax.swing.JTextField();
+        fieldDescripcion = new javax.swing.JTextField();
+        mesInicio = new com.toedter.calendar.JMonthChooser();
+        añoInicio = new com.toedter.calendar.JYearChooser();
+        labelAl = new javax.swing.JLabel();
+        mesFin = new com.toedter.calendar.JMonthChooser();
+        añoFin = new com.toedter.calendar.JYearChooser();
         panelBotones = new javax.swing.JPanel();
         btnRegistrarUsuario = new javax.swing.JButton();
-        btnGuardarCambios = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        btnGuardarCambios = new javax.swing.JButton();
         panelTabla = new javax.swing.JPanel();
         jScrollTablaFormacionAcademica = new javax.swing.JScrollPane();
         tblFormacionAcademica = new javax.swing.JTable();
@@ -48,8 +53,8 @@ public class Productos extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
-        jPanel1.setBackground(new java.awt.Color(0, 78, 97));
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        panelPrincipal.setBackground(new java.awt.Color(0, 78, 97));
+        panelPrincipal.setLayout(new java.awt.GridBagLayout());
 
         labelTitulo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         labelTitulo.setForeground(new java.awt.Color(255, 255, 255));
@@ -62,111 +67,143 @@ public class Productos extends javax.swing.JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
-        jPanel1.add(labelTitulo, gridBagConstraints);
+        panelPrincipal.add(labelTitulo, gridBagConstraints);
 
         panelDatos.setBackground(new java.awt.Color(0, 78, 97));
         panelDatos.setLayout(new java.awt.GridBagLayout());
 
-        labelProductoActividad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        labelProductoActividad.setForeground(new java.awt.Color(255, 255, 255));
-        labelProductoActividad.setText("Producto/Actividad: ");
+        labelProducto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelProducto.setForeground(new java.awt.Color(255, 255, 255));
+        labelProducto.setText("Producto/Actividad: ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-        panelDatos.add(labelProductoActividad, gridBagConstraints);
-
-        textProductoActividad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textProductoActividadActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 0.5;
-        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
-        panelDatos.add(textProductoActividad, gridBagConstraints);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        panelDatos.add(labelProducto, gridBagConstraints);
 
         labelDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         labelDescripcion.setForeground(new java.awt.Color(255, 255, 255));
-        labelDescripcion.setText("Fecha");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 10, 0, 0);
-        panelDatos.add(labelDescripcion, gridBagConstraints);
-
-        labelDescripcion1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        labelDescripcion1.setForeground(new java.awt.Color(255, 255, 255));
-        labelDescripcion1.setText("Descripción: ");
+        labelDescripcion.setText("Descripción:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        panelDatos.add(labelDescripcion, gridBagConstraints);
+
+        labelFecha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelFecha.setForeground(new java.awt.Color(255, 255, 255));
+        labelFecha.setText("Fecha:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        panelDatos.add(labelFecha, gridBagConstraints);
+
+        fieldProducto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
-        panelDatos.add(labelDescripcion1, gridBagConstraints);
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        panelDatos.add(fieldProducto, gridBagConstraints);
+
+        fieldDescripcion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 73;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(10, 5, 0, 0);
-        panelDatos.add(textDescripcion1, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        panelDatos.add(fieldDescripcion, gridBagConstraints);
+
+        mesInicio.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelDatos.add(mesInicio, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
+        panelDatos.add(añoInicio, gridBagConstraints);
+
+        labelAl.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelAl.setForeground(new java.awt.Color(255, 255, 255));
+        labelAl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelAl.setText("A");
+        labelAl.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 50;
+        panelDatos.add(labelAl, gridBagConstraints);
+
+        mesFin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelDatos.add(mesFin, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
+        panelDatos.add(añoFin, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
-        jPanel1.add(panelDatos, gridBagConstraints);
+        panelPrincipal.add(panelDatos, gridBagConstraints);
 
         panelBotones.setBackground(new java.awt.Color(0, 78, 97));
 
-        btnRegistrarUsuario.setBackground(new java.awt.Color(0, 0, 100));
         btnRegistrarUsuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnRegistrarUsuario.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarUsuario.setText("Registrar");
         btnRegistrarUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistrarUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnRegistrarUsuario.setPreferredSize(new java.awt.Dimension(135, 25));
         panelBotones.add(btnRegistrarUsuario);
 
-        btnGuardarCambios.setBackground(new java.awt.Color(0, 0, 100));
-        btnGuardarCambios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnGuardarCambios.setForeground(new java.awt.Color(255, 255, 255));
-        btnGuardarCambios.setText("Guardar cambios");
-        btnGuardarCambios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnGuardarCambios.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panelBotones.add(btnGuardarCambios);
-
-        btnEliminar.setBackground(new java.awt.Color(0, 0, 100));
         btnEliminar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar.setText("Eliminar");
         btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEliminar.setPreferredSize(new java.awt.Dimension(135, 25));
         panelBotones.add(btnEliminar);
 
+        btnGuardarCambios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnGuardarCambios.setText("Guardar cambios");
+        panelBotones.add(btnGuardarCambios);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 10, 0, 0);
-        jPanel1.add(panelBotones, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
+        panelPrincipal.add(panelBotones, gridBagConstraints);
 
         panelTabla.setBackground(new java.awt.Color(0, 78, 97));
         panelTabla.setLayout(new java.awt.GridBagLayout());
@@ -177,11 +214,11 @@ public class Productos extends javax.swing.JDialog {
 
             },
             new String [] {
-                "ID", "RFC", "PRODUCTO/ACTIVIDAD", "DESCRIPCION", "FECHA"
+                "ID", "PRODUCTO/ACTIVIDAD", "DESCRIPCION", "FECHA"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -194,6 +231,9 @@ public class Productos extends javax.swing.JDialog {
             tblFormacionAcademica.getColumnModel().getColumn(0).setMinWidth(50);
             tblFormacionAcademica.getColumnModel().getColumn(0).setPreferredWidth(60);
             tblFormacionAcademica.getColumnModel().getColumn(0).setMaxWidth(100);
+            tblFormacionAcademica.getColumnModel().getColumn(1).setPreferredWidth(200);
+            tblFormacionAcademica.getColumnModel().getColumn(2).setPreferredWidth(250);
+            tblFormacionAcademica.getColumnModel().getColumn(3).setPreferredWidth(100);
         }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -208,22 +248,17 @@ public class Productos extends javax.swing.JDialog {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 10, 10, 10);
-        jPanel1.add(panelTabla, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        panelPrincipal.add(panelTabla, gridBagConstraints);
 
-        getContentPane().add(jPanel1);
+        getContentPane().add(panelPrincipal);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void textProductoActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textProductoActividadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textProductoActividadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,26 +277,14 @@ public class Productos extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Productos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductosAcademicosVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Productos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductosAcademicosVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Productos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductosAcademicosVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Productos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductosAcademicosVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -270,7 +293,7 @@ public class Productos extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Productos dialog = new Productos(new javax.swing.JFrame(), true);
+                ProductosAcademicosVista dialog = new ProductosAcademicosVista(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -283,20 +306,25 @@ public class Productos extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public com.toedter.calendar.JYearChooser añoFin;
+    public com.toedter.calendar.JYearChooser añoInicio;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnGuardarCambios;
     public javax.swing.JButton btnRegistrarUsuario;
-    private javax.swing.JPanel jPanel1;
+    public javax.swing.JTextField fieldDescripcion;
+    public javax.swing.JTextField fieldProducto;
     public javax.swing.JScrollPane jScrollTablaFormacionAcademica;
+    private javax.swing.JLabel labelAl;
     private javax.swing.JLabel labelDescripcion;
-    private javax.swing.JLabel labelDescripcion1;
-    private javax.swing.JLabel labelProductoActividad;
+    private javax.swing.JLabel labelFecha;
+    private javax.swing.JLabel labelProducto;
     private javax.swing.JLabel labelTitulo;
+    public com.toedter.calendar.JMonthChooser mesFin;
+    public com.toedter.calendar.JMonthChooser mesInicio;
     private javax.swing.JPanel panelBotones;
     private javax.swing.JPanel panelDatos;
+    private javax.swing.JPanel panelPrincipal;
     private javax.swing.JPanel panelTabla;
     public javax.swing.JTable tblFormacionAcademica;
-    private javax.swing.JTextField textDescripcion1;
-    private javax.swing.JTextField textProductoActividad;
     // End of variables declaration//GEN-END:variables
 }

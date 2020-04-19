@@ -14,6 +14,7 @@ import views.perfil.Perfil;
 import views.dashboard.DashboardAdmin;
 
 import util.FrameHijo;
+import views.perfil.ProductosAcademicosVista;
 
 public class PerfilController {
 
@@ -83,7 +84,8 @@ public class PerfilController {
     }
 
     private void botonProductos(ActionEvent e) {
-
+        ProductosAcademicosVista vistaProductos = new ProductosAcademicosVista(FrameHijo.obtenerPadre(vistaPerfil), true);
+        ProductosAcademicosController controlProductosAcademicos = new ProductosAcademicosController(vistaProductos, personaLogueada);
     }
 
     private void botonHistorialMaterias(ActionEvent e) {

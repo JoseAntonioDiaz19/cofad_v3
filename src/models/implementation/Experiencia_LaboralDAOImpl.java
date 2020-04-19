@@ -117,7 +117,6 @@ public class Experiencia_LaboralDAOImpl implements Experiencia_LaboralDAO {
             System.err.println(e.getMessage());
             return false;
         }
-
     }
 
     @Override

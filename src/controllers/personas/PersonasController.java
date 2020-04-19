@@ -6,7 +6,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import models.dao.PersonasTblVistaDao;
 
 import util.Bloq_Mayus;
 import util.FrameHijo;
@@ -15,11 +14,12 @@ import models.implementation.PersonasTblVistaDaoImpl;
 import models.pojo.PersonasTblVista;
 import util.Conexion;
 import views.personas.JDialog_GestionarPersonal;
+import models.dao.PersonasTblVistaDAO;
 
 public class PersonasController {
     
     Personal vistaPersonas;
-    PersonasTblVistaDao personasTblVistaDao;
+    PersonasTblVistaDAO personasTblVistaDao;
     
     DefaultTableModel modeloTablaPersona;
 

@@ -295,7 +295,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
           <SubComponents>
-            <Container class="javax.swing.JScrollPane" name="jScrollTablaFormacionAcademica">
+            <Container class="javax.swing.JScrollPane" name="jScrollTablaProductosAcademicos">
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -308,7 +308,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="tblFormacionAcademica">
+                <Component class="javax.swing.JTable" name="tblProductosAcademicos">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="0"/>

@@ -6,10 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import models.dao.PersonasTblVistaDao;
 import models.pojo.PersonasTblVista;
+import models.dao.PersonasTblVistaDAO;
 
-public class PersonasTblVistaDaoImpl implements PersonasTblVistaDao{
+public class PersonasTblVistaDaoImpl implements PersonasTblVistaDAO{
     
     Connection conexion;
     PreparedStatement stmt;

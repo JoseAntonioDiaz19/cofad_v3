@@ -9,12 +9,12 @@ package views.perfil;
  *
  * @author manue
  */
-public class Perfil extends javax.swing.JPanel {
+public class PerfilVista extends javax.swing.JPanel {
 
     /**
      * Creates new form Perfil
      */
-    public Perfil() {
+    public PerfilVista() {
         initComponents();
     }
 
@@ -40,7 +40,7 @@ public class Perfil extends javax.swing.JPanel {
         botonDatosPersonales = new javax.swing.JButton();
         botonExperienciaLaboral = new javax.swing.JButton();
         botonProductos = new javax.swing.JButton();
-        botonHistorialMaterias = new javax.swing.JButton();
+        botonExperienciaDocente = new javax.swing.JButton();
         botonDatosLaborales = new javax.swing.JButton();
         botonFormacionAcademica = new javax.swing.JButton();
         botonCambiarContraseña = new javax.swing.JButton();
@@ -194,11 +194,11 @@ public class Perfil extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         panelEditarDatos.add(botonProductos, gridBagConstraints);
 
-        botonHistorialMaterias.setBackground(new java.awt.Color(255, 86, 130));
-        botonHistorialMaterias.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        botonHistorialMaterias.setForeground(new java.awt.Color(255, 255, 255));
-        botonHistorialMaterias.setText("Experiencia docente");
-        botonHistorialMaterias.setBorderPainted(false);
+        botonExperienciaDocente.setBackground(new java.awt.Color(255, 86, 130));
+        botonExperienciaDocente.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        botonExperienciaDocente.setForeground(new java.awt.Color(255, 255, 255));
+        botonExperienciaDocente.setText("Experiencia docente");
+        botonExperienciaDocente.setBorderPainted(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -207,7 +207,7 @@ public class Perfil extends javax.swing.JPanel {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 0.5;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
-        panelEditarDatos.add(botonHistorialMaterias, gridBagConstraints);
+        panelEditarDatos.add(botonExperienciaDocente, gridBagConstraints);
 
         botonDatosLaborales.setBackground(new java.awt.Color(255, 153, 0));
         botonDatosLaborales.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -287,9 +287,9 @@ public class Perfil extends javax.swing.JPanel {
     public javax.swing.JButton botonCambiarContraseña;
     public javax.swing.JButton botonDatosLaborales;
     public javax.swing.JButton botonDatosPersonales;
+    public javax.swing.JButton botonExperienciaDocente;
     public javax.swing.JButton botonExperienciaLaboral;
     public javax.swing.JButton botonFormacionAcademica;
-    public javax.swing.JButton botonHistorialMaterias;
     public javax.swing.JButton botonProductos;
     public javax.swing.JButton botonResumenCursos;
     public javax.swing.JLabel labelCargo;

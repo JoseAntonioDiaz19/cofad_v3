@@ -28,11 +28,11 @@ public class ProductosAcademicosController {
     ProductosAcademicosController(ProductosAcademicosVista vistaProductos, Personas personaLogueada) {
         this.personaLogueada = personaLogueada;
         this.vistaProductos = vistaProductos;
-        modelTablaProductos = (DefaultTableModel) this.vistaProductos.tblFormacionAcademica.getModel();
+        modelTablaProductos = (DefaultTableModel) this.vistaProductos.tblProductosAcademicos.getModel();
         vistaProductos.btnRegistrarUsuario.addActionListener(this::registrar);
         vistaProductos.btnEliminar.addActionListener(this::eliminar);
         vistaProductos.btnGuardarCambios.addActionListener(this::guardarCambios);
-        vistaProductos.tblFormacionAcademica.addMouseListener(new java.awt.event.MouseAdapter() {
+        vistaProductos.tblProductosAcademicos.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
@@ -57,11 +57,11 @@ public class ProductosAcademicosController {
     
     private void llenarCampos() {
         
-        int filaSeleccionadaProducto = vistaProductos.tblFormacionAcademica.getSelectedRow();
-        String producto_actividad = (String.valueOf(vistaProductos.tblFormacionAcademica.getValueAt(filaSeleccionadaProducto, 1)));
-        String descripcion = (String.valueOf(vistaProductos.tblFormacionAcademica.getValueAt(filaSeleccionadaProducto, 2)));
-        String fecha = (String.valueOf(vistaProductos.tblFormacionAcademica.getValueAt(filaSeleccionadaProducto, 3)));
-        int id = Integer.parseInt(String.valueOf(vistaProductos.tblFormacionAcademica.getValueAt(filaSeleccionadaProducto, 0)));
+        int filaSeleccionadaProducto = vistaProductos.tblProductosAcademicos.getSelectedRow();
+        String producto_actividad = (String.valueOf(vistaProductos.tblProductosAcademicos.getValueAt(filaSeleccionadaProducto, 1)));
+        String descripcion = (String.valueOf(vistaProductos.tblProductosAcademicos.getValueAt(filaSeleccionadaProducto, 2)));
+        String fecha = (String.valueOf(vistaProductos.tblProductosAcademicos.getValueAt(filaSeleccionadaProducto, 3)));
+        int id = Integer.parseInt(String.valueOf(vistaProductos.tblProductosAcademicos.getValueAt(filaSeleccionadaProducto, 0)));
         int idproducto = lista.get(id - 1).getIdproducto();
 
         //Separar fecha
@@ -146,8 +146,8 @@ public class ProductosAcademicosController {
         
         Producto productoEliminar = new Producto();
         
-        int filaSeleccionadaProducto = vistaProductos.tblFormacionAcademica.getSelectedRow();
-        int id = Integer.parseInt(String.valueOf(vistaProductos.tblFormacionAcademica.getValueAt(filaSeleccionadaProducto, 0)));
+        int filaSeleccionadaProducto = vistaProductos.tblProductosAcademicos.getSelectedRow();
+        int id = Integer.parseInt(String.valueOf(vistaProductos.tblProductosAcademicos.getValueAt(filaSeleccionadaProducto, 0)));
         
         int idproducto = lista.get(id - 1).getIdproducto();
         productoEliminar.setIdproducto(idproducto);
@@ -176,8 +176,8 @@ public class ProductosAcademicosController {
         String fecha = mesInicio + " " + añoInicio + " A " + mesFin + " " + añoFin;
         String rfc = personaLogueada.getRfc();
         
-        int filaSeleccionadaProducto = vistaProductos.tblFormacionAcademica.getSelectedRow();
-        int id = Integer.parseInt(String.valueOf(vistaProductos.tblFormacionAcademica.getValueAt(filaSeleccionadaProducto, 0)));
+        int filaSeleccionadaProducto = vistaProductos.tblProductosAcademicos.getSelectedRow();
+        int id = Integer.parseInt(String.valueOf(vistaProductos.tblProductosAcademicos.getValueAt(filaSeleccionadaProducto, 0)));
         
         int idproducto = lista.get(id - 1).getIdproducto();
         System.out.println("idproducto: " + idproducto + "id: " + id );

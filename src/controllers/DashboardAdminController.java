@@ -20,7 +20,7 @@ import views.dashboard.DashboardSlider;
 import models.pojo.Personas;
 import views.catalogos.Otros;
 import views.login.Login;
-import views.perfil.Perfil;
+import views.perfil.PerfilVista;
 import views.personas.Personal;
 
 public class DashboardAdminController {
@@ -112,7 +112,7 @@ public class DashboardAdminController {
         enableButton();
         mainView.btnPerfil.setEnabled(false);
         
-        Perfil vistaPerfil = new Perfil();
+        PerfilVista vistaPerfil = new PerfilVista();
         PerfilController ctrl = new PerfilController(personaLogueada, vistaPerfil, mainView);
          
         if (mainView.pnlMenu.getWidth() >= 200)

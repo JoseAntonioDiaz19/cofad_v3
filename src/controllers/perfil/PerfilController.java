@@ -2,28 +2,30 @@ package controllers.perfil;
 import java.awt.event.ActionEvent;
 import models.dao.PersonasDAO;
 import models.implementation.PersonasDaoImpl;
+import models.pojo.ExperienciaDocente;
 import models.pojo.Personas;
 import models.pojo.Usuarios;
 import util.Conexion;
-import views.perfil.DatosLaborales;
-import views.perfil.DatosPersonales;
+import views.perfil.DatosLaboralesVista;
+import views.perfil.DatosPersonalesVista;
 import views.perfil.Experiencia_LaboralVista;
-import views.perfil.FormacionAcademica;
-import views.perfil.Perfil;
+import views.perfil.FormacionAcademicaVista;
+import views.perfil.PerfilVista;
 //import views.usuarios.CambiarContraseña;
 import views.dashboard.DashboardAdmin;
 
 import util.FrameHijo;
+import views.perfil.ExperienciaDocenteVista;
 import views.perfil.ProductosAcademicosVista;
 
 public class PerfilController {
 
     Personas personaLogueada;
-    Perfil vistaPerfil;
+    PerfilVista vistaPerfil;
     Usuarios modeloUsuario;
     DashboardAdmin mainView;
 
-    public PerfilController(Personas personaLogueada, Perfil vistaPerfil,
+    public PerfilController(Personas personaLogueada, PerfilVista vistaPerfil,
             DashboardAdmin mainView) {
         this.personaLogueada = personaLogueada;
         this.vistaPerfil = vistaPerfil;
@@ -32,7 +34,7 @@ public class PerfilController {
         vistaPerfil.botonExperienciaLaboral.addActionListener(this::botonExperienciaLaboral);
         vistaPerfil.botonFormacionAcademica.addActionListener(this::FormacionAcademica);
         vistaPerfil.botonProductos.addActionListener(this::botonProductos);
-        vistaPerfil.botonHistorialMaterias.addActionListener(this::botonHistorialMaterias);
+        vistaPerfil.botonExperienciaDocente.addActionListener(this::botonExPerienciaDocente);
         vistaPerfil.botonDatosLaborales.addActionListener(this::botonDatosLaborales);
         vistaPerfil.botonCambiarContraseña.addActionListener(this::botonCambiarContraseña);
         vistaPerfil.botonResumenCursos.addActionListener(this::botonResumenCursos);
@@ -54,7 +56,7 @@ public class PerfilController {
     }
 
     private void botonDatosPersonales(ActionEvent e) {
-        DatosPersonales vistaDatosPersonales = new DatosPersonales(FrameHijo.obtenerPadre(vistaPerfil), true);
+        DatosPersonalesVista vistaDatosPersonales = new DatosPersonalesVista(FrameHijo.obtenerPadre(vistaPerfil), true);
         DatosPersonalesController controlDatosPersonales = new 
             DatosPersonalesController(vistaDatosPersonales, personaLogueada, vistaPerfil);
     }
@@ -65,12 +67,12 @@ public class PerfilController {
     }
 
     private void FormacionAcademica(ActionEvent e) {
-        FormacionAcademica vistaFormacion_academica = new FormacionAcademica(FrameHijo.obtenerPadre(vistaPerfil), true);
+        FormacionAcademicaVista vistaFormacion_academica = new FormacionAcademicaVista(FrameHijo.obtenerPadre(vistaPerfil), true);
         //FormacionAcademicaController controlFormacionAcademica = new FormacionAcademicaController(vistaFormacion_academica, personaLogueada);
     }
 
     private void botonDatosLaborales(ActionEvent e) {
-        DatosLaborales vistaDatosLaborales = new DatosLaborales(FrameHijo.obtenerPadre(vistaPerfil), true);
+        DatosLaboralesVista vistaDatosLaborales = new DatosLaboralesVista(FrameHijo.obtenerPadre(vistaPerfil), true);
         //DatosLaboralesController controlDatosLaborales = new DatosLaboralesController(vistaDatosLaborales, personaLogueada);
     }
 
@@ -88,7 +90,8 @@ public class PerfilController {
         ProductosAcademicosController controlProductosAcademicos = new ProductosAcademicosController(vistaProductos, personaLogueada);
     }
 
-    private void botonHistorialMaterias(ActionEvent e) {
-
+    private void botonExPerienciaDocente(ActionEvent e) {
+        ExperienciaDocenteVista vistaExperienciaDocente = new ExperienciaDocenteVista(FrameHijo.obtenerPadre(vistaPerfil), true);
+        ExperienciaDocenteController controlExperienciaDocente = new ExperienciaDocenteController(vistaExperienciaDocente, personaLogueada);
     }
 }

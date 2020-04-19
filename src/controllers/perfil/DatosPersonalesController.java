@@ -16,24 +16,24 @@ import models.pojo.Abreviatura_Titulo;
 import models.pojo.Personas;
 import models.pojo.Plantel;
 import util.Conexion;
-import views.perfil.DatosPersonales;
-import views.perfil.Perfil;
+import views.perfil.DatosPersonalesVista;
+import views.perfil.PerfilVista;
 /**
  *
  * @author Jose Antonio Diaz
  */
 public class DatosPersonalesController {
     
-    DatosPersonales vistaDatosPersonales;
+    DatosPersonalesVista vistaDatosPersonales;
     Personas personaLogueada;
     PersonasDAO personaDAO = new PersonasDaoImpl(Conexion.getConnection());
     PlantelDAO plantelDAO = new PlantelDaoImpl(Conexion.getConnection());
     ArrayList <Plantel> listaPlanteles;
     ArrayList <Abreviatura_Titulo> listaAbreviatura_Tituo;
-    Perfil vistaPerfil;
+    PerfilVista vistaPerfil;
     
-    DatosPersonalesController(DatosPersonales vistaDatosPersonales, 
-            Personas personaLogueada, Perfil vistaPerfil) {
+    DatosPersonalesController(DatosPersonalesVista vistaDatosPersonales, 
+            Personas personaLogueada, PerfilVista vistaPerfil) {
        this.vistaDatosPersonales =  vistaDatosPersonales;
        this.personaLogueada = personaLogueada;   
        this.vistaPerfil = vistaPerfil;

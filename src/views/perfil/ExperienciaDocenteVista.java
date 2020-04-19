@@ -5,18 +5,31 @@
  */
 package views.perfil;
 
+import java.util.Calendar;
+
 /**
  *
  * @author admin
  */
-public class ExperienciaDocente extends javax.swing.JDialog {
+public class ExperienciaDocenteVista extends javax.swing.JDialog {
 
     /**
      * Creates new form Formacion_Academica
+     * @param parent
+     * @param modal
      */
-    public ExperienciaDocente(java.awt.Frame parent, boolean modal) {
+    public ExperienciaDocenteVista(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+    
+    public int obtenerAño(){
+        Calendar c = Calendar.getInstance();
+        String stringAño  = Integer.toString(c.get(Calendar.YEAR));
+        int año = Integer.parseInt(stringAño);
+        System.out.println(año);
+        return año;
+        
     }
 
     /**
@@ -29,7 +42,7 @@ public class ExperienciaDocente extends javax.swing.JDialog {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
+        panelPrincipal = new javax.swing.JPanel();
         labelTitulo = new javax.swing.JLabel();
         panelDatos = new javax.swing.JPanel();
         labelMateria = new javax.swing.JLabel();
@@ -40,18 +53,18 @@ public class ExperienciaDocente extends javax.swing.JDialog {
         chooserMesFin = new com.toedter.calendar.JMonthChooser();
         chooserAño = new com.toedter.calendar.JYearChooser();
         panelBotones = new javax.swing.JPanel();
-        btnRegistrarUsuario = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
         btnGuardarCambios = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         panelTabla = new javax.swing.JPanel();
-        jScrollTablaFormacionAcademica = new javax.swing.JScrollPane();
-        tblFormacionAcademica = new javax.swing.JTable();
+        jScrollTablaExperienciaDocente = new javax.swing.JScrollPane();
+        tblExperienciaDocente = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
-        jPanel1.setBackground(new java.awt.Color(0, 78, 97));
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        panelPrincipal.setBackground(new java.awt.Color(0, 78, 97));
+        panelPrincipal.setLayout(new java.awt.GridBagLayout());
 
         labelTitulo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         labelTitulo.setForeground(new java.awt.Color(255, 255, 255));
@@ -64,7 +77,7 @@ public class ExperienciaDocente extends javax.swing.JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
-        jPanel1.add(labelTitulo, gridBagConstraints);
+        panelPrincipal.add(labelTitulo, gridBagConstraints);
 
         panelDatos.setBackground(new java.awt.Color(0, 78, 97));
         panelDatos.setLayout(new java.awt.GridBagLayout());
@@ -113,8 +126,9 @@ public class ExperienciaDocente extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 0);
         panelDatos.add(fieldMateria, gridBagConstraints);
 
+        chooserMesInicio.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         chooserMesInicio.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        chooserMesInicio.setMonth(7);
+        chooserMesInicio.setMonth(0);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -123,15 +137,14 @@ public class ExperienciaDocente extends javax.swing.JDialog {
         panelDatos.add(chooserMesInicio, gridBagConstraints);
 
         chooserMesFin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        chooserMesFin.setMonth(11);
+        chooserMesFin.setMonth(5);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(5, 120, 0, 0);
         panelDatos.add(chooserMesFin, gridBagConstraints);
-
-        chooserAño.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -144,18 +157,18 @@ public class ExperienciaDocente extends javax.swing.JDialog {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
-        jPanel1.add(panelDatos, gridBagConstraints);
+        panelPrincipal.add(panelDatos, gridBagConstraints);
 
         panelBotones.setBackground(new java.awt.Color(0, 78, 97));
 
-        btnRegistrarUsuario.setBackground(new java.awt.Color(0, 0, 100));
-        btnRegistrarUsuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnRegistrarUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegistrarUsuario.setText("Registrar");
-        btnRegistrarUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnRegistrarUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnRegistrarUsuario.setPreferredSize(new java.awt.Dimension(135, 25));
-        panelBotones.add(btnRegistrarUsuario);
+        btnRegistrar.setBackground(new java.awt.Color(0, 0, 100));
+        btnRegistrar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRegistrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRegistrar.setPreferredSize(new java.awt.Dimension(135, 25));
+        panelBotones.add(btnRegistrar);
 
         btnGuardarCambios.setBackground(new java.awt.Color(0, 0, 100));
         btnGuardarCambios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -180,34 +193,40 @@ public class ExperienciaDocente extends javax.swing.JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 10, 0, 10);
-        jPanel1.add(panelBotones, gridBagConstraints);
+        panelPrincipal.add(panelBotones, gridBagConstraints);
 
         panelTabla.setBackground(new java.awt.Color(0, 78, 97));
         panelTabla.setLayout(new java.awt.GridBagLayout());
 
-        tblFormacionAcademica.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tblFormacionAcademica.setModel(new javax.swing.table.DefaultTableModel(
+        tblExperienciaDocente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tblExperienciaDocente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "RFC", "MATERIA", "PERIODO", "AÑO"
+                "ID", "MATERIA", "PERIODO", "AÑO"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tblFormacionAcademica.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollTablaFormacionAcademica.setViewportView(tblFormacionAcademica);
-        if (tblFormacionAcademica.getColumnModel().getColumnCount() > 0) {
-            tblFormacionAcademica.getColumnModel().getColumn(0).setMinWidth(50);
-            tblFormacionAcademica.getColumnModel().getColumn(0).setPreferredWidth(60);
-            tblFormacionAcademica.getColumnModel().getColumn(0).setMaxWidth(100);
+        tblExperienciaDocente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollTablaExperienciaDocente.setViewportView(tblExperienciaDocente);
+        if (tblExperienciaDocente.getColumnModel().getColumnCount() > 0) {
+            tblExperienciaDocente.getColumnModel().getColumn(0).setMinWidth(50);
+            tblExperienciaDocente.getColumnModel().getColumn(0).setPreferredWidth(60);
+            tblExperienciaDocente.getColumnModel().getColumn(0).setMaxWidth(100);
+            tblExperienciaDocente.getColumnModel().getColumn(2).setMinWidth(120);
+            tblExperienciaDocente.getColumnModel().getColumn(2).setPreferredWidth(120);
+            tblExperienciaDocente.getColumnModel().getColumn(2).setMaxWidth(140);
+            tblExperienciaDocente.getColumnModel().getColumn(3).setMinWidth(60);
+            tblExperienciaDocente.getColumnModel().getColumn(3).setPreferredWidth(70);
+            tblExperienciaDocente.getColumnModel().getColumn(3).setMaxWidth(80);
         }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -218,7 +237,7 @@ public class ExperienciaDocente extends javax.swing.JDialog {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
-        panelTabla.add(jScrollTablaFormacionAcademica, gridBagConstraints);
+        panelTabla.add(jScrollTablaExperienciaDocente, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -228,9 +247,9 @@ public class ExperienciaDocente extends javax.swing.JDialog {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel1.add(panelTabla, gridBagConstraints);
+        panelPrincipal.add(panelTabla, gridBagConstraints);
 
-        getContentPane().add(jPanel1);
+        getContentPane().add(panelPrincipal);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -252,14 +271,46 @@ public class ExperienciaDocente extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ExperienciaDocente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExperienciaDocenteVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ExperienciaDocente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExperienciaDocenteVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ExperienciaDocente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExperienciaDocenteVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ExperienciaDocente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExperienciaDocenteVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -296,7 +347,7 @@ public class ExperienciaDocente extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ExperienciaDocente dialog = new ExperienciaDocente(new javax.swing.JFrame(), true);
+                ExperienciaDocenteVista dialog = new ExperienciaDocenteVista(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -311,20 +362,20 @@ public class ExperienciaDocente extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnGuardarCambios;
-    public javax.swing.JButton btnRegistrarUsuario;
-    private com.toedter.calendar.JYearChooser chooserAño;
-    private com.toedter.calendar.JMonthChooser chooserMesFin;
-    private com.toedter.calendar.JMonthChooser chooserMesInicio;
-    private javax.swing.JTextField fieldMateria;
-    private javax.swing.JPanel jPanel1;
-    public javax.swing.JScrollPane jScrollTablaFormacionAcademica;
+    public javax.swing.JButton btnRegistrar;
+    public com.toedter.calendar.JYearChooser chooserAño;
+    public com.toedter.calendar.JMonthChooser chooserMesFin;
+    public com.toedter.calendar.JMonthChooser chooserMesInicio;
+    public javax.swing.JTextField fieldMateria;
+    public javax.swing.JScrollPane jScrollTablaExperienciaDocente;
     private javax.swing.JLabel labelAño;
     private javax.swing.JLabel labelMateria;
     private javax.swing.JLabel labelPeriodo;
     private javax.swing.JLabel labelTitulo;
     private javax.swing.JPanel panelBotones;
     private javax.swing.JPanel panelDatos;
+    private javax.swing.JPanel panelPrincipal;
     private javax.swing.JPanel panelTabla;
-    public javax.swing.JTable tblFormacionAcademica;
+    public javax.swing.JTable tblExperienciaDocente;
     // End of variables declaration//GEN-END:variables
 }

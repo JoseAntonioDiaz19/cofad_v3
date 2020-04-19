@@ -9,12 +9,12 @@ package views.perfil;
  *
  * @author admin
  */
-public class FormacionAcademica extends javax.swing.JDialog {
+public class FormacionAcademicaVista extends javax.swing.JDialog {
 
     /**
      * Creates new form Formacion_Academica
      */
-    public FormacionAcademica(java.awt.Frame parent, boolean modal) {
+    public FormacionAcademicaVista(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -276,14 +276,18 @@ public class FormacionAcademica extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormacionAcademica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormacionAcademicaVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormacionAcademica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormacionAcademicaVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormacionAcademica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormacionAcademicaVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormacionAcademica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormacionAcademicaVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -292,7 +296,7 @@ public class FormacionAcademica extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FormacionAcademica dialog = new FormacionAcademica(new javax.swing.JFrame(), true);
+                FormacionAcademicaVista dialog = new FormacionAcademicaVista(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

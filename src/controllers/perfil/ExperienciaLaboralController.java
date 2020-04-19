@@ -174,7 +174,7 @@ public class ExperienciaLaboralController {
         vistaExperienciaLaboral.btnGuardarCambios.setEnabled(true);
         int filaSeleccionadaHorario = vistaExperienciaLaboral.tblExperienciaLaboral.getSelectedRow();
         int idexperiencia_laboral = Integer.parseInt(String.valueOf
-            (vistaExperienciaLaboral.tblExperienciaLaboral.getValueAt(filaSeleccionadaHorario, 1)));
+            (vistaExperienciaLaboral.tblExperienciaLaboral.getValueAt(filaSeleccionadaHorario, 0)));
         
         Experiencia_Laboral experienciaLaboral = sqlExperienciaLaboral.datosExperienciaLaboral(idexperiencia_laboral);
         vistaExperienciaLaboral.textActividades.setText(experienciaLaboral.getActividades());

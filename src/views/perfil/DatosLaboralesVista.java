@@ -5,9 +5,9 @@ import java.awt.Color;
  *
  * @author Jose Manuel Estrada Diaz
  */
-public class DatosLaborales extends javax.swing.JDialog
+public class DatosLaboralesVista extends javax.swing.JDialog
 {
-    public DatosLaborales(java.awt.Frame parent, boolean modal)
+    public DatosLaboralesVista(java.awt.Frame parent, boolean modal)
     {
         super(parent, modal);
         initComponents();
@@ -171,21 +171,23 @@ public class DatosLaborales extends javax.swing.JDialog
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DatosLaborales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DatosLaboralesVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DatosLaborales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DatosLaboralesVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DatosLaborales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DatosLaboralesVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DatosLaborales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DatosLaboralesVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DatosLaborales dialog = new DatosLaborales(new javax.swing.JFrame(), true);
+                DatosLaboralesVista dialog = new DatosLaboralesVista(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

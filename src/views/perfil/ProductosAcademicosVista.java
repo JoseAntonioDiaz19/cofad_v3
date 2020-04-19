@@ -47,8 +47,8 @@ public class ProductosAcademicosVista extends javax.swing.JDialog {
         btnEliminar = new javax.swing.JButton();
         btnGuardarCambios = new javax.swing.JButton();
         panelTabla = new javax.swing.JPanel();
-        jScrollTablaFormacionAcademica = new javax.swing.JScrollPane();
-        tblFormacionAcademica = new javax.swing.JTable();
+        jScrollTablaProductosAcademicos = new javax.swing.JScrollPane();
+        tblProductosAcademicos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridLayout(1, 0));
@@ -208,8 +208,8 @@ public class ProductosAcademicosVista extends javax.swing.JDialog {
         panelTabla.setBackground(new java.awt.Color(0, 78, 97));
         panelTabla.setLayout(new java.awt.GridBagLayout());
 
-        tblFormacionAcademica.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tblFormacionAcademica.setModel(new javax.swing.table.DefaultTableModel(
+        tblProductosAcademicos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tblProductosAcademicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -225,15 +225,15 @@ public class ProductosAcademicosVista extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        tblFormacionAcademica.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollTablaFormacionAcademica.setViewportView(tblFormacionAcademica);
-        if (tblFormacionAcademica.getColumnModel().getColumnCount() > 0) {
-            tblFormacionAcademica.getColumnModel().getColumn(0).setMinWidth(50);
-            tblFormacionAcademica.getColumnModel().getColumn(0).setPreferredWidth(60);
-            tblFormacionAcademica.getColumnModel().getColumn(0).setMaxWidth(100);
-            tblFormacionAcademica.getColumnModel().getColumn(1).setPreferredWidth(200);
-            tblFormacionAcademica.getColumnModel().getColumn(2).setPreferredWidth(250);
-            tblFormacionAcademica.getColumnModel().getColumn(3).setPreferredWidth(100);
+        tblProductosAcademicos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollTablaProductosAcademicos.setViewportView(tblProductosAcademicos);
+        if (tblProductosAcademicos.getColumnModel().getColumnCount() > 0) {
+            tblProductosAcademicos.getColumnModel().getColumn(0).setMinWidth(50);
+            tblProductosAcademicos.getColumnModel().getColumn(0).setPreferredWidth(60);
+            tblProductosAcademicos.getColumnModel().getColumn(0).setMaxWidth(100);
+            tblProductosAcademicos.getColumnModel().getColumn(1).setPreferredWidth(200);
+            tblProductosAcademicos.getColumnModel().getColumn(2).setPreferredWidth(250);
+            tblProductosAcademicos.getColumnModel().getColumn(3).setPreferredWidth(100);
         }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -244,7 +244,7 @@ public class ProductosAcademicosVista extends javax.swing.JDialog {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
-        panelTabla.add(jScrollTablaFormacionAcademica, gridBagConstraints);
+        panelTabla.add(jScrollTablaProductosAcademicos, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -313,7 +313,7 @@ public class ProductosAcademicosVista extends javax.swing.JDialog {
     public javax.swing.JButton btnRegistrarUsuario;
     public javax.swing.JTextField fieldDescripcion;
     public javax.swing.JTextField fieldProducto;
-    public javax.swing.JScrollPane jScrollTablaFormacionAcademica;
+    public javax.swing.JScrollPane jScrollTablaProductosAcademicos;
     private javax.swing.JLabel labelAl;
     private javax.swing.JLabel labelDescripcion;
     private javax.swing.JLabel labelFecha;
@@ -325,6 +325,6 @@ public class ProductosAcademicosVista extends javax.swing.JDialog {
     private javax.swing.JPanel panelDatos;
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JPanel panelTabla;
-    public javax.swing.JTable tblFormacionAcademica;
+    public javax.swing.JTable tblProductosAcademicos;
     // End of variables declaration//GEN-END:variables
 }

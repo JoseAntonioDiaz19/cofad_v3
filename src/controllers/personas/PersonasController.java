@@ -14,12 +14,12 @@ import models.implementation.PersonasTblVistaDaoImpl;
 import models.pojo.PersonasTblVista;
 import util.Conexion;
 import views.personas.JDialog_GestionarPersonal;
-import models.dao.PersonasTblVistaDAO;
+import models.dao.PersonasTblaVistaDAO;
 
 public class PersonasController {
     
     Personal vistaPersonas;
-    PersonasTblVistaDAO personasTblVistaDao;
+    PersonasTblaVistaDAO personasTblVistaDao;
     
     DefaultTableModel modeloTablaPersona;
 

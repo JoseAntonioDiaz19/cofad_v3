@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import models.pojo.PersonasTblVista;
-import models.dao.PersonasTblVistaDAO;
+import models.dao.PersonasTblaVistaDAO;
 
-public class PersonasTblVistaDaoImpl implements PersonasTblVistaDAO{
+public class PersonasTblVistaDaoImpl implements PersonasTblaVistaDAO{
     
     Connection conexion;
     PreparedStatement stmt;

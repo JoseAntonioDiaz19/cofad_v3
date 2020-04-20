@@ -9,7 +9,7 @@ import util.Conexion;
 import views.perfil.DatosLaboralesVista;
 import views.perfil.DatosPersonalesVista;
 import views.perfil.Experiencia_LaboralVista;
-import views.perfil.FormacionAcademicaVista;
+import views.perfil.PersonaFormAcademVista;
 import views.perfil.PerfilVista;
 //import views.usuarios.CambiarContraseña;
 import views.dashboard.DashboardAdmin;
@@ -67,8 +67,8 @@ public class PerfilController {
     }
 
     private void FormacionAcademica(ActionEvent e) {
-        FormacionAcademicaVista vistaFormacion_academica = new FormacionAcademicaVista(FrameHijo.obtenerPadre(vistaPerfil), true);
-        //FormacionAcademicaController controlFormacionAcademica = new FormacionAcademicaController(vistaFormacion_academica, personaLogueada);
+        PersonaFormAcademVista vistaPersonaFormAcadem = new PersonaFormAcademVista(FrameHijo.obtenerPadre(vistaPerfil), true);
+        PersonaFormAcademController controlPersonaFormaAcadem = new PersonaFormAcademController(vistaPersonaFormAcadem, personaLogueada);
     }
 
     private void botonDatosLaborales(ActionEvent e) {

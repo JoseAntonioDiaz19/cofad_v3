@@ -95,7 +95,7 @@ public class Experiencia_LaboralVista extends javax.swing.JDialog {
 
         labelPermanencia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         labelPermanencia.setForeground(new java.awt.Color(255, 255, 255));
-        labelPermanencia.setText("Permanencia (meses):");
+        labelPermanencia.setText("Permanencia (No.meses):");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -203,11 +203,11 @@ public class Experiencia_LaboralVista extends javax.swing.JDialog {
 
             },
             new String [] {
-                "ID", "RFC", "EMPRESA", "PERMANENCIA(MESES)", "ACTIVIDADES", "PUESTO"
+                "ID", "EMPRESA", "PERMANENCIA(MESES)", "ACTIVIDADES", "PUESTO"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -220,9 +220,9 @@ public class Experiencia_LaboralVista extends javax.swing.JDialog {
             tblExperienciaLaboral.getColumnModel().getColumn(0).setMinWidth(50);
             tblExperienciaLaboral.getColumnModel().getColumn(0).setPreferredWidth(60);
             tblExperienciaLaboral.getColumnModel().getColumn(0).setMaxWidth(100);
-            tblExperienciaLaboral.getColumnModel().getColumn(3).setMinWidth(150);
-            tblExperienciaLaboral.getColumnModel().getColumn(3).setPreferredWidth(150);
-            tblExperienciaLaboral.getColumnModel().getColumn(3).setMaxWidth(180);
+            tblExperienciaLaboral.getColumnModel().getColumn(2).setMinWidth(150);
+            tblExperienciaLaboral.getColumnModel().getColumn(2).setPreferredWidth(150);
+            tblExperienciaLaboral.getColumnModel().getColumn(2).setMaxWidth(180);
         }
 
         gridBagConstraints = new java.awt.GridBagConstraints();

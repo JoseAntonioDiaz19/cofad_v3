@@ -14,13 +14,13 @@ import util.Conexion;
 /**
  * @author Jose Antonio Diaz
  */
-
 public class ExperienciaLaboralController {
     
     Experiencia_LaboralVista vistaExperienciaLaboral;
     Personas personaLogueada;
     DefaultTableModel modelTablaExperienciaLaboral;
     Experiencia_LaboralDAO sqlExperienciaLaboral = new Experiencia_LaboralDAOImpl(Conexion.getConnection());
+    List<Experiencia_Laboral>lista;
     
     ExperienciaLaboralController(Experiencia_LaboralVista vistaExperienciaLaboral, Personas personaLogueada) {
         this.vistaExperienciaLaboral = vistaExperienciaLaboral;
@@ -54,11 +54,11 @@ public class ExperienciaLaboralController {
     private void llenarTablaExperienciaLaboral(){
       
         modelTablaExperienciaLaboral.setNumRows(0);
-        List<Experiencia_Laboral>lista = sqlExperienciaLaboral.GetAllBy(personaLogueada.getRfc());
+        lista = sqlExperienciaLaboral.GetAllBy(personaLogueada.getRfc());
+        int id = 1;
         for (int i = 0; i < lista.size(); i++) {
             modelTablaExperienciaLaboral.addRow(new Object[]{
-                lista.get(i).getIdexperiencia_laboral(),
-                lista.get(i).getRfc(),
+                id++,
                 lista.get(i).getEmpresa(),
                 lista.get(i).getPermanencia(),
                 lista.get(i).getActividades(),
@@ -110,17 +110,20 @@ public class ExperienciaLaboralController {
     }
 
     private void guardarCambios(ActionEvent e) {
-        int filaSeleccionadaHorario = vistaExperienciaLaboral.tblExperienciaLaboral.getSelectedRow();
-        int idexperiencia_laboral = Integer.parseInt(String.valueOf(vistaExperienciaLaboral.tblExperienciaLaboral.getValueAt(filaSeleccionadaHorario, 0)));
-        int permanencia;
-       
-       String rfc = personaLogueada.getRfc();
-       String empresa = vistaExperienciaLaboral.textEmpresa.getText();
+        
+        int filaSeleccionadaExperienciaLab = vistaExperienciaLaboral.tblExperienciaLaboral.getSelectedRow();
+        int id = Integer.parseInt(String.valueOf(vistaExperienciaLaboral.tblExperienciaLaboral.getValueAt(filaSeleccionadaExperienciaLab, 0)));
+        int idexperiencia_laboral = lista.get(id - 1).getIdexperiencia_laboral();
+        
+        String rfc = personaLogueada.getRfc();
+        String empresa = vistaExperienciaLaboral.textEmpresa.getText();
     	
-       try{
+        int permanencia;
+        try{
             permanencia = Integer.parseInt(vistaExperienciaLaboral.textPermanencia.getText());
             System.out.println(permanencia);
     	}catch(NumberFormatException ex){
+            System.out.println(ex);
             permanencia = 0;
     	}
        
@@ -159,18 +162,23 @@ public class ExperienciaLaboralController {
     }
 
     private void eliminar(ActionEvent e) {
-        int filaSeleccionadaHorario = vistaExperienciaLaboral.tblExperienciaLaboral.getSelectedRow();
-        int idexperiencia_laboral = Integer.parseInt(String.valueOf(vistaExperienciaLaboral.tblExperienciaLaboral.getValueAt(filaSeleccionadaHorario, 0)));
+        int filaSeleccionadaExperienciaLab = vistaExperienciaLaboral.tblExperienciaLaboral.getSelectedRow();
+        int id = Integer.parseInt(String.valueOf
+            (vistaExperienciaLaboral.tblExperienciaLaboral.getValueAt
+                (filaSeleccionadaExperienciaLab, 0)));
+        int idexperiencia_laboral = lista.get(id - 1).getIdexperiencia_laboral();
+        
         int res = JOptionPane.showConfirmDialog(vistaExperienciaLaboral, "Confirmar eliminación");
-       Experiencia_Laboral VOExperiencia_laboral = new Experiencia_Laboral();
-       VOExperiencia_laboral.setIdexperiencia_laboral(idexperiencia_laboral);
+        Experiencia_Laboral VOExperiencia_laboral = new Experiencia_Laboral();
+        VOExperiencia_laboral.setIdexperiencia_laboral(idexperiencia_laboral);
+        
         if (res == JOptionPane.YES_OPTION) {
             sqlExperienciaLaboral.Delete(VOExperiencia_laboral);
             JOptionPane.showMessageDialog(vistaExperienciaLaboral, "Operacion completada correctamente");
             vistaExperienciaLaboral.btnRegistrar.setEnabled(true);
             vistaExperienciaLaboral.btnGuardarCambios.setEnabled(false);
             vistaExperienciaLaboral.btnEliminar.setEnabled(false);
-            llenarCampos();
+            vaciarCampos();
             llenarTablaExperienciaLaboral();
         }
     }
@@ -179,9 +187,11 @@ public class ExperienciaLaboralController {
         vistaExperienciaLaboral.btnEliminar.setEnabled(true);
         vistaExperienciaLaboral.btnGuardarCambios.setEnabled(true);
         vistaExperienciaLaboral.btnRegistrar.setEnabled(false);
-        int filaSeleccionadaHorario = vistaExperienciaLaboral.tblExperienciaLaboral.getSelectedRow();
-        int idexperiencia_laboral = Integer.parseInt(String.valueOf
-            (vistaExperienciaLaboral.tblExperienciaLaboral.getValueAt(filaSeleccionadaHorario, 0)));
+        int filaSeleccionadaExperienciaLab = vistaExperienciaLaboral.tblExperienciaLaboral.getSelectedRow();
+        int id = Integer.parseInt(String.valueOf
+            (vistaExperienciaLaboral.tblExperienciaLaboral.getValueAt
+                (filaSeleccionadaExperienciaLab, 0)));
+        int idexperiencia_laboral = lista.get(id - 1).getIdexperiencia_laboral();
         
         Experiencia_Laboral experienciaLaboral = sqlExperienciaLaboral.datosExperienciaLaboral(idexperiencia_laboral);
         vistaExperienciaLaboral.textActividades.setText(experienciaLaboral.getActividades());

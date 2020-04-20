@@ -9,12 +9,12 @@ package views.perfil;
  *
  * @author admin
  */
-public class FormacionAcademicaVista extends javax.swing.JDialog {
+public class PersonaFormAcademVista extends javax.swing.JDialog {
 
     /**
      * Creates new form Formacion_Academica
      */
-    public FormacionAcademicaVista(java.awt.Frame parent, boolean modal) {
+    public PersonaFormAcademVista(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -112,7 +112,7 @@ public class FormacionAcademicaVista extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         panelDatos.add(labelTitulacion, gridBagConstraints);
 
-        boxFormacionAcademica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Elegir nivel académico --", "LICENCIATURA", "MAESTRIA", "DOCTORADO" }));
+        boxFormacionAcademica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Elegir nivel académico --" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -211,11 +211,11 @@ public class FormacionAcademicaVista extends javax.swing.JDialog {
 
             },
             new String [] {
-                "ID", "RFC", "FORMACIÓN", "INSTITUCIÓN", "TITULO", "CÉDULA"
+                "ID", "FORMACIÓN", "INSTITUCIÓN", "TITULO", "CÉDULA"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, false
+                false, true, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -276,14 +276,22 @@ public class FormacionAcademicaVista extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormacionAcademicaVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PersonaFormAcademVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormacionAcademicaVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PersonaFormAcademVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormacionAcademicaVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PersonaFormAcademVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormacionAcademicaVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PersonaFormAcademVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -296,7 +304,7 @@ public class FormacionAcademicaVista extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FormacionAcademicaVista dialog = new FormacionAcademicaVista(new javax.swing.JFrame(), true);
+                PersonaFormAcademVista dialog = new PersonaFormAcademVista(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

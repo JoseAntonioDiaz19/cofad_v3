@@ -44,8 +44,8 @@ public class ProductosAcademicosVista extends javax.swing.JDialog {
         añoFin = new com.toedter.calendar.JYearChooser();
         panelBotones = new javax.swing.JPanel();
         btnRegistrarUsuario = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
         btnGuardarCambios = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         panelTabla = new javax.swing.JPanel();
         jScrollTablaProductosAcademicos = new javax.swing.JScrollPane();
         tblProductosAcademicos = new javax.swing.JTable();
@@ -186,16 +186,16 @@ public class ProductosAcademicosVista extends javax.swing.JDialog {
         btnRegistrarUsuario.setPreferredSize(new java.awt.Dimension(135, 25));
         panelBotones.add(btnRegistrarUsuario);
 
+        btnGuardarCambios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnGuardarCambios.setText("Guardar cambios");
+        panelBotones.add(btnGuardarCambios);
+
         btnEliminar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEliminar.setPreferredSize(new java.awt.Dimension(135, 25));
         panelBotones.add(btnEliminar);
-
-        btnGuardarCambios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnGuardarCambios.setText("Guardar cambios");
-        panelBotones.add(btnGuardarCambios);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

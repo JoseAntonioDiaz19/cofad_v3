@@ -7,22 +7,19 @@ public class ExperienciaDocente {
     private int idexperiencia_docente;
     private String rfc;
     private String materia;
-    private String mes_inicio;
-    private String mes_fin;
-    private int año;
+    private String periodo;
 
-    public ExperienciaDocente(int idexperiencia_docente, String rfc, String materia, String mes_inicio, String mes_fin, int año) {
+    public ExperienciaDocente(int idexperiencia_docente, String rfc, String materia, String periodo) {
         this.idexperiencia_docente = idexperiencia_docente;
         this.rfc = rfc;
         this.materia = materia;
-        this.mes_inicio = mes_inicio;
-        this.mes_fin = mes_fin;
-        this.año = año;
+        this.periodo = periodo;
     }
 
     public ExperienciaDocente() {
     }
-   
+
+    
     /**
      * @return the idexperiencia_docente
      */
@@ -66,44 +63,17 @@ public class ExperienciaDocente {
     }
 
     /**
-     * @return the mes_inicio
+     * @return the periodo
      */
-    public String getMes_inicio() {
-        return mes_inicio;
+    public String getPeriodo() {
+        return periodo;
     }
 
     /**
-     * @param mes_inicio the mes_inicio to set
+     * @param periodo the periodo to set
      */
-    public void setMes_inicio(String mes_inicio) {
-        this.mes_inicio = mes_inicio.toUpperCase();
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo.toUpperCase();
     }
-
-    /**
-     * @return the mes_fin
-     */
-    public String getMes_fin() {
-        return mes_fin;
-    }
-
-    /**
-     * @param mes_fin the mes_fin to set
-     */
-    public void setMes_fin(String mes_fin) {
-        this.mes_fin = mes_fin.toUpperCase();
-    }
-
-    /**
-     * @return the año
-     */
-    public int getAño() {
-        return año;
-    }
-
-    /**
-     * @param año the año to set
-     */
-    public void setAño(int año) {
-        this.año = año;
-    }
+    
 }

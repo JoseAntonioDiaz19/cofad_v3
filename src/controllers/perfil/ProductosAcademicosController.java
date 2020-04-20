@@ -61,8 +61,6 @@ public class ProductosAcademicosController {
         String producto_actividad = (String.valueOf(vistaProductos.tblProductosAcademicos.getValueAt(filaSeleccionadaProducto, 1)));
         String descripcion = (String.valueOf(vistaProductos.tblProductosAcademicos.getValueAt(filaSeleccionadaProducto, 2)));
         String fecha = (String.valueOf(vistaProductos.tblProductosAcademicos.getValueAt(filaSeleccionadaProducto, 3)));
-        int id = Integer.parseInt(String.valueOf(vistaProductos.tblProductosAcademicos.getValueAt(filaSeleccionadaProducto, 0)));
-        int idproducto = lista.get(id - 1).getIdproducto();
 
         //Separar fecha
         String[] elementosFecha = fecha.split(" ");
@@ -104,7 +102,7 @@ public class ProductosAcademicosController {
         String añoInicio = String.valueOf(vistaProductos.añoInicio.getYear());
         String mesFin = obtenerNombreMes(vistaProductos.mesFin.getMonth() + 1);
         String añoFin = String.valueOf(vistaProductos.añoFin.getYear());
-        String fecha = mesInicio + " " + añoInicio + " A " + mesFin + " " + añoFin;
+        String fecha = mesInicio + " " + añoInicio + " - " + mesFin + " " + añoFin;
         String rfc = personaLogueada.getRfc();
         
         boolean datosLlenos = false;

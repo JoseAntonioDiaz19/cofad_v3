@@ -42,9 +42,7 @@ public class ExperienciaDocenteDaoImpl implements ExperienciaDocenteDAO {
                         conjuntoRes.getInt("idexperiencia_docente"),
                         conjuntoRes.getString("rfc"),
                         conjuntoRes.getString("materia"),
-                        conjuntoRes.getString("mes_inicio"),
-                        conjuntoRes.getString("mes_fin"),
-                        conjuntoRes.getInt("año")
+                        conjuntoRes.getString("periodo")
                 ));
             }
         } catch (SQLException e) {
@@ -58,15 +56,13 @@ public class ExperienciaDocenteDaoImpl implements ExperienciaDocenteDAO {
     public boolean Insert(ExperienciaDocente modelo) throws SQLException {
          try {
             String consulta = "INSERT INTO experiencia_docente (rfc, materia, "
-                    + "mes_inicio, mes_fin, año) "
-                    + "VALUES(?,?,?,?,?)";
+                    + "periodo) "
+                    + "VALUES(?,?,?)";
 
             cstmt = conexion.prepareCall(consulta);
             cstmt.setString(1, modelo.getRfc());
             cstmt.setString(2, modelo.getMateria());
-            cstmt.setString(3, modelo.getMes_inicio());
-            cstmt.setString(4, modelo.getMes_fin());
-            cstmt.setInt(5, modelo.getAño());
+            cstmt.setString(3, modelo.getPeriodo());
             cstmt.execute();
             return true;
         } catch (SQLException e) {
@@ -80,16 +76,14 @@ public class ExperienciaDocenteDaoImpl implements ExperienciaDocenteDAO {
     public boolean Update(ExperienciaDocente modelo) throws SQLException {
          try {
             String consulta = "UPDATE experiencia_docente SET rfc = ?, materia = ?, "
-                    + "mes_inicio = ?, mes_fin = ?, año = ? WHERE idexperiencia_docente = ?";
+                    + "periodo = ? WHERE idexperiencia_docente = ?";
             
             cstmt = conexion.prepareCall(consulta);
 
             cstmt.setString(1, modelo.getRfc());
             cstmt.setString(2, modelo.getMateria());
-            cstmt.setString(3, modelo.getMes_inicio());
-            cstmt.setString(4, modelo.getMes_fin());
-            cstmt.setInt(5, modelo.getAño());
-            cstmt.setInt(6, modelo.getIdexperiencia_docente());
+            cstmt.setString(3, modelo.getPeriodo());
+            cstmt.setInt(4, modelo.getIdexperiencia_docente());
             cstmt.execute();
             
             return true;

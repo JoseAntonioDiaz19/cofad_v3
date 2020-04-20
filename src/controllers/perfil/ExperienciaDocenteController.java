@@ -1,5 +1,4 @@
 package controllers.perfil;
-
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.List;
@@ -62,8 +61,7 @@ public class ExperienciaDocenteController {
             modelTablaExperienciaDocente.addRow(new Object[]{
                 id++,
                 lista.get(i).getMateria(),
-                lista.get(i).getMes_inicio() + "-" + lista.get(i).getMes_fin(),
-                lista.get(i).getAño()
+                lista.get(i).getPeriodo()
             });
         }
     }
@@ -71,23 +69,20 @@ public class ExperienciaDocenteController {
     private void llenarCampos() {
         int filaSelecExperienciaDocente = vistaExperienciaDocente.tblExperienciaDocente.getSelectedRow();
         String materia = (String.valueOf(vistaExperienciaDocente.tblExperienciaDocente.getValueAt(filaSelecExperienciaDocente, 1)));
-        String periodo = (String.valueOf(vistaExperienciaDocente.tblExperienciaDocente.getValueAt(filaSelecExperienciaDocente, 2)));
-        int año = Integer.parseInt(String.valueOf(vistaExperienciaDocente.tblExperienciaDocente.getValueAt(filaSelecExperienciaDocente, 3)));
+        String periodo = (String.valueOf(vistaExperienciaDocente.tblExperienciaDocente.getValueAt(filaSelecExperienciaDocente, 2))); 
 
-        int id = Integer.parseInt(String.valueOf(vistaExperienciaDocente.tblExperienciaDocente.getValueAt(filaSelecExperienciaDocente, 0)));
-        int idproducto = lista.get(id - 1).getIdexperiencia_docente();
+       //Separar fecha
+        String[] elementosFecha = periodo.split(" ");
+        String mesInicio = elementosFecha[0];
+        String añoInicio = elementosFecha[1];
+        String mesFin = elementosFecha[3];
+        String añoFin = elementosFecha[4];
 
-        String[] elementosFecha = periodo.split("-");
-        String stringMesInicio = elementosFecha[0];
-        String stringMesFin = elementosFecha[1];
-
-        int mesInicio = obtenerNumeroMes(stringMesInicio);
-        int mesFin = obtenerNumeroMes(stringMesFin);
-
-        vistaExperienciaDocente.chooserMesInicio.setMonth(mesInicio);
-        vistaExperienciaDocente.chooserMesFin.setMonth(mesFin);
-        vistaExperienciaDocente.chooserAño.setYear(año);
         vistaExperienciaDocente.fieldMateria.setText(materia);
+        vistaExperienciaDocente.mesInicio.setMonth(obtenerNumeroMes(mesInicio));
+        vistaExperienciaDocente.mesFin.setMonth(obtenerNumeroMes(mesFin));
+        vistaExperienciaDocente.añoInicio.setYear(Integer.parseInt(añoInicio));
+        vistaExperienciaDocente.añoFin.setYear(Integer.parseInt(añoFin));
         
         vistaExperienciaDocente.btnGuardarCambios.setEnabled(true);
         vistaExperienciaDocente.btnEliminar.setEnabled(true);
@@ -99,9 +94,11 @@ public class ExperienciaDocenteController {
         
         String rfc = personaLogueada.getRfc();
         String materia = vistaExperienciaDocente.fieldMateria.getText();
-        String mes_inicio = obtenerNombreMes(vistaExperienciaDocente.chooserMesInicio.getMonth() + 1);
-        String mes_fin = obtenerNombreMes(vistaExperienciaDocente.chooserMesFin.getMonth() + 1);
-        int año = vistaExperienciaDocente.chooserAño.getYear();
+        String mesInicio = obtenerNombreMes(vistaExperienciaDocente.mesInicio.getMonth() + 1);
+        String añoInicio = String.valueOf(vistaExperienciaDocente.añoInicio.getYear());
+        String mesFin = obtenerNombreMes(vistaExperienciaDocente.mesFin.getMonth() + 1);
+        String añoFin = String.valueOf(vistaExperienciaDocente.añoFin.getYear());
+        String periodo = mesInicio + " " + añoInicio + " - " + mesFin + " " + añoFin;
         
         boolean datosLlenos = false;
         if (!materia.equals("")) {
@@ -111,9 +108,7 @@ public class ExperienciaDocenteController {
         if (datosLlenos) {
             ExperienciaDocente nuevaExperienciaDocente = new ExperienciaDocente();
             nuevaExperienciaDocente.setMateria(materia);
-            nuevaExperienciaDocente.setMes_inicio(mes_inicio);
-            nuevaExperienciaDocente.setMes_fin(mes_fin);
-            nuevaExperienciaDocente.setAño(año);
+            nuevaExperienciaDocente.setPeriodo(periodo);
             nuevaExperienciaDocente.setRfc(rfc);
             
             boolean registroCorrecto;
@@ -134,9 +129,11 @@ public class ExperienciaDocenteController {
     private void botonGuardarCambios(ActionEvent e) {
         String rfc = personaLogueada.getRfc();
         String materia = vistaExperienciaDocente.fieldMateria.getText();
-        String mes_inicio = obtenerNombreMes(vistaExperienciaDocente.chooserMesInicio.getMonth() + 1);
-        String mes_fin = obtenerNombreMes(vistaExperienciaDocente.chooserMesFin.getMonth() + 1);
-        int año = vistaExperienciaDocente.chooserAño.getYear();
+        String mesInicio = obtenerNombreMes(vistaExperienciaDocente.mesInicio.getMonth() + 1);
+        String añoInicio = String.valueOf(vistaExperienciaDocente.añoInicio.getYear());
+        String mesFin = obtenerNombreMes(vistaExperienciaDocente.mesFin.getMonth() + 1);
+        String añoFin = String.valueOf(vistaExperienciaDocente.añoFin.getYear());
+        String periodo = mesInicio + " " + añoInicio + " - " + mesFin + " " + añoFin;
         
         int filaSeleccionadaProducto = vistaExperienciaDocente.tblExperienciaDocente.getSelectedRow();
         int id = Integer.parseInt(String.valueOf(vistaExperienciaDocente.tblExperienciaDocente.getValueAt(filaSeleccionadaProducto, 0)));
@@ -151,9 +148,7 @@ public class ExperienciaDocenteController {
         if (datosLlenos) {
             ExperienciaDocente nuevaExperienciaDocente = new ExperienciaDocente();
             nuevaExperienciaDocente.setMateria(materia);
-            nuevaExperienciaDocente.setMes_inicio(mes_inicio);
-            nuevaExperienciaDocente.setMes_fin(mes_fin);
-            nuevaExperienciaDocente.setAño(año);
+            nuevaExperienciaDocente.setPeriodo(periodo);
             nuevaExperienciaDocente.setRfc(rfc);
             nuevaExperienciaDocente.setIdexperiencia_docente(idexperiencia_docente);
             

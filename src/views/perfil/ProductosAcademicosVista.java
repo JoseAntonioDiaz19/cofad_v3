@@ -144,7 +144,7 @@ public class ProductosAcademicosVista extends javax.swing.JDialog {
         labelAl.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         labelAl.setForeground(new java.awt.Color(255, 255, 255));
         labelAl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelAl.setText("A");
+        labelAl.setText("-");
         labelAl.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;

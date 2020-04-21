@@ -18,6 +18,7 @@ import views.dashboard.CambioPanel;
 import views.dashboard.DashboardSlider;
 
 import models.pojo.Personas;
+import models.pojo.Usuarios;
 import views.catalogos.Otros;
 import views.login.Login;
 import views.perfil.PerfilVista;
@@ -31,11 +32,12 @@ public class DashboardAdminController {
     private int xMouse;
     private int yMouse;
     private String click;
+    Usuarios modeloUsuario;
 
-    public DashboardAdminController(DashboardAdmin mainView, 
-            Personas personaLogueada) {
+    public DashboardAdminController(DashboardAdmin mainView, Personas personaLogueada, Usuarios modeloUsuario) {
         this.mainView = mainView;
         this.personaLogueada = personaLogueada;
+        this.modeloUsuario = modeloUsuario;
         init();
     }
     
@@ -113,7 +115,7 @@ public class DashboardAdminController {
         mainView.btnPerfil.setEnabled(false);
         
         PerfilVista vistaPerfil = new PerfilVista();
-        PerfilController ctrl = new PerfilController(personaLogueada, vistaPerfil, mainView);
+        PerfilController ctrl = new PerfilController(personaLogueada, vistaPerfil, mainView, modeloUsuario);
          
         if (mainView.pnlMenu.getWidth() >= 200)
             new DashboardSlider(mainView).start();

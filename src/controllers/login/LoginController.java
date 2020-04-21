@@ -21,6 +21,7 @@ import models.dao.PersonasDAO;
 import models.dao.UserDAO;
 import models.implementation.PersonasDaoImpl;
 import models.implementation.UserDaoImpl;
+import models.pojo.Usuarios;
 import util.AlertMarket;
 import util.Conexion;
 
@@ -31,7 +32,7 @@ public class LoginController {
     
     private int yMouse;
     private int xMouse;
-    
+    Usuarios modeloUsuario = new Usuarios();
     UserDAO Userdao;
 
     public LoginController(Login plog) {
@@ -112,6 +113,8 @@ public class LoginController {
             Personas encontrado = personaDAO.obtenerDatosUsuario(plog.txtUser.getText());
             if(encontrado.getIdstatus_persona() == 1)
             {
+                modeloUsuario.setPassword(plog.txtPass.getText());
+                modeloUsuario.setUsuario(plog.txtUser.getText());
                 abrirPrincipal_GUI(encontrado);
                 plog.dispose();
             }
@@ -151,7 +154,7 @@ public class LoginController {
             public void run() {
                 DashboardAdmin mainView = new DashboardAdmin();
                 mainView.setVisible(true);
-                DashboardAdminController ctrl = new DashboardAdminController(mainView, encontrado);
+                DashboardAdminController ctrl = new DashboardAdminController(mainView, encontrado, modeloUsuario);
             }
         });
     }

@@ -1,37 +1,41 @@
 package controllers.perfil;
-/*import controladores.modulos.login.LoginController;
+
+import controllers.login.LoginController;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
-import modelos.entidades.Persona;
-import modelos.entidades.Usuario;
-import modelos.sql.UsuarioSQL;
-import vistas.modulos.login.login;
-import vistas.modulos.usuarios.CambiarContraseña;
-import vistas.modulos.vistasPrincipales.Principal_GUI;
+import models.dao.UserDAO;
+import models.implementation.UserDaoImpl;
+import models.pojo.Personas;
+import models.pojo.Usuarios;
+import views.dashboard.DashboardAdmin;
+import views.usuarios.CambiarContraseña;
+import util.Conexion;
+import views.login.Login;
 
-import javax.sql.DataSource;
 /**
  * @author Jose Antonio Diaz
  */
 public class CambiarMiContraseñaController {
-    /*
-    DataSource dataSource;
+    
     CambiarContraseña vistaCambiarContraseña;
-    Persona personaLogueada;
-    Usuario modeloUsuario;
-    Principal_GUI mainView;
+    Personas personaLogueada; 
+    Usuarios modeloUsuario; 
+    DashboardAdmin mainView;
+    UserDAO sqlUsuario = new UserDaoImpl(Conexion.getConnection());
 
     CambiarMiContraseñaController(CambiarContraseña vistaCambiarContraseña, 
-            Persona personaLogueada, Usuario modeloUsuario, Principal_GUI mainView,
-            DataSource pool) {
-       this.vistaCambiarContraseña = vistaCambiarContraseña;
-       this.personaLogueada = personaLogueada;
-       this.modeloUsuario = modeloUsuario;
-       this.mainView = mainView;
-       dataSource = pool;
+            Personas personaLogueada, Usuarios modeloUsuario, 
+            DashboardAdmin mainView) {
+        
+        this.vistaCambiarContraseña =  vistaCambiarContraseña;
+        this.personaLogueada = personaLogueada;
+        this.modeloUsuario = modeloUsuario;
+        this.mainView = mainView;
+        
        vistaCambiarContraseña.btnCambiarContraseña.addActionListener(this::cambiarContraseña);
        inicializar();
+
     }
     
     private void inicializar(){
@@ -44,10 +48,8 @@ public class CambiarMiContraseñaController {
 
     private void cambiarContraseña(ActionEvent e) {
        
-        UsuarioSQL sqlUsuario = new UsuarioSQL();
-        sqlUsuario.setDataSource(dataSource);
         int idrol = sqlUsuario.obtenerIdrolUsuario(modeloUsuario.getUsuario(), modeloUsuario.getPassword());
-        String rfc = personaLogueada.getRFC();
+        String rfc = personaLogueada.getRfc();
         
         String contraseñaNueva = vistaCambiarContraseña.passNueva.getText();
         String contraseñaRepetida = vistaCambiarContraseña.passRepetida.getText();
@@ -65,11 +67,7 @@ public class CambiarMiContraseñaController {
     }
     
     private void iniciarSesion(){
-        login plog = new login();
-        Usuario modeloUsuario = new Usuario();
-        UsuarioSQL sqlUsuario = new UsuarioSQL();
-        
-        LoginController ctrl = new LoginController(plog, modeloUsuario, sqlUsuario, dataSource);
+        Login vista = new Login();
+        LoginController ctrl = new LoginController(vista);
     }
-    */
 }

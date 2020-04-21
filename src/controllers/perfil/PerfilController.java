@@ -2,7 +2,6 @@ package controllers.perfil;
 import java.awt.event.ActionEvent;
 import models.dao.PersonasDAO;
 import models.implementation.PersonasDaoImpl;
-import models.pojo.ExperienciaDocente;
 import models.pojo.Personas;
 import models.pojo.Usuarios;
 import util.Conexion;
@@ -15,8 +14,10 @@ import views.perfil.PerfilVista;
 import views.dashboard.DashboardAdmin;
 
 import util.FrameHijo;
+import static util.FrameHijo.obtenerPadre;
 import views.perfil.ExperienciaDocenteVista;
 import views.perfil.ProductosAcademicosVista;
+import views.usuarios.CambiarContraseña;
 
 public class PerfilController {
 
@@ -25,11 +26,13 @@ public class PerfilController {
     Usuarios modeloUsuario;
     DashboardAdmin mainView;
 
-    public PerfilController(Personas personaLogueada, PerfilVista vistaPerfil,
-            DashboardAdmin mainView) {
+    public PerfilController(Personas personaLogueada, PerfilVista vistaPerfil, 
+            DashboardAdmin mainView, Usuarios modeloUsuario) {
+        
         this.personaLogueada = personaLogueada;
         this.vistaPerfil = vistaPerfil;
         this.mainView = mainView;
+        this.modeloUsuario = modeloUsuario;
         vistaPerfil.botonDatosPersonales.addActionListener(this::botonDatosPersonales);
         vistaPerfil.botonExperienciaLaboral.addActionListener(this::botonExperienciaLaboral);
         vistaPerfil.botonFormacionAcademica.addActionListener(this::FormacionAcademica);
@@ -77,8 +80,10 @@ public class PerfilController {
     }
 
     private void botonCambiarContraseña(ActionEvent e) {
-        //CambiarContraseña vistaCambiarContraseña = new CambiarContraseña(obtenerPadre(vistaPerfil),true);
-//        CambiarMiContraseñaController controlCambiarContraseña = new CambiarMiContraseñaController(vistaCambiarContraseña, personaLogueada, modeloUsuario, mainView, dataSource);
+        CambiarContraseña vistaCambiarContraseña = new CambiarContraseña(obtenerPadre(vistaPerfil),true);
+        CambiarMiContraseñaController controlCambiarContraseña = 
+                new CambiarMiContraseñaController(vistaCambiarContraseña, 
+                        personaLogueada, modeloUsuario, mainView);
     }
 
     private void botonResumenCursos(ActionEvent e) {

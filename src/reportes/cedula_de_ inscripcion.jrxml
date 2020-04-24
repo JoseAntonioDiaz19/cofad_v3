@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cedula_de_ inscripcion" language="groovy" pageWidth="612" pageHeight="792" columnWidth="510" leftMargin="51" rightMargin="51" topMargin="28" bottomMargin="42" uuid="2246696e-c991-4e52-ad6f-9917e0c13de5">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idparticipante" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<queryString>
+		<![CDATA[SELECT
+	concat (
+		EXTRACT ( DAY FROM horario_lugar.fecha ) ,
+		' DE ',
+		UPPER (
+			 to_char( to_timestamp( ( SELECT EXTRACT ( MONTH FROM horario_lugar.fecha ) ) :: TEXT, 'MM' ), 'TMMonth' )
+		),
+		' DE ',
+		 EXTRACT ( YEAR FROM horario_lugar.fecha )
+	) AS "Fecha de realizacion de la cedula",
+	curso.clave_curso,
+	curso.curso,
+	(
+	SELECT
+		concat ( persona.ape_paterno, ' ', persona.ape_materno, ' ', persona.nombre ) AS "Nombre del instructor"
+	FROM
+		persona
+		INNER JOIN facilitador ON persona.rfc = facilitador.rfc
+		INNER JOIN curso ON facilitador.idfacilitador = curso.idfacilitador
+	WHERE
+		curso.idcurso = ( SELECT idcurso FROM participante WHERE idparticipante = $P{idparticipante} )
+	),
+	concat (
+		'DEL ',
+		EXTRACT ( DAY FROM curso.fecha_inicio ),
+		' DE ',
+		UPPER ( to_char( to_timestamp( ( SELECT EXTRACT ( MONTH FROM curso.fecha_inicio ) ) :: TEXT, 'MM' ), 'TMMonth' ) ),
+		' DEL ',
+		EXTRACT ( YEAR FROM curso.fecha_inicio ),
+		' AL ',
+		EXTRACT ( DAY FROM curso.fecha_fin ),
+		' DE ',
+		UPPER ( to_char( to_timestamp( ( SELECT EXTRACT ( MONTH FROM curso.fecha_fin ) ) :: TEXT, 'MM' ), 'TMMonth' ) ),
+		' DEL ',
+		EXTRACT ( YEAR FROM curso.fecha_fin )
+	) AS "FECHA DE REALIZACION",
+	concat(to_char(horario_lugar.hora_inicio,'HH24:MI'),' A ',
+	to_char(horario_lugar.hora_fin,'HH24:MI'),' HORAS') as "HORARIO",
+	curso.duracion,
+	CASE COALESCE (persona.sexo ,'' )
+	WHEN 'H' THEN
+	'X' ELSE''
+	END AS Hombre,
+
+	CASE COALESCE (persona.sexo,'' )
+	WHEN 'M' THEN
+	'X' ELSE''
+	END AS Mujer,
+	concat('	',persona.ape_paterno,' 			',persona.ape_materno,' 			',persona.nombre) as "NOMBRE DEL PARTICIPANTE",
+	persona.rfc,
+	persona.curp,
+	upper(persona.correo) as correo,
+	case when nivelestudios2(persona.rfc)=1 then 'OTROS'
+when nivelestudios2(persona.rfc)=2 then 'LICENCIATURA'
+when nivelestudios2(persona.rfc)=3 then 'MAESTRIA'
+when nivelestudios2(persona.rfc)=4 then 'DOCTORADO'
+else 'OTROS' end as "Nivel Academico",
+(select persona_formacionacademica.titulacion as participante_carrera
+		from formacion_academica
+		INNER JOIN persona_formacionacademica
+		on persona_formacionacademica.idformacion_academica=formacion_academica.idformacion_academica
+		INNER JOIN persona
+		on persona_formacionacademica.rfc=persona.rfc
+		INNER JOIN participante
+		on persona.rfc=participante.rfc
+		where participante.idparticipante=$P{idparticipante} and persona_formacionacademica.idpersona_formacionacademica=(select max(persona_formacionacademica.idpersona_formacionacademica) from persona_formacionacademica INNER JOIN persona
+		on persona_formacionacademica.rfc=persona.rfc
+		INNER JOIN participante
+		on persona.rfc=participante.rfc
+		where idparticipante=$P{idparticipante})),
+		case when cargo.idcargo <> 5 then ' X '
+else ' ' end as "APOYO A LA EDUCACION",
+case when cargo.idcargo = 5 then ' X '
+else ' ' end as "DOCENTE",
+plantel.plantel,
+puesto.puesto,
+cargo.cargo,
+persona.clave_presupuestal,
+case when cargo.idcargo>3 then (SELECT concat(persona.nombre,' ',persona.ape_paterno,' ',persona.ape_materno)
+from persona
+INNER JOIN puesto_persona on persona.rfc=puesto_persona.rfc
+INNER JOIN cargo on puesto_persona.idcargo=cargo.idcargo
+INNER JOIN puesto on puesto.idpuesto=puesto_persona.idpuesto
+where puesto_persona.idcargo=3 and puesto.idpuesto=(SELECT puesto.idpuesto
+from persona
+INNER JOIN puesto_persona on persona.rfc=puesto_persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc
+INNER JOIN puesto on puesto.idpuesto=puesto_persona.idpuesto
+where participante.idparticipante=$P{idparticipante} and puesto_persona.idjornada_laboral=(select max(puesto_persona.idjornada_laboral)
+from puesto_persona INNER JOIN persona on puesto_persona.rfc=persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc where participante.idparticipante= $P{idparticipante})))
+when cargo.idcargo =3 then (SELECT concat(persona.nombre,' ',persona.ape_paterno,' ',persona.ape_materno) as "JEFE INMEDIATO"
+from persona
+INNER JOIN puesto_persona on persona.rfc=puesto_persona.rfc
+INNER JOIN cargo on puesto_persona.idcargo=cargo.idcargo
+INNER JOIN puesto on puesto.idpuesto=puesto_persona.idpuesto
+where puesto_persona.idcargo=2 and puesto.idsubdireccion=(SELECT puesto.idsubdireccion
+from persona
+INNER JOIN puesto_persona on persona.rfc=puesto_persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc
+INNER JOIN puesto on puesto.idpuesto=puesto_persona.idpuesto
+INNER JOIN subdireccion on puesto.idsubdireccion=subdireccion.idsubdireccion
+where participante.idparticipante=$P{idparticipante} and puesto_persona.idjornada_laboral=(select max(puesto_persona.idjornada_laboral)
+from puesto_persona INNER JOIN persona on puesto_persona.rfc=persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc where participante.idparticipante= $P{idparticipante})))
+when cargo.idcargo =2 then (SELECT concat(persona.nombre,' ',persona.ape_paterno,' ',persona.ape_materno) as "JEFE INMEDIATO"
+from persona
+INNER JOIN puesto_persona on persona.rfc=puesto_persona.rfc
+INNER JOIN cargo on puesto_persona.idcargo=cargo.idcargo
+INNER JOIN puesto on puesto.idpuesto=puesto_persona.idpuesto
+where puesto_persona.idcargo=1 and puesto.idsubdireccion=(SELECT puesto.idsubdireccion
+from persona
+INNER JOIN puesto_persona on persona.rfc=puesto_persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc
+INNER JOIN puesto on puesto.idpuesto=puesto_persona.idpuesto
+INNER JOIN subdireccion on puesto.idsubdireccion=subdireccion.idsubdireccion
+where participante.idparticipante=$P{idparticipante} and puesto_persona.idjornada_laboral=(select max(puesto_persona.idjornada_laboral)
+from puesto_persona INNER JOIN persona on puesto_persona.rfc=persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc where participante.idparticipante= $P{idparticipante})))
+else 'OTROS' end as "JEFE INMEDIATO",
+persona.telefono,
+CASE COALESCE (cast(persona.es_externo as varchar),'' )
+WHEN 'true' THEN
+	'SI' ELSE'NO'
+	END AS "ES O NO EXTERNO",
+	jornada_laboral.jornada_laboral
+FROM
+cargo INNER JOIN puesto_persona on cargo.idcargo=puesto_persona.idcargo
+INNER JOIN jornada_laboral on puesto_persona.idjornada_laboral=jornada_laboral.idjornada_laboral
+INNER JOIN puesto on puesto_persona.idpuesto=puesto.idpuesto
+INNER JOIN persona on puesto_persona.rfc=persona.rfc
+INNER JOIN plantel on plantel.clave_plantel=persona.clave_plantel
+INNER JOIN participante on persona.rfc=participante.rfc
+	INNER JOIN curso ON curso.idcurso = participante.idcurso
+	INNER JOIN horario ON curso.idhorario = horario.idhorario
+	INNER JOIN horario_lugar ON horario.idhorario = horario_lugar.idhorario
+WHERE
+	participante.idparticipante =$P{idparticipante} and puesto_persona.idjornada_laboral=(select max(puesto_persona.idjornada_laboral)
+from puesto_persona INNER JOIN persona on puesto_persona.rfc=persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc where participante.idparticipante= $P{idparticipante})]]>
+	</queryString>
+	<field name="Fecha de realizacion de la cedula" class="java.lang.String"/>
+	<field name="clave_curso" class="java.lang.String"/>
+	<field name="curso" class="java.lang.String"/>
+	<field name="Nombre del instructor" class="java.lang.String"/>
+	<field name="FECHA DE REALIZACION" class="java.lang.String"/>
+	<field name="HORARIO" class="java.lang.String"/>
+	<field name="duracion" class="java.lang.Integer"/>
+	<field name="hombre" class="java.lang.String"/>
+	<field name="mujer" class="java.lang.String"/>
+	<field name="NOMBRE DEL PARTICIPANTE" class="java.lang.String"/>
+	<field name="rfc" class="java.lang.String"/>
+	<field name="curp" class="java.lang.String"/>
+	<field name="correo" class="java.lang.String"/>
+	<field name="Nivel Academico" class="java.lang.String"/>
+	<field name="participante_carrera" class="java.lang.String"/>
+	<field name="APOYO A LA EDUCACION" class="java.lang.String"/>
+	<field name="DOCENTE" class="java.lang.String"/>
+	<field name="plantel" class="java.lang.String"/>
+	<field name="puesto" class="java.lang.String"/>
+	<field name="cargo" class="java.lang.String"/>
+	<field name="clave_presupuestal" class="java.lang.String"/>
+	<field name="JEFE INMEDIATO" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.String"/>
+	<field name="ES O NO EXTERNO" class="java.lang.String"/>
+	<field name="jornada_laboral" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="53" splitType="Stretch">
+			<staticText>
+				<reportElement x="296" y="0" width="214" height="53" uuid="2d4f0710-3b41-4888-abc6-24315cd8f8e9"/>
+				<text><![CDATA[TECNOLÓGICO NACIONAL DE MÉXICO
+Secretaría de Administración
+Dirección de  Personal
+]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="124" height="50" uuid="5c8e3287-6762-49d9-9954-8594eb0d7bcb"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="510" height="30" uuid="b632ae91-c981-431b-8951-e125bc19bafe"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CÉDULA DE INSCRIPCIÓN]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<line>
+				<reportElement x="378" y="31" width="132" height="1" uuid="1c4a41c5-7fdf-48f5-9bea-89222d45af54"/>
+			</line>
+			<staticText>
+				<reportElement x="334" y="16" width="44" height="15" uuid="02c47f6e-ec1c-4a47-b172-b87eec97a100"/>
+				<text><![CDATA[FECHA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="378" y="16" width="132" height="15" uuid="d488d6b7-3557-4c93-9fb7-766bd1f8aefc"/>
+				<textFieldExpression><![CDATA[$F{Fecha de realizacion de la cedula}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="468" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="26" width="112" height="20" uuid="a406376a-a66d-43da-998a-2d55a887fa76"/>
+				<text><![CDATA[CLAVE DEL CURSO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="46" width="112" height="20" uuid="b4c68446-3692-4150-87e6-8789f8c2d3bc"/>
+				<text><![CDATA[NOMBRE DEL CURSO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="66" width="165" height="20" uuid="1356c269-9ac6-484c-b1c7-1bfdcd62525b"/>
+				<text><![CDATA[NOMBRE DEL INSTRUCTOR (ES):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="86" width="139" height="20" uuid="2d867b63-7470-40e5-86fc-c19b740bfa44"/>
+				<text><![CDATA[FECHA DE REALIZACION:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="104" width="139" height="20" uuid="74631fda-78be-40cb-8140-48ebc51b00f4"/>
+				<text><![CDATA[HORA DE REALIZACIÓN:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="342" y="104" width="58" height="20" uuid="d56556f7-76b7-474d-8afa-948777de4d2a"/>
+				<text><![CDATA[DURACION:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="0" width="510" height="20" backcolor="#CCCCCC" uuid="7a0bd570-35a4-474e-a688-ee8ad63bd4c6"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="220" y="0" width="111" height="20" uuid="ec6418b5-de1a-4830-a62f-6ea8fa82b3cd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATOS DEL EVENTO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="112" y="40" width="398" height="1" uuid="169a7b69-2695-4a95-ba18-0587c4d4f0a2"/>
+			</line>
+			<line>
+				<reportElement x="114" y="60" width="396" height="1" uuid="b0cd459b-8457-4c3c-9dda-aefce8d17d18"/>
+			</line>
+			<line>
+				<reportElement x="165" y="80" width="345" height="1" uuid="c1e87871-fe1d-482c-904c-efcb7cba33be"/>
+			</line>
+			<line>
+				<reportElement x="139" y="100" width="371" height="1" uuid="ebf241e1-5487-4699-999d-1088b3ca41a7"/>
+			</line>
+			<line>
+				<reportElement x="139" y="118" width="203" height="1" uuid="7c640a06-2e1b-4fee-b877-9cd4db7f173f"/>
+			</line>
+			<line>
+				<reportElement x="400" y="118" width="110" height="1" uuid="4f1fa2a2-47da-4249-a188-1bad562e1ca3"/>
+			</line>
+			<rectangle>
+				<reportElement x="0" y="134" width="510" height="20" forecolor="#000000" backcolor="#CCCCCC" uuid="077926e1-4681-4e92-a39a-3f5a50c344ef"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="220" y="134" width="111" height="20" uuid="a166f227-3295-4c57-978d-e0bdc91943a2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATOS PERSONALES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="317" y="162" width="64" height="20" uuid="9e50de23-5bcd-4af4-b98d-bc9cf6c318d4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[HOMBRE:   (]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="162" width="73" height="20" uuid="92a93db1-5f7a-45c8-9625-d134b9d304d1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[)     MUJER:    (]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="492" y="162" width="10" height="20" uuid="65e0d5ee-25f0-4e4a-907d-c98718a409e6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="188" width="52" height="20" uuid="bb25ed64-e37c-4ed0-b0f5-feb588da54c4"/>
+				<text><![CDATA[NOMBRE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="221" width="29" height="17" uuid="22750d15-d292-485f-81d8-d64501dc7d65"/>
+				<text><![CDATA[RFC:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="52" y="205" width="458" height="1" uuid="530681a3-acf1-41d6-ba50-24b86cc7f81f"/>
+			</line>
+			<staticText>
+				<reportElement x="85" y="205" width="110" height="16" uuid="dc2f44f5-fc43-4568-9e1b-2a3d5dba09fc"/>
+				<text><![CDATA[APELLIDO PATERNO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="236" y="206" width="122" height="13" uuid="adb5c702-ac83-4ee3-b621-655052b9ad3d"/>
+				<text><![CDATA[APELLIDO MATERNO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="381" y="204" width="100" height="15" uuid="5bb6dab8-a501-411b-b1a3-e5496543eb52"/>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<line>
+				<reportElement x="29" y="237" width="279" height="1" uuid="f18e32d3-0a6a-4dab-9f30-8c50d512044a"/>
+			</line>
+			<staticText>
+				<reportElement x="308" y="222" width="50" height="14" uuid="e2f5c898-9338-4d07-b391-65a3659cdb55"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[CURP:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="358" y="236" width="152" height="1" uuid="8b676e13-b732-42a4-8e57-fde155a43443"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="242" width="139" height="20" uuid="e3ca7c88-0196-49ba-a0bb-8b6d1a61fb06"/>
+				<text><![CDATA[CORREO ELECTRONICO:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="139" y="256" width="371" height="1" uuid="1baf9910-0b47-4ce8-9882-c2757b4ffc8c"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="262" width="165" height="15" uuid="e497c099-9a90-4a8c-ba7d-d54afd61ecae"/>
+				<text><![CDATA[GRADO MAXIMO DE ESTUDIOS:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="165" y="276" width="345" height="1" uuid="dccb1308-c66c-4c58-8c74-d2a97e1ca0f5"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="282" width="139" height="15" uuid="3ab11551-ef53-4304-ae5d-ac47e8b76adb"/>
+				<text><![CDATA[NOMBRE DE LA CARRERA:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="139" y="296" width="371" height="1" uuid="54fc81cb-a0db-4b9a-a603-13bb951c011d"/>
+			</line>
+			<rectangle>
+				<reportElement x="0" y="302" width="510" height="20" backcolor="#CCCCCC" uuid="57a7d684-d38b-4eed-9316-0a961727fcc6"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="328" y="325" width="153" height="14" uuid="100639bc-9306-43ad-bea2-a36ee0ae49fa"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[)    APOYO A LA EDUCACIÓN   (]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="249" y="325" width="66" height="14" uuid="73e9fe78-0c34-47ce-b4ba-51cc806d671f"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[DOCENTE:   (]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="493" y="325" width="9" height="14" uuid="c19c71a2-665d-4742-9b3a-6ed06dea812f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="339" width="195" height="14" uuid="1583c0ae-932f-4ada-8ada-242c6cf30e00"/>
+				<text><![CDATA[INSTITUTO TECNOLÓGICO O CENTRO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="358" width="124" height="14" uuid="bf8b9023-68eb-4782-8fa0-01687deabc91"/>
+				<text><![CDATA[ÁREA DE ADSCRIPCIÓN:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="377" width="139" height="14" uuid="78fa85d5-fdaf-4665-9f9e-3d9330a34b1e"/>
+				<text><![CDATA[PUESTO QUE DESEMPEÑA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="394" width="124" height="14" uuid="b5592603-a815-4911-bdae-76288be3ada9"/>
+				<text><![CDATA[CLAVE PRESUPUESTAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="410" width="100" height="15" uuid="bf9eab14-5d93-41de-bdc7-35e7447abeb3"/>
+				<text><![CDATA[JEFE INMEDIATO:.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="428" width="62" height="14" uuid="0d26ba15-2eef-4ba9-b4f6-d76cd75fe008"/>
+				<text><![CDATA[TELÉFONO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="308" y="428" width="25" height="14" uuid="ce5e3af2-a143-4cb6-b5fb-6abbe64a940d"/>
+				<text><![CDATA[EXT:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="446" width="41" height="14" uuid="80b82be3-c850-426a-aef3-453d6a2ea3cc"/>
+				<text><![CDATA[HORAS:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="195" y="353" width="313" height="1" uuid="4e016911-ead3-4ace-95a2-5cf29b418153"/>
+			</line>
+			<line>
+				<reportElement x="124" y="371" width="384" height="1" uuid="5051f608-9f59-4103-b697-9b78e133a74e"/>
+			</line>
+			<line>
+				<reportElement x="139" y="390" width="369" height="1" uuid="2ff41ec8-369e-4304-8af4-6fc3bcfd29a2"/>
+			</line>
+			<line>
+				<reportElement x="124" y="407" width="384" height="1" uuid="36eb39f2-a635-4ad8-98c1-8f2423a5c8e2"/>
+			</line>
+			<line>
+				<reportElement x="100" y="424" width="410" height="1" uuid="dfd00762-b02e-42f7-b735-6e6c225c6d25"/>
+			</line>
+			<line>
+				<reportElement x="62" y="441" width="247" height="1" uuid="e871818a-db33-44de-a015-fd668f889c0e"/>
+			</line>
+			<line>
+				<reportElement x="333" y="441" width="177" height="1" uuid="4c28c2bb-b65b-46c7-a7e8-9b3e49367879"/>
+			</line>
+			<line>
+				<reportElement x="42" y="459" width="266" height="1" uuid="2a272c16-5737-4a92-8333-310e51c0f997"/>
+			</line>
+			<staticText>
+				<reportElement x="242" y="302" width="100" height="20" uuid="b98af4df-cb05-48fe-ba7a-ec0db83f81ac"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATOS LABORALES]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="114" y="26" width="396" height="14" uuid="2ffbdc10-fb1a-4926-be18-accea2831b8a"/>
+				<textFieldExpression><![CDATA[$F{clave_curso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="112" y="46" width="398" height="14" uuid="c09c1aec-5064-48de-9cf1-2cb811634863"/>
+				<textFieldExpression><![CDATA[$F{curso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="165" y="66" width="345" height="14" uuid="9a0ceb7e-f2eb-4949-8dd5-f9a0a36f4e8b"/>
+				<textFieldExpression><![CDATA[$F{Nombre del instructor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="139" y="86" width="371" height="14" uuid="f7e40154-01af-4239-986c-aa216da2d2d1"/>
+				<textFieldExpression><![CDATA[$F{FECHA DE REALIZACION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="139" y="106" width="203" height="13" uuid="1d57ac64-827f-471c-9e27-1d4b36c24cb1"/>
+				<textFieldExpression><![CDATA[$F{HORARIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="398" y="104" width="110" height="15" uuid="b06f5ee6-b3b9-495e-8488-9b251ae03b4b"/>
+				<textFieldExpression><![CDATA[$F{duracion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="378" y="162" width="22" height="20" uuid="35fc85cc-2c7c-4a70-bb2a-5cf029600dd0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{hombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="473" y="162" width="19" height="20" uuid="50a0b4c1-8712-47fa-8787-a91713c40ed5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{mujer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="52" y="189" width="456" height="16" uuid="a9eea068-0364-4a07-89f8-43498c7f9e64"/>
+				<textFieldExpression><![CDATA[$F{NOMBRE DEL PARTICIPANTE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="29" y="222" width="279" height="14" uuid="363496c6-f0f8-4fbd-9291-c888d3f92a35"/>
+				<textFieldExpression><![CDATA[$F{rfc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="358" y="222" width="150" height="14" uuid="6fd931b0-b4d2-4bda-b402-16fe53166bde"/>
+				<textFieldExpression><![CDATA[$F{curp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="242" width="368" height="14" uuid="21d4563b-15d2-4f6f-b71f-bfa4dddfaca4"/>
+				<textFieldExpression><![CDATA[$F{correo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="165" y="262" width="343" height="14" uuid="1577a680-6cdd-4746-8ec1-6a44602d6387"/>
+				<textFieldExpression><![CDATA[$F{Nivel Academico}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="282" width="368" height="14" uuid="668f049f-cf00-4bf5-b95e-2d3ed79a55cf"/>
+				<textFieldExpression><![CDATA[$F{participante_carrera}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="481" y="325" width="12" height="14" uuid="f31f3b62-639b-46ee-ba68-14895ff9d1ea"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{APOYO A LA EDUCACION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="315" y="325" width="13" height="14" uuid="03203c4b-efbf-463e-b711-653b00fbf4f2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{DOCENTE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="196" y="339" width="312" height="14" uuid="fd29d6e6-5062-4b80-bb94-a4771aa80b8a"/>
+				<textFieldExpression><![CDATA[$F{plantel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="124" y="357" width="384" height="14" uuid="a6f53987-1b6f-4bfa-97a9-1de468b0be87"/>
+				<textFieldExpression><![CDATA[$F{puesto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="377" width="368" height="13" uuid="9f25223d-58b4-49f5-802f-c0cd08ad9bf6"/>
+				<textFieldExpression><![CDATA[$F{cargo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="124" y="394" width="386" height="13" uuid="8b36f609-5c3d-498c-80f3-6a71d9334bd7"/>
+				<textFieldExpression><![CDATA[$F{clave_presupuestal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="62" y="428" width="246" height="14" uuid="80022145-610d-4bef-956d-900f42202d0c"/>
+				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="334" y="428" width="176" height="13" uuid="7b035b5a-6bfa-418b-96d5-e9aa0b829b66"/>
+				<textFieldExpression><![CDATA[$F{ES O NO EXTERNO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="42" y="446" width="266" height="14" uuid="2ac34ec2-2e76-44a8-b8b1-7f3ad919647f"/>
+				<textFieldExpression><![CDATA[$F{jornada_laboral}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="410" width="408" height="14" uuid="de8ac538-5d09-46ab-b568-d6d1d42045a1"/>
+				<textFieldExpression><![CDATA[$F{JEFE INMEDIATO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="34" width="75" height="20" uuid="433ed91e-f38e-410f-beac-9d8e85056fe4"/>
+				<text><![CDATA[M00-IT-13-R10]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="468" y="34" width="42" height="20" uuid="97beb05a-fcce-4494-9aa6-208ad0180db9"/>
+				<text><![CDATA[REV. O]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="17" width="42" height="17" uuid="5a353099-f8e9-414f-8000-574aa02f2938"/>
+				<text><![CDATA[FIRMA]]></text>
+			</staticText>
+			<line>
+				<reportElement x="308" y="16" width="200" height="1" uuid="930d1644-7058-4481-85a5-ae328d2b1320"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

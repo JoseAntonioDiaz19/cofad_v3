@@ -1,0 +1,770 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ENCUESTA_DE_OPINION" language="groovy" pageWidth="612" pageHeight="792" columnWidth="578" leftMargin="17" rightMargin="17" topMargin="53" bottomMargin="53" uuid="6d10e21d-a6f8-4c9f-bcab-da7deeaede46">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="229"/>
+	<subDataset name="tabla_instructor" uuid="7868ee92-2c74-4485-a1b5-8a774fc11f5b">
+		<parameter name="idpartcipante_ds_instructor" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[Select
+opinion.idopinion,
+opinion.opinion,
+opinion_encuestaopinion.valor_opinion
+from aspecto
+	INNER JOIN opinion on aspecto.idaspecto=opinion.idaspecto
+			INNER JOIN opinion_encuestaopinion on opinion.idopinion=opinion_encuestaopinion.idopinion
+			INNER JOIN encuesta_opinion on opinion_encuestaopinion.idencuesta_opinion=encuesta_opinion.idencuesta_opinion
+			INNER JOIN participante on encuesta_opinion.idencuesta_opinion= participante.idencuesta_opinion
+			INNER JOIN persona on participante.rfc= persona.rfc
+			INNER JOIN curso on participante.idcurso= curso.idcurso
+			 where  aspecto.idaspecto= 1 and idparticipante=$P{idpartcipante_ds_instructor}]]>
+		</queryString>
+		<field name="idopinion" class="java.lang.Integer"/>
+		<field name="opinion" class="java.lang.String"/>
+		<field name="valor_opinion" class="java.lang.Integer"/>
+	</subDataset>
+	<subDataset name="TABLA_MATERIAL_DIDATICO" uuid="7ddcf8d8-15fc-46de-99e1-e7db0b5f0823">
+		<parameter name="idparticipante_ds_matdi" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[Select
+opinion.idopinion,
+opinion.opinion,
+opinion_encuestaopinion.valor_opinion
+from aspecto
+	INNER JOIN opinion on aspecto.idaspecto=opinion.idaspecto
+			INNER JOIN opinion_encuestaopinion on opinion.idopinion=opinion_encuestaopinion.idopinion
+			INNER JOIN encuesta_opinion on opinion_encuestaopinion.idencuesta_opinion=encuesta_opinion.idencuesta_opinion
+			INNER JOIN participante on encuesta_opinion.idencuesta_opinion= participante.idencuesta_opinion
+			INNER JOIN persona on participante.rfc= persona.rfc
+			INNER JOIN curso on participante.idcurso= curso.idcurso
+			 where  aspecto.idaspecto= 2 and idparticipante=$P{idparticipante_ds_matdi}]]>
+		</queryString>
+		<field name="idopinion" class="java.lang.Integer"/>
+		<field name="opinion" class="java.lang.String"/>
+		<field name="valor_opinion" class="java.lang.Integer"/>
+	</subDataset>
+	<subDataset name="tabla_curso" uuid="ef80bda1-be5e-4493-a884-5bd20f5bc7d2">
+		<parameter name="idparticipante_ds_curso" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[Select
+			 opinion.idopinion,
+opinion.opinion,
+opinion_encuestaopinion.valor_opinion
+from aspecto
+	INNER JOIN opinion on aspecto.idaspecto=opinion.idaspecto
+			INNER JOIN opinion_encuestaopinion on opinion.idopinion=opinion_encuestaopinion.idopinion
+			INNER JOIN encuesta_opinion on opinion_encuestaopinion.idencuesta_opinion=encuesta_opinion.idencuesta_opinion
+			INNER JOIN participante on encuesta_opinion.idencuesta_opinion= participante.idencuesta_opinion
+			INNER JOIN persona on participante.rfc= persona.rfc
+			INNER JOIN curso on participante.idcurso= curso.idcurso
+			 where aspecto.idaspecto= 3 and idparticipante=$P{idparticipante_ds_curso}]]>
+		</queryString>
+		<field name="idopinion" class="java.lang.Integer"/>
+		<field name="opinion" class="java.lang.String"/>
+		<field name="valor_opinion" class="java.lang.Integer"/>
+	</subDataset>
+	<subDataset name="tabla_infraestructura" uuid="f75bf752-e6cd-49f2-b0f9-3282a1fa50e0">
+		<parameter name="idparticipante_ds_infra" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[Select
+			 opinion.idopinion,
+opinion.opinion,
+opinion_encuestaopinion.valor_opinion
+from aspecto
+	INNER JOIN opinion on aspecto.idaspecto=opinion.idaspecto
+			INNER JOIN opinion_encuestaopinion on opinion.idopinion=opinion_encuestaopinion.idopinion
+			INNER JOIN encuesta_opinion on opinion_encuestaopinion.idencuesta_opinion=encuesta_opinion.idencuesta_opinion
+			INNER JOIN participante on encuesta_opinion.idencuesta_opinion= participante.idencuesta_opinion
+			INNER JOIN persona on participante.rfc= persona.rfc
+			INNER JOIN curso on participante.idcurso= curso.idcurso
+			 where aspecto.idaspecto= 4 and idparticipante=$P{idparticipante_ds_infra}]]>
+		</queryString>
+		<field name="idopinion" class="java.lang.Integer"/>
+		<field name="opinion" class="java.lang.String"/>
+		<field name="valor_opinion" class="java.lang.Integer"/>
+	</subDataset>
+	<parameter name="IDPARTICIPANTE" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<queryString>
+		<![CDATA[SELECT
+	concat (
+		( SELECT EXTRACT ( DAY FROM encuesta_opinion.fecha_realizacion ) ),
+		' DE ',
+		UPPER ( ( SELECT to_char( to_timestamp( ( SELECT EXTRACT ( MONTH FROM encuesta_opinion.fecha_realizacion ) ) :: TEXT, 'MM' ), 'TMMonth' ) ) ),
+		' DE ',
+		( SELECT EXTRACT ( YEAR FROM encuesta_opinion.fecha_realizacion ) )
+	) AS encuesta_realizacion,
+	curso.curso,
+	curso.sede,
+	(
+	SELECT
+		concat ( persona.nombre, ' ', persona.ape_paterno, ' ', persona.ape_materno ) AS nombre_instructor
+	FROM
+		persona
+		INNER JOIN facilitador ON persona.rfc = facilitador.rfc
+		INNER JOIN curso ON facilitador.idfacilitador = curso.idfacilitador
+	WHERE
+		curso.idcurso = ( SELECT idcurso FROM participante WHERE idparticipante = $P{IDPARTICIPANTE} )
+	),
+	encuesta_opinion.comentario,
+	encuesta_opinion.sugerencia
+	FROM
+	encuesta_opinion
+	INNER JOIN participante ON encuesta_opinion.idencuesta_opinion = participante.idencuesta_opinion
+	INNER JOIN persona ON participante.rfc = persona.rfc
+	INNER JOIN curso ON participante.idcurso = curso.idcurso
+WHERE
+	idparticipante =$P{IDPARTICIPANTE}]]>
+	</queryString>
+	<field name="encuesta_realizacion" class="java.lang.String"/>
+	<field name="curso" class="java.lang.String"/>
+	<field name="sede" class="java.lang.String"/>
+	<field name="nombre_instructor" class="java.lang.String"/>
+	<field name="comentario" class="java.lang.String"/>
+	<field name="sugerencia" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="45" width="572" height="34" uuid="c46c1366-cd15-4bfa-b5d7-8ec85925505a"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Encuesta de opinión
+Curso de capacitación presencial]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="123" y="0" width="242" height="52" uuid="20f71c1b-f9bf-47b1-8579-378aec595434"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[INSTITUTO TECNOLOGICO DE MEXICO
+SECRETARIA DE ADMINISTRACION
+DIRECCION DEL PERSONAL DEL TNM
+JEFATURA DE CAPACITACION Y DESARROLLO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="443" y="0" width="121" height="19" uuid="1353258e-9abf-4acd-b817-affaed07af8d"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="443" y="0" width="120" height="19" uuid="44f904f2-7757-4c97-8ef6-b821038c1a9b"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Clave de identificación]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="443" y="19" width="121" height="16" uuid="55815468-7778-426e-8cef-fb6e70cf360d"/>
+			</rectangle>
+			<image>
+				<reportElement x="-7" y="0" width="120" height="50" uuid="5153aad1-65e8-4604-82e5-fd91bd938a42"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="57" splitType="Stretch">
+			<textField>
+				<reportElement x="93" y="8" width="206" height="13" uuid="585e437d-74e7-48d3-9534-d60d575b0630"/>
+				<textFieldExpression><![CDATA[$F{curso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="8" width="90" height="13" uuid="f4f775c3-62b9-4da3-a984-9245cb17a062"/>
+				<text><![CDATA[Nombre del Curso:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="433" y="8" width="138" height="13" uuid="fbe73978-f28e-4c5c-892a-deb4feaa8e0a"/>
+				<textFieldExpression><![CDATA[$F{encuesta_realizacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="113" y="24" width="376" height="13" uuid="8236c7fb-e4a8-4c5a-a60d-db48cd511082"/>
+				<textFieldExpression><![CDATA[$F{sede}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="24" width="110" height="13" uuid="45ea2a67-a116-404f-80d7-a40e8d5309ac"/>
+				<text><![CDATA[Nombre de Institución:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="124" y="42" width="388" height="13" uuid="a1bdf6a1-191a-4dea-a3c8-a1446d3331cf"/>
+				<textFieldExpression><![CDATA[$F{nombre_instructor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="42" width="121" height="13" uuid="1ffbb278-d161-4a5e-b2cb-db6eab894251"/>
+				<text><![CDATA[Nombre del Facilitador:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="8" width="124" height="13" uuid="ea5d99b7-608b-4587-a965-d0feef6e5f33"/>
+				<text><![CDATA[FECHA DE REALIZACIÓN:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="93" y="21" width="206" height="1" uuid="f2a5440b-3cb4-4da4-ab60-3cd251b8a77a"/>
+			</line>
+			<line>
+				<reportElement x="436" y="20" width="132" height="1" uuid="94b3544b-f058-4ef7-b0a0-10fd8b1d9533"/>
+			</line>
+			<line>
+				<reportElement x="113" y="37" width="455" height="1" uuid="6884a134-0c69-4113-af75-3a0d9a340a92"/>
+			</line>
+			<line>
+				<reportElement x="124" y="55" width="444" height="1" uuid="96b9555b-0746-4c29-aafe-31a01335af75"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="386" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="27" width="568" height="26" uuid="aa1de877-366d-41f5-b81a-c1e8abc066d4"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INSTRUCCIÓN: Solicitamos exprese su opinión sobre los siguientes aspectos escribiendo el número correspondiente en el recuadro de la derecha según la siguiente escala:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="9" y="56" width="22" height="27" uuid="3441d499-431b-4eae-95b7-619888592465"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="123" y="56" width="22" height="27" uuid="7743c42f-6378-4a9d-9ca5-355cbafa491b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="252" y="56" width="22" height="27" uuid="a91a494d-3354-4559-9325-fd5934d7c749"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="341" y="56" width="22" height="27" uuid="3a60525f-70e4-4104-8e4d-c32d5a35720b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="456" y="56" width="22" height="27" uuid="2e16ae4d-e339-474a-8097-d47f210443f0"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="31" y="56" width="76" height="27" uuid="f22caf54-0bcd-4188-a8ea-c3d282fed64c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Totalmente de acuerdo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="145" y="56" width="87" height="27" uuid="ccdf9611-90df-484c-8552-3b40641e2574"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Parcialmente de acuerdo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="274" y="56" width="55" height="27" uuid="5f9070af-abec-45c3-b527-7428c93b9e1d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Indiferente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="363" y="56" width="81" height="27" uuid="592add93-ff50-4658-8346-1f68e110a8bb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Parcialmente en desacuerdo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="478" y="56" width="86" height="27" uuid="2753f928-b997-4cf6-879a-0687d7c028c6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[En desacuerdo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="56" width="22" height="27" uuid="bff55291-6d5b-439f-b6a5-c8ae379725c0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="123" y="56" width="22" height="27" uuid="91397d30-8146-4c58-91b1-94bdf1abe784"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="252" y="56" width="22" height="27" uuid="9d22a7fd-53d3-46eb-a1a2-cee6cc4bd86c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="341" y="56" width="22" height="27" uuid="ca12ea50-a0a0-4c16-8a08-ff23bfe00878"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="456" y="56" width="22" height="27" uuid="d2c791c6-3bb0-4e24-8a76-2c8f2e114c1e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1" width="568" height="26" uuid="673cd97e-7d95-43df-b290-42679b5acf6f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[La presente encuesta tiene como finalidad conocer su opinión sobre el curso de capacitación en el que participó, las respuestas nos servirán para mejorarlo.]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement key="table" x="304" y="96" width="273" height="140" uuid="a6d19252-0423-4dc3-b84f-6aad7656b6d0"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="tabla_curso" uuid="d4ee32b5-1954-44ec-9e82-35bff57a3d9e">
+						<datasetParameter name="idparticipante_ds_curso">
+							<datasetParameterExpression><![CDATA[$P{IDPARTICIPANTE}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="16" uuid="02ad6364-f691-437f-9cb7-18e18ec4c6ad">
+						<jr:columnHeader height="18" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<rectangle>
+								<reportElement x="0" y="0" width="16" height="18" backcolor="#CCCCCC" uuid="ec1a8929-bc89-4333-a599-b4fcc7d87af3"/>
+								<graphicElement>
+									<pen lineWidth="0.0"/>
+								</graphicElement>
+							</rectangle>
+						</jr:columnHeader>
+						<jr:detailCell height="25" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="16" height="25" uuid="8f28d8a1-547d-44f6-ab2c-01c0bdfa2d11"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{idopinion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="232" uuid="d208dcf9-9f0b-4cdf-9be8-13ea2d098220">
+						<jr:columnHeader height="18" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<rectangle>
+								<reportElement x="0" y="0" width="232" height="18" backcolor="#CCCCCC" uuid="d6206060-1027-4647-8639-f1e8d6fab78f"/>
+								<graphicElement>
+									<pen lineWidth="0.0"/>
+								</graphicElement>
+							</rectangle>
+							<staticText>
+								<reportElement x="0" y="0" width="232" height="18" uuid="d6c52c49-0149-4811-b102-e79024a84553"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true" isUnderline="false"/>
+								</textElement>
+								<text><![CDATA[CURSO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="25" rowSpan="1">
+							<box>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="232" height="25" uuid="3e897b4a-1f11-4ee5-ab4c-0d2025d3ea1c"/>
+								<textElement textAlignment="Justified" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{opinion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="23" uuid="8599dcdd-79f8-48c0-93a5-9bcecb4d96c3">
+						<jr:columnHeader height="18" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<rectangle>
+								<reportElement x="0" y="0" width="23" height="18" backcolor="#CCCCCC" uuid="cd55e586-d954-4ff8-8cad-953860d22cfa"/>
+								<graphicElement>
+									<pen lineWidth="0.0"/>
+								</graphicElement>
+							</rectangle>
+						</jr:columnHeader>
+						<jr:detailCell height="25" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="23" height="25" uuid="0fb0befa-e214-4ae9-ae1e-e364b29597b4"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{valor_opinion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement key="table" x="0" y="96" width="278" height="181" uuid="cb5d5cdd-d93d-4b80-9633-6ac7ed05f828"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="tabla_instructor" uuid="bc4937cc-ea79-42b9-84eb-9e975d462157">
+						<datasetParameter name="idpartcipante_ds_instructor">
+							<datasetParameterExpression><![CDATA[$P{IDPARTICIPANTE}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="22" uuid="70e98a0b-30b4-4232-8914-d131fd07c8e6">
+						<jr:columnHeader height="16" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<rectangle>
+								<reportElement x="0" y="0" width="22" height="16" backcolor="#CCCCCC" uuid="6ca6f012-d9da-43d9-9420-b45bab9cc7f1"/>
+								<graphicElement>
+									<pen lineWidth="0.0"/>
+								</graphicElement>
+							</rectangle>
+						</jr:columnHeader>
+						<jr:detailCell height="22" rowSpan="1">
+							<textField>
+								<reportElement x="2" y="0" width="20" height="22" uuid="15c7b84a-bcb6-42d5-83ff-d230e20e04dd"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{idopinion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="251" uuid="c5f3afcd-c32f-4223-91f9-8a40c089d271">
+						<jr:columnHeader height="16" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<rectangle>
+								<reportElement x="0" y="0" width="251" height="16" backcolor="#CCCCCC" uuid="2dbc7df7-b42f-48f9-bc1b-5db9fd022b54"/>
+								<graphicElement>
+									<pen lineWidth="0.0"/>
+								</graphicElement>
+							</rectangle>
+							<staticText>
+								<reportElement x="1" y="0" width="250" height="16" uuid="aea91332-9af6-4179-8be2-952cfc2d3d4f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[INSTRUCTOR]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="22" rowSpan="1">
+							<box>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="251" height="22" uuid="37d1bc36-2496-4f40-88cb-0d77626c1966"/>
+								<textElement textAlignment="Justified" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{opinion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="22" uuid="a86d63bd-69cd-4bf3-859a-97b2b859f9d4">
+						<jr:columnHeader height="16" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<rectangle>
+								<reportElement x="0" y="0" width="22" height="16" backcolor="#CCCCCC" uuid="4309e1a4-712d-4f5e-a215-711e043aff16"/>
+								<graphicElement>
+									<pen lineWidth="0.0"/>
+								</graphicElement>
+							</rectangle>
+						</jr:columnHeader>
+						<jr:detailCell height="22" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="1" y="0" width="21" height="22" uuid="11e82415-1d88-40c0-a28b-c8d1ed761ba6"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{valor_opinion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement key="table" x="0" y="287" width="278" height="96" uuid="bea46f7f-8391-4ce4-9bfa-b42e61f111d6"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="TABLA_MATERIAL_DIDATICO" uuid="4fe0cbff-2256-4fb4-8ca9-c62dcce36ed1">
+						<datasetParameter name="idparticipante_ds_matdi">
+							<datasetParameterExpression><![CDATA[$P{IDPARTICIPANTE}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="25" uuid="8f5453e8-7025-4353-8f92-62ceab980ff3">
+						<jr:columnHeader height="20" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<rectangle>
+								<reportElement x="0" y="0" width="25" height="20" backcolor="#CCCCCC" uuid="056f8464-33b3-497e-bc87-88806b86e163"/>
+								<graphicElement>
+									<pen lineWidth="0.0"/>
+								</graphicElement>
+							</rectangle>
+						</jr:columnHeader>
+						<jr:detailCell height="27" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="25" height="27" uuid="8b27c462-605b-40ac-9923-1f25c6810ae8"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{idopinion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="248" uuid="155df9ad-d078-4f79-a217-d5715656325d">
+						<jr:columnHeader height="20" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<rectangle>
+								<reportElement x="0" y="0" width="248" height="20" backcolor="#CCCCCC" uuid="d0b2c7cb-ff23-4910-acc0-b69e00d546a2"/>
+								<graphicElement>
+									<pen lineWidth="0.0"/>
+								</graphicElement>
+							</rectangle>
+							<staticText>
+								<reportElement x="0" y="0" width="228" height="20" uuid="118499aa-b7b6-4483-9e53-4792aeac1935"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[MATERIAL DIDÁCTICO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="27" rowSpan="1">
+							<box>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="248" height="27" uuid="dee55aef-ec4d-455b-8d53-12881178039d"/>
+								<textElement textAlignment="Justified" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{opinion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="22" uuid="fc14c1b0-2a8e-4ca8-9169-fe7eeb5a14da">
+						<jr:columnHeader height="20" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<rectangle>
+								<reportElement x="0" y="0" width="22" height="20" backcolor="#CCCCCC" uuid="426f601b-a366-4aa7-9107-5cc64dbca367"/>
+								<graphicElement>
+									<pen lineWidth="0.0"/>
+								</graphicElement>
+							</rectangle>
+						</jr:columnHeader>
+						<jr:detailCell height="27" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="20" height="27" uuid="44fefde8-648c-4886-960f-3bdfc1183b80"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{valor_opinion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement key="table" x="291" y="243" width="273" height="140" uuid="b903df59-2e59-4f15-acb0-4a878ec7499d"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="tabla_infraestructura" uuid="2ce6e66d-59b2-4f1c-a885-b94c99c80a55">
+						<datasetParameter name="idparticipante_ds_infra">
+							<datasetParameterExpression><![CDATA[$P{IDPARTICIPANTE}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="15" uuid="150fdf20-30d3-4d5e-babc-3ebcc6c29a58">
+						<jr:columnHeader height="19" rowSpan="1"/>
+						<jr:detailCell height="27" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="17" uuid="b1fcd127-355a-4cf8-b61d-4e0d82cd11cb">
+						<jr:columnHeader height="19" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<rectangle>
+								<reportElement x="0" y="1" width="17" height="18" backcolor="#CCCCCC" uuid="aa948927-7771-4544-9d34-53d628938711"/>
+								<graphicElement>
+									<pen lineWidth="0.0"/>
+								</graphicElement>
+							</rectangle>
+						</jr:columnHeader>
+						<jr:detailCell height="27" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="16" height="27" uuid="121bd6ed-56d8-47ef-887d-52d40c1921b0"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{idopinion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="232" uuid="f6f7c2d0-a8ea-494b-be4c-9e725ba762d8">
+						<jr:columnHeader height="19" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<rectangle>
+								<reportElement x="0" y="0" width="232" height="19" backcolor="#CCCCCC" uuid="fa257d4a-a65b-46d0-bd8c-712f6932bbcd"/>
+								<graphicElement>
+									<pen lineWidth="0.0"/>
+								</graphicElement>
+							</rectangle>
+							<staticText>
+								<reportElement x="0" y="0" width="207" height="19" uuid="71f15724-8801-4c39-bdff-e705b8b04080"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[INFRAESTRUCTURA]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="27" rowSpan="1">
+							<box>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="232" height="26" uuid="1b7e27e2-c4f3-4598-ae06-e40481959e53"/>
+								<textElement textAlignment="Justified" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{opinion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="21" uuid="41163b5b-9373-4795-a4a3-82b89e302f7d">
+						<jr:columnHeader height="19" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<rectangle>
+								<reportElement x="1" y="0" width="20" height="19" backcolor="#CCCCCC" uuid="71484f43-7b61-4dc9-b52b-a34690437321"/>
+								<graphicElement>
+									<pen lineWidth="0.0"/>
+								</graphicElement>
+							</rectangle>
+						</jr:columnHeader>
+						<jr:detailCell height="27" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="20" height="26" uuid="4f6ef0db-0ba2-4777-b51e-8760603b0caa"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{valor_opinion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="69" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="578" height="69" uuid="e3b9422b-0e6b-40aa-8f47-255f5df76075"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="578" height="20" backcolor="#CCCCCC" uuid="624fd456-55d2-4a31-9591-07ccd037e9c1"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="229" y="0" width="197" height="20" uuid="1ea3cf05-b06c-4e68-a094-e996fe1064a1"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[COMENTARIOS O SUGERENCIAS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="20" width="578" height="27" uuid="3aeba3f5-d7cc-4e5f-876f-82cf818b18f1"/>
+				<textFieldExpression><![CDATA[$F{comentario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3" y="47" width="575" height="22" uuid="46aef50a-0791-4180-8a20-df2a24283d09"/>
+				<textFieldExpression><![CDATA[$F{sugerencia}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="241" y="15" width="100" height="20" uuid="7f13486b-78cd-4444-a46b-6a035053c463"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gracias]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="15" width="76" height="20" uuid="ba3b4247-d72c-4883-a728-02419f183bc7"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[M00-IT-13-R-13]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="541" y="20" width="37" height="15" uuid="5a3b05f5-fc98-4912-bd29-8550d6f7b775"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Rev. O]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="5" splitType="Stretch"/>
+	</summary>
+</jasperReport>

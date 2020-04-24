@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="REPORTE_NOMBRE_DOCENTE_CURSO_F_A" language="groovy" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="55eaecf4-bac9-4b3e-af75-e91091e32e6d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="tabla_reporteParcial_Nombre_Docente_curso_F_A" uuid="c020a500-5885-470c-9ca2-974d3a6a3052">
+		<parameter name="DS_PERIODO_ESCOLAR" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="SEXO1" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="SEXO2" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="DS_CARRERA1" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="DS_CARRERA2" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="DS_CARRERA3" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="DS_CARRERA4" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="DS_CARRERA5" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="DS_CARRERA6" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="FORMACION1" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="FORMACION2" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="FORMACION3" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select
+concat(persona.nombre,' ',persona.ape_paterno,' ',persona.ape_materno) as nombre_participante,
+case when nivelestudios2(persona.rfc)=2 then 'LICENCIATURA'
+when nivelestudios2(persona.rfc)=3 then 'MAESTRIA'
+when nivelestudios2(persona.rfc)=4 then 'DOCTORADO'
+else 'Otros' end as "Nivel Academico",
+COALESCE(actualizacion.curso_actualizacion,'0')as cantidad_actualizacion,
+COALESCE(formacion.curso_formacion,'0') as cantidad_formacion,
+(COALESCE(actualizacion.curso_actualizacion,'0')+COALESCE(formacion.curso_formacion,'0')) as total,
+concat(periodo_escolar.periodo,' DEL ',periodo_escolar.año) as periodo_anio
+from
+persona
+LEFT JOIN persona_formacionacademica ON persona_formacionacademica.rfc = persona.rfc
+LEFT JOIN participante ON persona.rfc = participante.rfc
+LEFT JOIN curso ON curso.idcurso = participante.idcurso
+LEFT JOIN periodo_escolar ON periodo_escolar.idperiodo_escolar =curso.idperiodo_escolar
+LEFT JOIN puesto_persona on puesto_persona.rfc=persona.rfc
+LEFT JOIN (SELECT persona.rfc, count(persona.rfc) as curso_actualizacion FROM curso
+					 RIGHT JOIN participante ON participante.idcurso = curso.idcurso
+					 RIGHT JOIN persona ON persona.rfc = participante.rfc
+					 WHERE idtipo_curso IN ('A') AND curso.idperiodo_escolar = $P{DS_PERIODO_ESCOLAR} GROUP BY persona.rfc) actualizacion
+ON persona.rfc = actualizacion.rfc
+LEFT JOIN (SELECT persona.rfc, count(persona.rfc) as curso_formacion FROM curso
+RIGHT JOIN participante ON participante.idcurso = curso.idcurso
+RIGHT JOIN persona ON persona.rfc = participante.rfc
+WHERE idtipo_curso IN ('F') AND curso.idperiodo_escolar = $P{DS_PERIODO_ESCOLAR} GROUP BY persona.rfc) formacion
+ON persona.rfc = formacion.rfc
+WHERE  periodo_escolar.idperiodo_escolar=$P{DS_PERIODO_ESCOLAR}
+AND  nivelestudios2(persona.rfc) IN ($P{FORMACION1},$P{FORMACION2},$P{FORMACION3})
+AND puesto_persona.idpuesto IN ($P{DS_CARRERA1},$P{DS_CARRERA2},$P{DS_CARRERA3},$P{DS_CARRERA4},$P{DS_CARRERA5},$P{DS_CARRERA6})
+AND persona.sexo IN ($P{SEXO1},$P{SEXO2})
+GROUP BY
+persona.rfc,
+persona.nombre,
+persona.ape_paterno,
+persona.ape_materno,
+persona.sexo,
+periodo_escolar.periodo,
+periodo_escolar."año",
+actualizacion.curso_actualizacion,
+formacion.curso_formacion]]>
+		</queryString>
+		<field name="nombre_participante" class="java.lang.String"/>
+		<field name="Nivel Academico" class="java.lang.String"/>
+		<field name="cantidad_actualizacion" class="java.lang.Long"/>
+		<field name="cantidad_formacion" class="java.lang.Long"/>
+		<field name="total" class="java.lang.Long"/>
+		<field name="periodo_anio" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="ID_PERIODO_ESCOLAR" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SEXO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SEXO2" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FORMACION1" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FORMACION2" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FORMACION3" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CARRERA1" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CARRERA2" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CARRERA3" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CARRERA4" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CARRERA5" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CARRERA6" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+concat(persona.nombre,' ',persona.ape_paterno,' ',persona.ape_materno) as nombre_participante,
+case when nivelestudios2(persona.rfc)=2 then 'LICENCIATURA'
+when nivelestudios2(persona.rfc)=3 then 'MAESTRIA'
+when nivelestudios2(persona.rfc)=4 then 'DOCTORADO'
+else 'Otros' end as "Nivel Academico",
+COALESCE(actualizacion.curso_actualizacion,'0')as cantidad_actualizacion,
+COALESCE(formacion.curso_formacion,'0') as cantidad_formacion,
+(COALESCE(actualizacion.curso_actualizacion,'0')+COALESCE(formacion.curso_formacion,'0')) as total,
+concat(periodo_escolar.periodo,' DEL ',periodo_escolar.año) as periodo_anio
+from
+persona
+LEFT JOIN persona_formacionacademica ON persona_formacionacademica.rfc = persona.rfc
+LEFT JOIN participante ON persona.rfc = participante.rfc
+LEFT JOIN curso ON curso.idcurso = participante.idcurso
+LEFT JOIN periodo_escolar ON periodo_escolar.idperiodo_escolar =curso.idperiodo_escolar
+LEFT JOIN puesto_persona on puesto_persona.rfc=persona.rfc
+LEFT JOIN (SELECT persona.rfc, count(persona.rfc) as curso_actualizacion FROM curso
+					 RIGHT JOIN participante ON participante.idcurso = curso.idcurso
+					 RIGHT JOIN persona ON persona.rfc = participante.rfc
+					 WHERE idtipo_curso IN ('A') AND curso.idperiodo_escolar =$P{ID_PERIODO_ESCOLAR} GROUP BY persona.rfc) actualizacion
+ON persona.rfc = actualizacion.rfc
+LEFT JOIN (SELECT persona.rfc, count(persona.rfc) as curso_formacion FROM curso
+RIGHT JOIN participante ON participante.idcurso = curso.idcurso
+RIGHT JOIN persona ON persona.rfc = participante.rfc
+WHERE idtipo_curso IN ('F') AND curso.idperiodo_escolar =$P{ID_PERIODO_ESCOLAR}  GROUP BY persona.rfc) formacion
+ON persona.rfc = formacion.rfc
+WHERE  periodo_escolar.idperiodo_escolar=$P{ID_PERIODO_ESCOLAR}
+AND  nivelestudios2(persona.rfc) IN ($P{FORMACION1},$P{FORMACION2},$P{FORMACION3})
+AND puesto_persona.idpuesto IN ($P{CARRERA1},$P{CARRERA2},$P{CARRERA3},$P{CARRERA4},$P{CARRERA5},$P{CARRERA6})
+AND persona.sexo IN ($P{SEXO},$P{SEXO2})
+GROUP BY
+persona.rfc,
+persona.nombre,
+persona.ape_paterno,
+persona.ape_materno,
+persona.sexo,
+periodo_escolar.periodo,
+periodo_escolar."año",
+actualizacion.curso_actualizacion,
+formacion.curso_formacion]]>
+	</queryString>
+	<field name="nombre_participante" class="java.lang.String"/>
+	<field name="Nivel Academico" class="java.lang.String"/>
+	<field name="cantidad_actualizacion" class="java.lang.Long"/>
+	<field name="cantidad_formacion" class="java.lang.Long"/>
+	<field name="total" class="java.lang.Long"/>
+	<field name="periodo_anio" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="20" splitType="Stretch"/>
+	</title>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="572" height="29" uuid="5bc57e81-39d1-47de-9bc3-403357f3b22d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[INSTITUTO TECNOLOGICO DE TAPACHULA
+DEPARTAMENTO DE DESARROLLO ACADEMICO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="4" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch"/>
+	</columnFooter>
+	<summary>
+		<band height="66">
+			<componentElement>
+				<reportElement key="table" isPrintRepeatedValues="false" x="1" y="0" width="572" height="63" uuid="eeeaddf5-995e-42af-aa72-60954f9b276c"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="tabla_reporteParcial_Nombre_Docente_curso_F_A" uuid="1f1cc7c6-fb23-43e7-b3f3-5e01712b946d">
+						<datasetParameter name="SEXO1">
+							<datasetParameterExpression><![CDATA[$P{SEXO}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="SEXO2">
+							<datasetParameterExpression><![CDATA[$P{SEXO2}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="DS_PERIODO_ESCOLAR">
+							<datasetParameterExpression><![CDATA[$P{ID_PERIODO_ESCOLAR}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="DS_CARRERA1">
+							<datasetParameterExpression><![CDATA[$P{CARRERA1}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="DS_CARRERA2">
+							<datasetParameterExpression><![CDATA[$P{CARRERA2}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="DS_CARRERA3">
+							<datasetParameterExpression><![CDATA[$P{CARRERA3}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="DS_CARRERA4">
+							<datasetParameterExpression><![CDATA[$P{CARRERA4}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="DS_CARRERA5">
+							<datasetParameterExpression><![CDATA[$P{CARRERA5}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="DS_CARRERA6">
+							<datasetParameterExpression><![CDATA[$P{CARRERA6}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="FORMACION1">
+							<datasetParameterExpression><![CDATA[$P{FORMACION1}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="FORMACION2">
+							<datasetParameterExpression><![CDATA[$P{FORMACION2}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="FORMACION3">
+							<datasetParameterExpression><![CDATA[$P{FORMACION3}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="203" uuid="ae0b13f5-8836-46bc-8645-f4cc63d817c4">
+						<jr:columnHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="203" height="30" uuid="d8807bb1-1e97-428d-89ee-fc8d3bc87d93"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[NOMBRE DEL DOCENTE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="26" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="3" y="0" width="200" height="26" uuid="0d58f2ac-bf72-4cdb-868a-ef42145aeab0"/>
+								<textElement verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{nombre_participante}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="72" uuid="788b9ad4-67a1-4c13-9bbd-6a516cef9d7e">
+						<jr:columnHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="71" height="30" uuid="1a9317ce-dc6b-4024-92f0-979e1f195a13"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[NIVEL ACADEMICO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="26" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="71" height="26" uuid="a9c3c51b-2f72-428f-a38e-9a3df96018c9"/>
+								<textElement verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Nivel Academico}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="509914d3-3f23-4860-81b4-72a33f943de0">
+						<jr:columnHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="b70cfd0e-e302-4e31-a7f3-e00324c31ed1"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[CURSO DE FOMACION]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="26" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="60" height="26" uuid="01390a20-38b2-42c8-9284-09c2cb7962f0"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{cantidad_actualizacion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="c53a0a95-fd21-46c9-842b-123206bca87e">
+						<jr:columnHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="08b86eda-5ef7-421d-aad1-38a9f3444338"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[CURSO DE ACTUALIZACION]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="26" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="90" height="26" uuid="7285728d-ddbd-4ced-b8b9-8dfeb50a123c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{cantidad_formacion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="39" uuid="234fc008-2f01-4e66-9ca6-188f6c154294">
+						<jr:columnHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="39" height="30" uuid="5d681f24-ab7c-4cb2-8c6f-782a09709550"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[TOTAL]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="26" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0" lineStyle="Solid"/>
+								<topPen lineWidth="1.0" lineStyle="Solid"/>
+								<leftPen lineWidth="1.0" lineStyle="Solid"/>
+								<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+								<rightPen lineWidth="1.0" lineStyle="Solid"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="39" height="26" uuid="122ffb8c-07d0-47d9-94b6-bbfe15efdd45"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="106" uuid="27f7eeb5-47a8-46bf-a871-38052ee6e5a8">
+						<jr:columnHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="106" height="30" uuid="23e1cf1a-56f9-4048-8a73-ff65133c9167"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[PERIODO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="26" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="2" y="0" width="104" height="26" uuid="580ac099-603c-4da5-989d-885efa6705f2"/>
+								<textElement textAlignment="Justified" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{periodo_anio}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

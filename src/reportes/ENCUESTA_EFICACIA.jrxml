@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ENCUESTA_EFICACIA" language="groovy" pageWidth="595" pageHeight="842" columnWidth="465" leftMargin="85" rightMargin="45" topMargin="70" bottomMargin="70" uuid="2585e115-81ce-4a0e-ac6a-22c856fee87d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="44"/>
+	<subDataset name="tabla_eficacia" uuid="ef11934c-dbea-4bad-9b93-dadf9e12c52b">
+		<parameter name="idparticipante_ds_eficacia" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select
+afirmacion_eficacia.afirmacion,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=1 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=1) as VARCHAR),' ')
+WHEN '1' THEN
+'X' ELSE''
+END AS puntos_1,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=2 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=1) as VARCHAR),' ')
+WHEN '2' THEN
+'X' ELSE''
+END AS puntos_2,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=3 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=1) as VARCHAR),' ')
+WHEN '3' THEN
+'X' ELSE''
+END AS puntos_3,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=4 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=1) as VARCHAR),' ')
+WHEN '4' THEN
+'X' ELSE''
+END AS puntos_4,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=5 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=1) as VARCHAR),' ')
+WHEN '5' THEN
+'X' ELSE''
+END AS puntos_5
+
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=1
+UNION ALL
+select
+afirmacion_eficacia.afirmacion,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=1 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=2) as VARCHAR),' ')
+WHEN '1' THEN
+'X' ELSE''
+END AS puntos_1,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=2 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=2) as VARCHAR),' ')
+WHEN '2' THEN
+'X' ELSE''
+END AS puntos_2,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=3 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=2) as VARCHAR),' ')
+WHEN '3' THEN
+'X' ELSE''
+END AS puntos_3,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=4 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=2) as VARCHAR),' ')
+WHEN '4' THEN
+'X' ELSE''
+END AS puntos_4,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=5 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=2) as VARCHAR),' ')
+WHEN '5' THEN
+'X' ELSE''
+END AS puntos_5
+
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=2
+UNION ALL
+select
+afirmacion_eficacia.afirmacion,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=1 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=3) as VARCHAR),' ')
+WHEN '1' THEN
+'X' ELSE''
+END AS puntos_1,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=2 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=3) as VARCHAR),' ')
+WHEN '2' THEN
+'X' ELSE''
+END AS puntos_2,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=3 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=3) as VARCHAR),' ')
+WHEN '3' THEN
+'X' ELSE''
+END AS puntos_3,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=4 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=3) as VARCHAR),' ')
+WHEN '4' THEN
+'X' ELSE''
+END AS puntos_4,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=5 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=3) as VARCHAR),' ')
+WHEN '5' THEN
+'X' ELSE''
+END AS puntos_5
+
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=3
+UNION ALL
+select
+afirmacion_eficacia.afirmacion,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=1 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=4) as VARCHAR),' ')
+WHEN '1' THEN
+'X' ELSE''
+END AS puntos_1,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=2 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=4) as VARCHAR),' ')
+WHEN '2' THEN
+'X' ELSE''
+END AS puntos_2,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=3 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=4) as VARCHAR),' ')
+WHEN '3' THEN
+'X' ELSE''
+END AS puntos_3,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=4 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=4) as VARCHAR),' ')
+WHEN '4' THEN
+'X' ELSE''
+END AS puntos_4,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=5 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=4) as VARCHAR),' ')
+WHEN '5' THEN
+'X' ELSE''
+END AS puntos_5
+
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=4
+UNION ALL
+select
+afirmacion_eficacia.afirmacion,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=1 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=5) as VARCHAR),' ')
+WHEN '1' THEN
+'X' ELSE''
+END AS puntos_1,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=2 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=5) as VARCHAR),' ')
+WHEN '2' THEN
+'X' ELSE''
+END AS puntos_2,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=3 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=5) as VARCHAR),' ')
+WHEN '3' THEN
+'X' ELSE''
+END AS puntos_3,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=4 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=5) as VARCHAR),' ')
+WHEN '4' THEN
+'X' ELSE''
+END AS puntos_4,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=5 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=5) as VARCHAR),' ')
+WHEN '5' THEN
+'X' ELSE''
+END AS puntos_5
+
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=5
+UNION ALL
+select
+afirmacion_eficacia.afirmacion,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=1 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=6) as VARCHAR),' ')
+WHEN '1' THEN
+'X' ELSE''
+END AS puntos_1,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=2 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=6) as VARCHAR),' ')
+WHEN '2' THEN
+'X' ELSE''
+END AS puntos_2,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=3 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=6) as VARCHAR),' ')
+WHEN '3' THEN
+'X' ELSE''
+END AS puntos_3,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=4 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=6) as VARCHAR),' ')
+WHEN '4' THEN
+'X' ELSE''
+END AS puntos_4,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=5 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=6) as VARCHAR),' ')
+WHEN '5' THEN
+'X' ELSE''
+END AS puntos_5
+
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=6
+UNION ALL
+select
+afirmacion_eficacia.afirmacion,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=1 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=7) as VARCHAR),' ')
+WHEN '1' THEN
+'X' ELSE''
+END AS puntos_1,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=2 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=7) as VARCHAR),' ')
+WHEN '2' THEN
+'X' ELSE''
+END AS puntos_2,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=3 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=7) as VARCHAR),' ')
+WHEN '3' THEN
+'X' ELSE''
+END AS puntos_3,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=4 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=7) as VARCHAR),' ')
+WHEN '4' THEN
+'X' ELSE''
+END AS puntos_4,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=5 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=7) as VARCHAR),' ')
+WHEN '5' THEN
+'X' ELSE''
+END AS puntos_5
+
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=7
+
+UNION ALL
+select
+afirmacion_eficacia.afirmacion,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=1 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=8) as VARCHAR),' ')
+WHEN '1' THEN
+'X' ELSE''
+END AS puntos_1,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=2 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=8) as VARCHAR),' ')
+WHEN '2' THEN
+'X' ELSE''
+END AS puntos_2,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=3 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=8) as VARCHAR),' ')
+WHEN '3' THEN
+'X' ELSE''
+END AS puntos_3,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=4 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=8) as VARCHAR),' ')
+WHEN '4' THEN
+'X' ELSE''
+END AS puntos_4,
+CASE COALESCE (CAST(( select afirmacioneficacia_encuestaeficacia.puntos
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where puntos=5 and idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=8) as VARCHAR),' ')
+WHEN '5' THEN
+'X' ELSE''
+END AS puntos_5
+
+from afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia where idparticipante=$P{idparticipante_ds_eficacia} and afirmacioneficacia_encuestaeficacia.idafirmacion=8]]>
+		</queryString>
+		<field name="afirmacion" class="java.lang.String"/>
+		<field name="puntos_1" class="java.lang.String"/>
+		<field name="puntos_2" class="java.lang.String"/>
+		<field name="puntos_3" class="java.lang.String"/>
+		<field name="puntos_4" class="java.lang.String"/>
+		<field name="puntos_5" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="idparticipante" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select concat('(',curso.curso,')') as curso,
+encuesta_eficacia.sugerencia
+from
+afirmacion_eficacia INNER JOIN afirmacioneficacia_encuestaeficacia
+on afirmacion_eficacia.idafirmacion= afirmacioneficacia_encuestaeficacia.idafirmacion
+INNER JOIN encuesta_eficacia on afirmacioneficacia_encuestaeficacia.idencuesta_eficacia=encuesta_eficacia.idencuesta_eficacia
+INNER JOIN participante on encuesta_eficacia.idencuesta_eficacia= participante.idencuesta_eficacia
+INNER JOIN curso on curso.idcurso=participante.idcurso
+where idparticipante=$P{idparticipante} and afirmacioneficacia_encuestaeficacia.idafirmacion=8]]>
+	</queryString>
+	<field name="curso" class="java.lang.String"/>
+	<field name="sugerencia" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="83" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="25" width="465" height="58" uuid="cfe14861-d91f-4c7d-84d8-d57b745ca6a2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INSTITUTO TECNOLÓGICO DE TAPACHULA
+SUBDIRECCIÓN ACADÉMICA
+DEPARTAMENTO: VARIOS
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1" width="465" height="20" uuid="a86b75b2-2c67-4cd6-855a-a25c94c51a8f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ENCUESTA EFICACIA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="465" height="45" uuid="f2ebf716-23e4-4fb1-b67d-73217c26e6a2"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[Considerando la necesidad de evaluar los cursos a los cuales Usted asistió, se le solicita conteste las siguientes preguntas, marcando con una X la respuesta que a su juicio corresponda a la afirmación realizada, partiendo de la siguiente escala.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="190" y="22" width="275" height="20" uuid="4cf5f76c-2f93-478c-b0d9-af79686db32d"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{curso}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="45" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="3" width="85" height="39" uuid="898cf182-abb1-4805-a03d-32c9fe9d413e"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="85" y="3" width="92" height="39" uuid="38249eae-4c02-4226-b0cf-01216c0bc1e6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="177" y="3" width="92" height="39" uuid="17632c1b-9e60-4577-afdc-27bf9a110841"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="269" y="3" width="103" height="39" uuid="1a05bd7c-52e3-48c6-b947-33f7ee33c1d1"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="372" y="3" width="93" height="39" uuid="929bd2e7-ce04-4261-8d17-513aa702006a"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="1" width="85" height="41" uuid="588f1b5c-6eb4-4457-8c28-a6cc1e2e6340"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[1
+Totalmente en desacuerdo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="4" width="92" height="38" uuid="21e6d36c-0d25-4429-9e86-eb686b720b85"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[2
+Parcialmente en desacuerdo
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="177" y="4" width="92" height="28" uuid="5a33a0be-e0d2-4f57-8775-f72490da08e6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[3
+Indiferente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="269" y="4" width="103" height="38" uuid="6a3a21fb-8e94-4db0-8507-5cd6dfc640da"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[4
+Parcialmente de acuerdo
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="372" y="4" width="93" height="38" uuid="aeda03fe-6934-4980-9748-5c4fab204619"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5
+Totalmente de acuerdo
+]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="172" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" x="0" y="37" width="465" height="125" uuid="c5d4cf63-b151-415c-85c7-a547514ba4a8"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="tabla_eficacia" uuid="4eaa9569-0d46-4568-9d4b-6f1d4092b983">
+						<datasetParameter name="idparticipante_ds_eficacia">
+							<datasetParameterExpression><![CDATA[$P{idparticipante}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="348" uuid="4d9f392a-d6ee-4252-b039-6734ccd11dbe">
+						<jr:columnHeader height="19" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="348" height="18" uuid="08d8fb69-0c36-4c30-9d07-1ba3a00820f8"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[afirmacion]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="22" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="348" height="22" uuid="0c6334a1-d4d8-4f09-8ce2-c24d4795aa2e"/>
+								<textElement textAlignment="Justified">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{afirmacion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="27" uuid="f376dcb0-50a2-4285-9b19-6201212fa5ed">
+						<jr:columnHeader height="19" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="27" height="18" uuid="518a5fea-4a74-49b9-8092-41c52a231a8c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[1]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="22" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="27" height="22" uuid="90cd8a82-d09f-469d-970a-cbeb902f83fc"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{puntos_1}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="22" uuid="15e50d0a-f04e-4923-89b8-b47a74dd80be">
+						<jr:columnHeader height="19" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="20" height="18" uuid="93b58df1-c569-4698-9522-c68f93107090"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[2]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="22" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="20" height="22" uuid="332daf18-7ab9-426a-84f0-4093bed9424c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{puntos_2}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="22" uuid="80ab51fa-6614-471a-bb5b-67a551c7f1b8">
+						<jr:columnHeader height="19" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="22" height="18" uuid="67fe8431-37d0-4b57-90ad-e59f631d80e0"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[3]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="22" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="22" height="20" uuid="b2ccce2d-5c96-4fe6-9969-b6912283df52"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{puntos_3}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="23" uuid="1eae4e48-0f61-43c9-a2d5-f51878db5406">
+						<jr:columnHeader height="19" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="21" height="18" uuid="1e417ba2-d535-499b-8617-236bbc9ef0ef"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[4]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="22" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="21" height="22" uuid="0890c3d8-295f-4bf6-8c20-110f19696a0e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{puntos_4}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="22" uuid="d31ba6f1-939f-40e8-b293-7035477b5e02">
+						<jr:columnHeader height="19" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="1" y="1" width="20" height="18" uuid="8f69b474-c097-4f05-b743-77e6788c2c67"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[5]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="22" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="21" height="22" uuid="7fb27373-3150-4eb4-8d22-753b4b15efb4"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{puntos_5}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement x="0" y="1" width="177" height="20" uuid="13afc15a-98ff-45e6-ae52-c5b7aeaa6ea9"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle"/>
+				<text><![CDATA[Los cursos en los que participó le:]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="92" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="72" width="465" height="20" uuid="ad918efc-0303-4973-9028-982780d2b3ac"/>
+				<text><![CDATA[ITTAP-CA-PO-004-03                                                                                                            Rev. 6]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<summary>
+		<band height="102" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="465" height="35" uuid="81b92623-8314-4521-a73e-e6a287c0f117"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[Tiene Usted sugerencias para mejorar los cursos ofrecidos por el Instituto tecnológico. Por favor utilice el reverso de la encuesta si el espacio no le es suficiente]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="47" width="465" height="1" uuid="1db78821-6338-4ad2-896c-c68d5212c26e"/>
+			</line>
+			<line>
+				<reportElement x="0" y="59" width="465" height="1" uuid="102f732a-4221-46d4-8e17-a86557595095"/>
+			</line>
+			<line>
+				<reportElement x="0" y="71" width="465" height="1" uuid="7721983e-19a3-49d3-ad9c-7013af81d85c"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="35" width="465" height="48" uuid="a38e8f8d-5872-4014-b43d-88b81f8550c3"/>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{sugerencia}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,958 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="curriculum" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="73ecee40-b390-4f85-9a76-e4e077bce1db">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#73B0E6">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="tabla_formacion_academica" uuid="19cbfdab-69fa-4471-b9b7-8627423426b8">
+		<parameter name="rfc_ds_experiencia_docente" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+tabla1.formacion_academica,
+institucion,
+titulacion,
+cedula_profesional
+FROM
+	persona_formacionacademica
+	FULL JOIN formacion_academica tabla1
+	ON persona_formacionacademica.idformacion_academica = tabla1.idformacion_academica
+	LEFT JOIN  persona on persona_formacionacademica.rfc=persona.rfc
+	where persona.rfc= $P{rfc_ds_experiencia_docente}]]>
+		</queryString>
+		<field name="formacion_academica" class="java.lang.String"/>
+		<field name="institucion" class="java.lang.String"/>
+		<field name="titulacion" class="java.lang.String"/>
+		<field name="cedula_profesional" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="tabla_experiencia_laboral" uuid="bdb7b764-fec4-4982-ab79-a397bef098b2">
+		<parameter name="rfc_experiencia_laboral" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select
+COALESCE(row_number() over(order by experiencia_laboral.idexperiencia_laboral ),'1') as numero_laboral,
+COALESCE(experiencia_laboral.puesto,'NINGUNO') as puesto_laboral,
+COALESCE(experiencia_laboral.empresa,'NINGUNO') as empresa_laboral,
+COALESCE(experiencia_laboral.permanencia,'0') as permanencia_laboral,
+COALESCE(experiencia_laboral.actividades,'NINGUNO') as acitividades_labor
+
+from experiencia_laboral INNER JOIN persona
+on experiencia_laboral.rfc= persona.rfc
+where persona.rfc=$P{rfc_experiencia_laboral}]]>
+		</queryString>
+		<field name="numero_laboral" class="java.lang.Long"/>
+		<field name="puesto_laboral" class="java.lang.String"/>
+		<field name="empresa_laboral" class="java.lang.String"/>
+		<field name="permanencia_laboral" class="java.lang.Integer"/>
+		<field name="acitividades_labor" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="tabla_experiencia_docente" uuid="5dc51116-481b-474a-affc-b4907b8ae2ce">
+		<parameter name="rfc_ds_docente" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select
+row_number() over(order by experiencia_docente.idexpericiencia_docente ),
+COALESCE(experiencia_docente.materia,'') as materia_historial,
+COALESCE(experiencia_docente.periodo,'') as periodo_historial
+
+from persona INNER JOIN experiencia_docente on persona.rfc= experiencia_docente.rfc
+where persona.rfc=$P{rfc_ds_docente}]]>
+		</queryString>
+		<field name="row_number" class="java.lang.Long"/>
+		<field name="materia_historial" class="java.lang.String"/>
+		<field name="periodo_historial" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="tabla_producto" uuid="298c6857-7a1f-46b5-88ab-9b3dea8fb714">
+		<parameter name="rfc_producto" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select
+row_number() over(order by producto.idproducto),
+COALESCE(producto.producto_actividad,'') as p_a,
+			COALESCE(producto.descripcion,'')as des_pro,
+			COALESCE(producto.fecha,'') as periodo_pro
+			from producto INNER JOIN persona on producto.rfc=persona.rfc
+			where persona.rfc=$P{rfc_producto}]]>
+		</queryString>
+		<field name="row_number" class="java.lang.Long"/>
+		<field name="p_a" class="java.lang.String"/>
+		<field name="des_pro" class="java.lang.String"/>
+		<field name="periodo_pro" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="tabla_participacion_instructor" uuid="b6a32082-63a8-480b-b50b-423806f35d34">
+		<parameter name="rfc_instructor" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select row_number() over(order by curso.curso) as numero_curso,
+			curso.curso,
+			curso.sede,
+			concat(curso.duracion,' HORAS') as horas_curso,
+			concat(' DEL ',EXTRACT(day from curso.fecha_inicio),' DE ',
+upper( to_char(to_timestamp((select EXTRACT(MONTH from curso.fecha_inicio))::TEXT,'MM'),'TMMonth') ),' DE ',
+ EXTRACT(YEAR from curso.fecha_inicio),' AL ',
+ EXTRACT(day from curso.fecha_fin),' DE ',
+upper( to_char(to_timestamp((select EXTRACT(MONTH from curso.fecha_fin))::TEXT,'MM'),'TMMonth') ),' DE ',
+ EXTRACT(YEAR from curso.fecha_fin)) as fecha_de_Realizacion
+from persona INNER JOIN facilitador on persona.rfc=facilitador.rfc
+INNER JOIN curso on facilitador.idfacilitador=curso.idfacilitador
+where persona.rfc=$P{rfc_instructor}]]>
+		</queryString>
+		<field name="numero_curso" class="java.lang.Long"/>
+		<field name="curso" class="java.lang.String"/>
+		<field name="sede" class="java.lang.String"/>
+		<field name="horas_curso" class="java.lang.String"/>
+		<field name="fecha_de_realizacion" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="rfc" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+concat( persona.nombre,' ', persona.ape_paterno,' ',persona.ape_materno) as nombre_facilitador,
+concat(ltrim(SUBSTRING(persona.curp,9,2), '0'),' DE ',
+upper((select to_char(to_timestamp((select SUBSTRING(persona.curp,7,2))::TEXT,'MM'),'TMMonth') as mes)), ' DE 19',
+substring(persona.curp, 5, 2)) as fecha_nacimiento,
+persona.curp,
+persona.rfc,
+persona.telefono,
+persona.correo
+from persona where persona.rfc=$P{rfc}]]>
+	</queryString>
+	<field name="nombre_facilitador" class="java.lang.String"/>
+	<field name="fecha_nacimiento" class="java.lang.String"/>
+	<field name="curp" class="java.lang.String"/>
+	<field name="rfc" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.String"/>
+	<field name="correo" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="10" width="571" height="29" uuid="94051281-d690-4a42-a8be-fab22df4012a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[FORMATO CURRICULUM VITAE DEL INSTRUCTOR
+M00-SC-029-A01
+]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="4" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="6" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="114" splitType="Stretch">
+			<textField>
+				<reportElement x="83" y="21" width="300" height="15" uuid="df256a17-0647-4df8-b9a1-b1fe0d463332"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_facilitador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="142" y="37" width="300" height="15" uuid="ccf66949-9ede-4c8b-8d24-4bf6e4568c20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_nacimiento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="69" y="52" width="300" height="14" uuid="2ef1a15d-5225-42d0-86f6-79cc4c9f7145"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{curp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="69" y="66" width="156" height="15" uuid="1c68ff40-5abc-4277-922b-bf77cbef239a"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rfc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="83" y="81" width="192" height="16" uuid="ebc52db7-cdcf-455f-a85c-b4fa605848e7"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="132" y="97" width="237" height="16" uuid="9ea24300-b0cc-47f5-b95b-1a3c4905e1cf"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{correo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="32" y="22" width="51" height="15" uuid="d0ed0598-1414-40f2-96f7-fe3da8dc0106"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="37" width="110" height="15" uuid="6089e358-e8c8-4c89-9a49-2f0e2048dd68"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de nacimiento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="52" width="37" height="14" uuid="011f1aab-01de-4c70-8498-42a7a6f11bde"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CURP:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="66" width="37" height="15" uuid="39c4515d-5bbc-4751-a718-fb45888a7838"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[R.F.C:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="81" width="51" height="16" uuid="c402d69c-3afe-45c0-b3bc-690d4a3123a1"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Teléfono:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="97" width="100" height="16" uuid="b4954888-ad9a-488e-a124-a40dcd12744d"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Correo electrónico:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="1" width="138" height="20" uuid="4be362ac-5e05-4d89-a61c-ae66e6233229"/>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATOS PERSONALES:]]></text>
+			</staticText>
+		</band>
+		<band height="76">
+			<componentElement>
+				<reportElement key="table" x="50" y="29" width="496" height="47" uuid="9c6e1c17-a432-4ed8-a8e0-3273907201b8"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="tabla_formacion_academica" uuid="0ddd646d-048c-4010-8f1e-f550d5235962">
+						<datasetParameter name="rfc_ds_experiencia_docente">
+							<datasetParameterExpression><![CDATA[$P{rfc}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="105" uuid="d92fdbe6-97b9-4b11-b898-bc5ce22c38b8">
+						<jr:columnHeader height="17" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="102" height="17" uuid="7d814d8e-fde0-47f2-b84d-640c61afa3a7"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Formación académica]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="28" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="105" height="28" uuid="ceccdfb2-27c6-4c8e-a2f4-60f24d748292"/>
+								<textElement>
+									<font fontName="Arial" size="10" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{formacion_academica}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="190" uuid="44f91203-2f41-4153-ba13-93c214ae9810">
+						<jr:columnHeader height="17" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="190" height="17" uuid="671e7be2-3b6e-4336-82d5-86b26a666d6a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Institución]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="28" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="190" height="28" uuid="f059ea32-b116-4778-87ca-62986f1524f7"/>
+								<textElement>
+									<font fontName="Arial" size="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{institucion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="139" uuid="f38fc347-d916-4160-a7ac-ff2987d1b786">
+						<jr:columnHeader height="17" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="139" height="17" uuid="48de4aa9-7968-4b8a-bf31-fa5fae3c35f1"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Titulación]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="28" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="139" height="28" uuid="05d6616a-b627-480f-93f0-66c6e7b8d664"/>
+								<textElement>
+									<font fontName="Arial" size="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{titulacion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="59" uuid="7be3b169-f735-4e11-b263-1e06a15d9a7f">
+						<jr:columnHeader height="17" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="59" height="17" uuid="caa7ea4e-f774-468c-a307-e5f95f5dc1df"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Cédula prof.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="28" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="59" height="28" uuid="e325ba1b-c812-49ef-8ca8-a31215ec1aad"/>
+								<textElement>
+									<font fontName="Arial" size="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{cedula_profesional}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement x="29" y="14" width="140" height="15" uuid="d5ba16ce-efa9-485f-ba9c-590f8d7b3dec"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[2. FORMACIÓN ACÁDEMICA]]></text>
+			</staticText>
+		</band>
+		<band height="91">
+			<componentElement>
+				<reportElement key="table" x="50" y="32" width="496" height="59" uuid="3681c298-f537-4782-804d-9aee78c3c314"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="tabla_experiencia_laboral" uuid="6a589419-da98-4025-bc9d-f603cebe992b">
+						<datasetParameter name="rfc_experiencia_laboral">
+							<datasetParameterExpression><![CDATA[$P{rfc}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="27" uuid="63d34b6f-3de8-488a-801d-b2ee07b64a2f">
+						<jr:columnHeader height="18" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="27" height="18" uuid="f2ef800e-b65d-406b-b9d1-4564014a7d5c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" isBold="true"/>
+								</textElement>
+								<text><![CDATA[No.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="39" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="27" height="39" uuid="c5fd2750-268b-4a3d-a1c8-6510d9236a06"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{numero_laboral}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="121" uuid="5c64ec62-b6cc-4b12-a316-32093148ab6c">
+						<jr:columnHeader height="18" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="118" height="18" uuid="1738fa90-8d86-426c-8426-63c604b7a7f9"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Puesto]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="39" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="118" height="39" uuid="5713957b-da7f-4acd-86d9-27a51a8548bd"/>
+								<textElement>
+									<font fontName="Arial"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{puesto_laboral}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="103" uuid="39127364-fb74-4c0e-b9e1-fceee438fcd2">
+						<jr:columnHeader height="18" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="101" height="18" uuid="4ccfd735-59b9-409f-8a1f-08b6f166d35e"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Empresa]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="39" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="101" height="39" uuid="d3ac1c90-5bfc-45a1-8136-016eef24150c"/>
+								<textElement verticalAlignment="Top">
+									<font fontName="Arial" size="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{empresa_laboral}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="68" uuid="60d09f49-21d4-49c9-90c9-96adafbdf659">
+						<jr:columnHeader height="18" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="68" height="18" uuid="e5f800a6-9375-4fb2-a611-2328c9475dda"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Permanencia]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="39" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="68" height="39" uuid="5dca36a7-6dea-4dbc-956b-be28388edcdb"/>
+								<textElement textAlignment="Justified" verticalAlignment="Top">
+									<font fontName="Arial" size="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{permanencia_laboral}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="175" uuid="7534e8c5-f28f-4269-9372-5e5e089cc766">
+						<jr:columnHeader height="18" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="175" height="18" uuid="b0c4a572-ad5d-4842-8c07-5f85f501d189"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Actividades]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="39" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="175" height="39" uuid="18d8fc21-413a-4eb8-8fa1-0112981c7da0"/>
+								<textElement>
+									<font fontName="Arial" size="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{acitividades_labor}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement x="29" y="12" width="140" height="20" uuid="9485cd16-a12f-4998-bafa-bbdf5609211b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[3. EXPERIENCIA LABORAL]]></text>
+			</staticText>
+		</band>
+		<band height="85">
+			<componentElement>
+				<reportElement key="table 1" x="50" y="36" width="496" height="49" uuid="5a642b8a-49a1-48e4-8de4-7f4d76f8bb72"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="tabla_experiencia_docente" uuid="6fd5673f-f513-4cd4-b11b-ef0ecde79821">
+						<datasetParameter name="rfc_ds_docente">
+							<datasetParameterExpression><![CDATA[$P{rfc}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="25" uuid="cbdd776c-d6c3-4d37-a85f-6425423f8b70">
+						<jr:columnHeader height="19" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="25" height="18" uuid="a1d95f07-d464-4573-bc21-3815dc90a6e6"/>
+								<textElement verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[No.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="29" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="25" height="29" uuid="6b44bc79-f5b3-4d1a-b816-6d320bfe62cd"/>
+								<textElement verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{row_number}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="263" uuid="85354d6f-93ea-4256-82f3-e1cfc485945f">
+						<jr:columnHeader height="19" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="263" height="18" uuid="36488f7b-a61d-4f66-ab43-0f3f73a4ba55"/>
+								<textElement textAlignment="Justified" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Materia]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="29" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="263" height="29" uuid="ac503717-12a6-4a3f-bebe-c01e646594ef"/>
+								<textElement textAlignment="Justified" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{materia_historial}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="205" uuid="8a11627d-e447-4279-a080-d6602fdff227">
+						<jr:columnHeader height="19" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="205" height="18" uuid="7696879a-4c58-442c-aaf5-3b3a5454a93a"/>
+								<textElement textAlignment="Justified" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Periodo]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="29" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="205" height="29" uuid="6b893f40-700f-4149-a7cd-c7b385731ada"/>
+								<textElement verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{periodo_historial}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement x="29" y="16" width="140" height="20" uuid="f026448b-4179-4922-8d44-08868fc359b9"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4. EXPERIENCIA DOCENTE]]></text>
+			</staticText>
+		</band>
+		<band height="81">
+			<componentElement>
+				<reportElement key="table 1" x="50" y="17" width="496" height="50" uuid="96f9b709-19c3-4c82-91d8-e6a1f04d819b"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="tabla_producto" uuid="e8b22edc-21bd-4465-8cf9-46eef9a976d4">
+						<datasetParameter name="rfc_producto">
+							<datasetParameterExpression><![CDATA[$P{rfc}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="29" uuid="a40df196-7acc-4a0d-b4e6-a149df406672">
+						<jr:columnHeader height="21" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="29" height="21" uuid="be24c8a3-5097-4726-84da-496051ed2a13"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" isBold="true"/>
+								</textElement>
+								<text><![CDATA[No.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="29" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="29" height="29" uuid="b1b36986-f4fc-46ea-b53c-04efba6b2c63"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{row_number}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="192" uuid="ad3be019-1ff5-4b0a-b768-832f7eeac5f3">
+						<jr:columnHeader height="21" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="192" height="21" uuid="c77bb0aa-95c6-4f02-b545-f988c97bf907"/>
+								<textElement textAlignment="Justified" verticalAlignment="Middle">
+									<font fontName="Arial" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Actividad/producto]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="29" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="192" height="29" uuid="98cf9f04-5776-450b-be49-45fca77ea0e2"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{p_a}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="169" uuid="a3b65bdc-09f7-4c7c-9aa7-1ec85e4e2b65">
+						<jr:columnHeader height="21" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="169" height="21" uuid="091196e0-97a9-4f66-80e0-8a753ade23b3"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Descripción]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="29" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="169" height="29" uuid="49fe7898-a13a-4643-ad03-2cccb1023ad1"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{des_pro}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="104" uuid="b930e790-bb53-438e-9e91-85fb776b6a0c">
+						<jr:columnHeader height="21" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="104" height="21" uuid="75e3d39b-e758-4154-a8bb-975d9840038a"/>
+								<textElement textAlignment="Justified" verticalAlignment="Middle">
+									<font fontName="Arial" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Periodo]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="29" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="104" height="29" uuid="8862623e-929c-43f6-b75f-d29cac67c570"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{periodo_pro}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement x="29" y="2" width="179" height="15" uuid="07623917-9363-477d-a99f-5b32ddf6ffdb"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[5. PRODUCTOS EN ACADÉMICOS]]></text>
+			</staticText>
+		</band>
+		<band height="107">
+			<componentElement>
+				<reportElement key="table 1" x="50" y="19" width="496" height="86" uuid="f99958c6-9f45-4453-9d3e-b097f293bee4"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="tabla_participacion_instructor" uuid="584135ee-3300-4d8f-9e79-45f26f0154ca">
+						<datasetParameter name="rfc_instructor">
+							<datasetParameterExpression><![CDATA[$P{rfc}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="33" uuid="860b1315-fdb4-4f15-ab66-7895a890a4f3">
+						<jr:columnHeader height="39" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="33" height="39" uuid="919eda4b-c073-4dbb-a492-c43a58f6eeda"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" isBold="true"/>
+								</textElement>
+								<text><![CDATA[No.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="47" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="33" height="45" uuid="aecf44e4-ee0f-4be8-b655-b5a4db56fabe"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{numero_curso}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="172" uuid="b52ea9ca-d530-4059-bf1e-d67cff45a6b8">
+						<jr:columnHeader height="39" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="172" height="39" uuid="5aeaeebb-a4f9-4227-8a56-6ba6356f5574"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Título]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="47" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="172" height="45" uuid="54d22bce-472d-466d-979f-a783add81a52"/>
+								<textElement textAlignment="Justified" verticalAlignment="Middle">
+									<font fontName="Arial"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{curso}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="121" uuid="14a9b7c8-a206-4319-9484-f895b02255dd">
+						<jr:columnHeader height="39" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="121" height="39" uuid="4ed37990-0e64-4239-85bd-060c27931f90"/>
+								<textElement>
+									<font fontName="Arial" size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Instituciòn o Empresa u Organización]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="47" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="121" height="45" uuid="d15a594a-38d1-4a9b-a57c-18a92c2d3d2a"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{sede}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="56" uuid="9cbb4778-4bb9-4aa7-9c57-b47344b9bde8">
+						<jr:columnHeader height="39" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="56" height="39" uuid="952cfa46-68a9-4e6c-8ed4-2ed78884f5c4"/>
+								<textElement>
+									<font fontName="Arial" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Duración (HORAS)]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="47" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="56" height="45" uuid="7899a5a3-845a-4678-b48c-d8dc8f8348cc"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{horas_curso}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="112" uuid="f51dfedf-b760-407d-bee8-d85f317cc009">
+						<jr:columnHeader height="39" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="112" height="39" uuid="cc81bed5-1c53-4073-9ca3-913f9d1e3157"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Fecha]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="47" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="112" height="45" uuid="1fc9b2aa-8571-4d3c-a4e8-8ce575cfc9f8"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{fecha_de_realizacion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement x="29" y="3" width="218" height="20" uuid="8a402fd4-a850-4d8e-ad1c-d62e813294e5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[6. PARTICIPACIÓN COMO INSTRUCTOR]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<summary>
+		<band height="6" splitType="Stretch"/>
+	</summary>
+</jasperReport>

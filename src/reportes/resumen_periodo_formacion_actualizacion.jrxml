@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="resumen_periodo_formacion_actualizacion" language="groovy" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aabfa870-182d-47e1-aef6-c68d5e120fd1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="resumen_periodo_formacion_actualizacion" uuid="58b6f56d-8271-4f91-ada1-7ac85ff2c117">
+		<parameter name="id_parametro_ds" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select puesto.puesto,
+COALESCE(cantidad_hombre_formacion.cantidad_h_f,'0') as cantidad_hombre_f,
+COALESCE(cantidad_mujer_formacion.cantidad_m_f,'0') as cantidad_mujer_f,
+COALESCE(cantidad_hombre_actualizacion.cantidad_h_a,'0') as cantidad_hombre_a,
+COALESCE(cantidad_mujer_actualizacion.cantidad_m_a,'0') as cantidad_mujer_a
+from puesto
+			LEFT JOIN
+(select puesto.puesto,
+puesto.idpuesto,
+COALESCE(count(DISTINCT persona.rfc),'0') as cantidad_h_f
+from puesto RIGHT JOIN puesto_persona on puesto.idpuesto=puesto_persona.idpuesto
+INNER JOIN persona on persona.rfc=puesto_persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc
+INNER JOIN curso on participante.idcurso=curso.idcurso
+where persona.sexo='H' and curso.idperiodo_escolar=$P{id_parametro_ds} and curso.idtipo_curso='F'
+group by puesto.puesto,
+puesto.idpuesto) cantidad_hombre_formacion
+on cantidad_hombre_formacion.idpuesto=puesto.idpuesto
+LEFT JOIN
+(select puesto.puesto,
+puesto.idpuesto,
+COALESCE(count(DISTINCT persona.rfc),'0') as cantidad_m_f
+from puesto RIGHT JOIN puesto_persona on puesto.idpuesto=puesto_persona.idpuesto
+INNER JOIN persona on persona.rfc=puesto_persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc
+INNER JOIN curso on participante.idcurso=curso.idcurso
+where persona.sexo='M' and curso.idperiodo_escolar=$P{id_parametro_ds} and curso.idtipo_curso='F'
+group by puesto.puesto,
+puesto.idpuesto) cantidad_mujer_formacion
+on cantidad_mujer_formacion.idpuesto=puesto.idpuesto
+
+LEFT JOIN
+(select puesto.puesto,
+COALESCE(count(DISTINCT persona.rfc),'0') as cantidad_h_a,
+puesto.idpuesto
+from puesto RIGHT JOIN puesto_persona on puesto.idpuesto=puesto_persona.idpuesto
+INNER JOIN persona on persona.rfc=puesto_persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc
+INNER JOIN curso on participante.idcurso=curso.idcurso
+where persona.sexo='H' and curso.idperiodo_escolar=$P{id_parametro_ds} and curso.idtipo_curso='A'
+group by puesto.puesto,
+puesto.idpuesto) cantidad_hombre_actualizacion
+on cantidad_hombre_actualizacion.idpuesto=puesto.idpuesto
+LEFT JOIN
+(select puesto.puesto,
+COALESCE(count(DISTINCT persona.rfc),'0') as cantidad_m_a,
+puesto.idpuesto
+from puesto RIGHT JOIN puesto_persona on puesto.idpuesto=puesto_persona.idpuesto
+INNER JOIN persona on persona.rfc=puesto_persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc
+INNER JOIN curso on participante.idcurso=curso.idcurso
+where persona.sexo='M' and curso.idperiodo_escolar=$P{id_parametro_ds} and curso.idtipo_curso='A'
+group by puesto.puesto,
+puesto.idpuesto) cantidad_mujer_actualizacion
+on cantidad_mujer_actualizacion.idpuesto=puesto.idpuesto
+where puesto.idpuesto>4 and puesto.idpuesto<11
+GROUP BY puesto.puesto,
+cantidad_hombre_formacion.cantidad_h_f,
+cantidad_mujer_formacion.cantidad_m_f,
+cantidad_hombre_actualizacion.cantidad_h_a,
+cantidad_mujer_actualizacion.cantidad_m_a
+]]>
+		</queryString>
+		<field name="puesto" class="java.lang.String"/>
+		<field name="cantidad_hombre_f" class="java.lang.Long"/>
+		<field name="cantidad_mujer_f" class="java.lang.Long"/>
+		<field name="cantidad_hombre_a" class="java.lang.Long"/>
+		<field name="cantidad_mujer_a" class="java.lang.Long"/>
+	</subDataset>
+	<parameter name="idperiodo" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select puesto.puesto,
+COALESCE(cantidad_hombre_formacion.cantidad_h_f,'0') as cantidad_hombre_f,
+COALESCE(cantidad_mujer_formacion.cantidad_m_f,'0') as cantidad_mujer_f,
+COALESCE(cantidad_hombre_actualizacion.cantidad_h_a,'0') as cantidad_hombre_a,
+COALESCE(cantidad_mujer_actualizacion.cantidad_m_a,'0') as cantidad_mujer_a
+from puesto
+			LEFT JOIN
+(select puesto.puesto,
+puesto.idpuesto,
+COALESCE(count(DISTINCT persona.rfc),'0') as cantidad_h_f
+from puesto RIGHT JOIN puesto_persona on puesto.idpuesto=puesto_persona.idpuesto
+INNER JOIN persona on persona.rfc=puesto_persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc
+INNER JOIN curso on participante.idcurso=curso.idcurso
+where persona.sexo='H' and curso.idperiodo_escolar=$P{idperiodo} and curso.idtipo_curso='F'
+group by puesto.puesto,
+puesto.idpuesto) cantidad_hombre_formacion
+on cantidad_hombre_formacion.idpuesto=puesto.idpuesto
+LEFT JOIN
+(select puesto.puesto,
+puesto.idpuesto,
+COALESCE(count(DISTINCT persona.rfc),'0') as cantidad_m_f
+from puesto RIGHT JOIN puesto_persona on puesto.idpuesto=puesto_persona.idpuesto
+INNER JOIN persona on persona.rfc=puesto_persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc
+INNER JOIN curso on participante.idcurso=curso.idcurso
+where persona.sexo='M' and curso.idperiodo_escolar=$P{idperiodo} and curso.idtipo_curso='F'
+group by puesto.puesto,
+puesto.idpuesto) cantidad_mujer_formacion
+on cantidad_mujer_formacion.idpuesto=puesto.idpuesto
+
+LEFT JOIN
+(select puesto.puesto,
+COALESCE(count(DISTINCT persona.rfc),'0') as cantidad_h_a,
+puesto.idpuesto
+from puesto RIGHT JOIN puesto_persona on puesto.idpuesto=puesto_persona.idpuesto
+INNER JOIN persona on persona.rfc=puesto_persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc
+INNER JOIN curso on participante.idcurso=curso.idcurso
+where persona.sexo='H' and curso.idperiodo_escolar=$P{idperiodo} and curso.idtipo_curso='A'
+group by puesto.puesto,
+puesto.idpuesto) cantidad_hombre_actualizacion
+on cantidad_hombre_actualizacion.idpuesto=puesto.idpuesto
+LEFT JOIN
+(select puesto.puesto,
+COALESCE(count(DISTINCT persona.rfc),'0') as cantidad_m_a,
+puesto.idpuesto
+from puesto RIGHT JOIN puesto_persona on puesto.idpuesto=puesto_persona.idpuesto
+INNER JOIN persona on persona.rfc=puesto_persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc
+INNER JOIN curso on participante.idcurso=curso.idcurso
+where persona.sexo='M' and curso.idperiodo_escolar=$P{idperiodo} and curso.idtipo_curso='A'
+group by puesto.puesto,
+puesto.idpuesto) cantidad_mujer_actualizacion
+on cantidad_mujer_actualizacion.idpuesto=puesto.idpuesto
+where puesto.idpuesto>4 and puesto.idpuesto<11
+GROUP BY puesto.puesto,
+cantidad_hombre_formacion.cantidad_h_f,
+cantidad_mujer_formacion.cantidad_m_f,
+cantidad_hombre_actualizacion.cantidad_h_a,
+cantidad_mujer_actualizacion.cantidad_m_a]]>
+	</queryString>
+	<field name="puesto" class="java.lang.String"/>
+	<field name="cantidad_hombre_f" class="java.lang.Long"/>
+	<field name="cantidad_mujer_f" class="java.lang.Long"/>
+	<field name="cantidad_hombre_a" class="java.lang.Long"/>
+	<field name="cantidad_mujer_a" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="40" uuid="7b0837ed-fb16-4ae4-b1f1-f818104916a0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INSTITUTO TECNOLOGICO DE TAPACHULA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="6" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="5" splitType="Stretch"/>
+	</detail>
+	<summary>
+		<band height="71" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" x="0" y="0" width="555" height="68" uuid="b3b379c6-82d0-43d7-9d9b-03eff414031f"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="resumen_periodo_formacion_actualizacion" uuid="7414f71b-0744-4471-b7c6-b4127d3a2cc4">
+						<datasetParameter name="id_parametro_ds">
+							<datasetParameterExpression><![CDATA[$P{idperiodo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="330" uuid="6dcd1c05-1275-479e-97bc-ba62f6af8932">
+						<jr:columnHeader height="33" rowSpan="2">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="330" height="33" uuid="cf80d557-166e-4a19-91b6-368fe46ab8ee"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Carrera]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter height="0" rowSpan="1"/>
+						<jr:detailCell height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="330" height="30" uuid="b232be1a-ff5e-4932-b7bd-cab909089465"/>
+								<textFieldExpression><![CDATA[$F{puesto}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:columnGroup width="109" uuid="e555ad8e-986c-4e40-b14b-0ba273189306">
+						<jr:columnHeader height="18" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="109" height="18" uuid="36c925c1-a978-4993-a0a4-1700123697f6"/>
+								<textElement textAlignment="Center">
+									<font fontName="Arial" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Formación]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:column width="54" uuid="6d40b13a-d33e-48c6-a936-ab5c8676ce9f">
+							<jr:columnHeader height="15" rowSpan="1">
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<staticText>
+									<reportElement x="0" y="0" width="54" height="15" uuid="f97c9f83-3edd-45fc-ad64-375fd8904f1a"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Hombre]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textField>
+									<reportElement x="0" y="0" width="54" height="30" uuid="642c79f0-a798-4984-8fba-400caee727a5"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{cantidad_hombre_f}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="55" uuid="76dcdc9e-86a4-444c-95d7-d389e88620e6">
+							<jr:columnHeader height="15" rowSpan="1">
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<staticText>
+									<reportElement x="0" y="0" width="55" height="15" uuid="a35c3a3a-d9a6-45c9-9d2c-528a7bd9fdf5"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Mujer]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textField>
+									<reportElement x="0" y="0" width="55" height="30" uuid="867447e0-4536-470e-a1f5-71d21768a543"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{cantidad_mujer_f}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+					<jr:columnGroup width="113" uuid="780c4e09-0b73-49d0-bfdf-a03672241616">
+						<jr:columnHeader height="18" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="113" height="18" uuid="f8348fa1-c51a-4289-89c7-9ba7e5aad93f"/>
+								<textElement textAlignment="Center">
+									<font fontName="Arial" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Actualización]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:column width="53" uuid="e9ce991f-daaf-450d-85c8-4a7d9d79450e">
+							<jr:columnHeader height="15" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="53" height="15" uuid="59ef56a5-9300-4fdc-88de-270c151f5157"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Hombre]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textField>
+									<reportElement x="0" y="0" width="53" height="30" uuid="8df15a81-af33-4e28-aad6-4705855d9d68"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{cantidad_hombre_a}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="60" uuid="9db379e4-7b02-4c1d-b222-a5d8187a2a04">
+							<jr:columnHeader height="15" rowSpan="1">
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<staticText>
+									<reportElement x="0" y="0" width="60" height="15" uuid="773e3daf-9978-4308-a312-80bcf3d9a81f"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Mujer]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textField>
+									<reportElement x="0" y="0" width="60" height="30" uuid="adf3319c-344a-45e2-b03c-1fe549b02fd5"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{cantidad_mujer_a}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

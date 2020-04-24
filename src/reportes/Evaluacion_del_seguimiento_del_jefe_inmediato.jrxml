@@ -1,0 +1,1122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Evaluacion_del_seguimiento_del_jefe_inmediato" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8de27a85-88e7-4196-904a-f6276737d468">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="125"/>
+	<subDataset name="tabla_jefe_123" uuid="8c0fd4b9-1446-420a-bab2-0c98f1ac4933">
+		<parameter name="idparticipante_ds_jefe123" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select
+concat(row_number() over(order by opinion_jefe.idopinion_jefe),'. ') as numero_evaluacion,
+opinion_jefe.opinion_jefe,
+opinionjefe_evaluacionjefe.valor_opinion
+from opinion_jefe INNER JOIN opinionjefe_evaluacionjefe on opinion_jefe.idopinion_jefe=opinionjefe_evaluacionjefe.idopinion_jefe INNER JOIN evaluacion_jefe on opinionjefe_evaluacionjefe.idevaluacion_jefe=evaluacion_jefe.idevaluacion_jefe INNER JOIN participante on evaluacion_jefe.idevaluacion_jefe=participante.idevaluacion_jefe
+where participante.idparticipante=$P{idparticipante_ds_jefe123} and opinion_jefe.idopinion_jefe <4]]>
+		</queryString>
+		<field name="numero_evaluacion" class="java.lang.String"/>
+		<field name="opinion_jefe" class="java.lang.String"/>
+		<field name="valor_opinion" class="java.lang.Integer"/>
+	</subDataset>
+	<subDataset name="registro4" uuid="242faa2f-42bd-4b78-8453-32c7e623a219">
+		<parameter name="idparticipante_ds_4" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select
+concat('a) ',substring(opinion_jefe.opinion_jefe,37,100)) as opinion_final,
+opinionjefe_evaluacionjefe.valor_opinion
+from opinion_jefe INNER JOIN opinionjefe_evaluacionjefe on opinion_jefe.idopinion_jefe=opinionjefe_evaluacionjefe.idopinion_jefe INNER JOIN evaluacion_jefe on opinionjefe_evaluacionjefe.idevaluacion_jefe=evaluacion_jefe.idevaluacion_jefe INNER JOIN participante on evaluacion_jefe.idevaluacion_jefe=participante.idevaluacion_jefe
+where participante.idparticipante=$P{idparticipante_ds_4} and opinion_jefe.idopinion_jefe =4]]>
+		</queryString>
+		<field name="opinion_final" class="java.lang.String"/>
+		<field name="valor_opinion" class="java.lang.Integer"/>
+	</subDataset>
+	<subDataset name="registro5" uuid="1ed8a627-ea53-4494-8c59-f47e0144bb3f">
+		<parameter name="idparticipante_ds_5" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select
+concat('b) ',substring(opinion_jefe.opinion_jefe,37,100)) as opinion_final,
+opinionjefe_evaluacionjefe.valor_opinion
+from opinion_jefe INNER JOIN opinionjefe_evaluacionjefe on opinion_jefe.idopinion_jefe=opinionjefe_evaluacionjefe.idopinion_jefe INNER JOIN evaluacion_jefe on opinionjefe_evaluacionjefe.idevaluacion_jefe=evaluacion_jefe.idevaluacion_jefe INNER JOIN participante on evaluacion_jefe.idevaluacion_jefe=participante.idevaluacion_jefe
+where participante.idparticipante=$P{idparticipante_ds_5} and opinion_jefe.idopinion_jefe =5]]>
+		</queryString>
+		<field name="opinion_final" class="java.lang.String"/>
+		<field name="valor_opinion" class="java.lang.Integer"/>
+	</subDataset>
+	<subDataset name="registro6" uuid="d828e4bb-0b20-49d2-a95a-12e2f7bbd1ec">
+		<parameter name="idparticipante_ds_6" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select
+concat('c) ',substring(opinion_jefe.opinion_jefe,37,100)) as opinion_final,
+opinionjefe_evaluacionjefe.valor_opinion
+from opinion_jefe INNER JOIN opinionjefe_evaluacionjefe on opinion_jefe.idopinion_jefe=opinionjefe_evaluacionjefe.idopinion_jefe INNER JOIN evaluacion_jefe on opinionjefe_evaluacionjefe.idevaluacion_jefe=evaluacion_jefe.idevaluacion_jefe INNER JOIN participante on evaluacion_jefe.idevaluacion_jefe=participante.idevaluacion_jefe
+where participante.idparticipante=$P{idparticipante_ds_6} and opinion_jefe.idopinion_jefe =6]]>
+		</queryString>
+		<field name="opinion_final" class="java.lang.String"/>
+		<field name="valor_opinion" class="java.lang.Integer"/>
+	</subDataset>
+	<subDataset name="tabla_ds_7" uuid="977a0ba9-e80a-41cc-8c7c-2578af255793">
+		<parameter name="ipaprticipante_ds_7" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select
+concat('d) ',substring(opinion_jefe.opinion_jefe,37,100)) as opinion_final,
+opinionjefe_evaluacionjefe.valor_opinion
+from opinion_jefe INNER JOIN opinionjefe_evaluacionjefe on opinion_jefe.idopinion_jefe=opinionjefe_evaluacionjefe.idopinion_jefe INNER JOIN evaluacion_jefe on opinionjefe_evaluacionjefe.idevaluacion_jefe=evaluacion_jefe.idevaluacion_jefe INNER JOIN participante on evaluacion_jefe.idevaluacion_jefe=participante.idevaluacion_jefe
+where participante.idparticipante=$P{ipaprticipante_ds_7} and opinion_jefe.idopinion_jefe =7]]>
+		</queryString>
+		<field name="opinion_final" class="java.lang.String"/>
+		<field name="valor_opinion" class="java.lang.Integer"/>
+	</subDataset>
+	<subDataset name="registro_ds_8" uuid="9618ae4c-06c2-4c60-8916-b6d6ade38e40">
+		<parameter name="idparticipante_ds_8" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select
+concat('e) ',substring(opinion_jefe.opinion_jefe,37,100)) as opinion_final,
+opinionjefe_evaluacionjefe.valor_opinion
+from opinion_jefe INNER JOIN opinionjefe_evaluacionjefe on opinion_jefe.idopinion_jefe=opinionjefe_evaluacionjefe.idopinion_jefe INNER JOIN evaluacion_jefe on opinionjefe_evaluacionjefe.idevaluacion_jefe=evaluacion_jefe.idevaluacion_jefe INNER JOIN participante on evaluacion_jefe.idevaluacion_jefe=participante.idevaluacion_jefe
+where participante.idparticipante=$P{idparticipante_ds_8} and opinion_jefe.idopinion_jefe =8]]>
+		</queryString>
+		<field name="opinion_final" class="java.lang.String"/>
+		<field name="valor_opinion" class="java.lang.Integer"/>
+	</subDataset>
+	<subDataset name="tabla_ds_9" uuid="e9545f17-5ee9-4b6b-98f7-5aeedeb6b118">
+		<parameter name="idparticipante_ds_9" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select
+concat('f) ',substring(opinion_jefe.opinion_jefe,37,100)) as opinion_final,
+opinionjefe_evaluacionjefe.valor_opinion
+from opinion_jefe INNER JOIN opinionjefe_evaluacionjefe on opinion_jefe.idopinion_jefe=opinionjefe_evaluacionjefe.idopinion_jefe INNER JOIN evaluacion_jefe on opinionjefe_evaluacionjefe.idevaluacion_jefe=evaluacion_jefe.idevaluacion_jefe INNER JOIN participante on evaluacion_jefe.idevaluacion_jefe=participante.idevaluacion_jefe
+where participante.idparticipante=$P{idparticipante_ds_9} and opinion_jefe.idopinion_jefe =9]]>
+		</queryString>
+		<field name="opinion_final" class="java.lang.String"/>
+		<field name="valor_opinion" class="java.lang.Integer"/>
+	</subDataset>
+	<subDataset name="registro_10" uuid="84ee2d56-48be-44be-a55e-b412ae1dedd2">
+		<parameter name="idparticipante_ds_10" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select
+concat('g) ',substring(opinion_jefe.opinion_jefe,37,100)) as opinion_final,
+opinionjefe_evaluacionjefe.valor_opinion
+from opinion_jefe INNER JOIN opinionjefe_evaluacionjefe on opinion_jefe.idopinion_jefe=opinionjefe_evaluacionjefe.idopinion_jefe INNER JOIN evaluacion_jefe on opinionjefe_evaluacionjefe.idevaluacion_jefe=evaluacion_jefe.idevaluacion_jefe INNER JOIN participante on evaluacion_jefe.idevaluacion_jefe=participante.idevaluacion_jefe
+where participante.idparticipante=$P{idparticipante_ds_10} and opinion_jefe.idopinion_jefe =10]]>
+		</queryString>
+		<field name="opinion_final" class="java.lang.String"/>
+		<field name="valor_opinion" class="java.lang.Integer"/>
+	</subDataset>
+	<subDataset name="registro11" uuid="90867b80-c2dd-458d-9ad6-0a4723268612">
+		<parameter name="idparticipante_ds_11" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select
+concat('h) ',substring(opinion_jefe.opinion_jefe,37,100)) as opinion_final,
+opinionjefe_evaluacionjefe.valor_opinion
+from opinion_jefe INNER JOIN opinionjefe_evaluacionjefe on opinion_jefe.idopinion_jefe=opinionjefe_evaluacionjefe.idopinion_jefe INNER JOIN evaluacion_jefe on opinionjefe_evaluacionjefe.idevaluacion_jefe=evaluacion_jefe.idevaluacion_jefe INNER JOIN participante on evaluacion_jefe.idevaluacion_jefe=participante.idevaluacion_jefe
+where participante.idparticipante=$P{idparticipante_ds_11} and opinion_jefe.idopinion_jefe =11]]>
+		</queryString>
+		<field name="opinion_final" class="java.lang.String"/>
+		<field name="valor_opinion" class="java.lang.Integer"/>
+	</subDataset>
+	<subDataset name="obstaculo_ds_1" uuid="6615673c-3b8f-45dc-828b-62af6a20431e">
+		<parameter name="idparticipante_obstaculo1" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select
+case COALESCE((select obstaculo
+from obstaculo_aplicacion INNER JOIN obstaculoaplicacion_evaluacionjefe
+on obstaculo_aplicacion.idobstaculo_aplicacion=obstaculoaplicacion_evaluacionjefe.idobstaculo_aplicacion
+INNER JOIN evaluacion_jefe on obstaculoaplicacion_evaluacionjefe.idevaluacion_jefe=evaluacion_jefe.idevaluacion_jefe INNER JOIN participante on evaluacion_jefe.idevaluacion_jefe=participante.idevaluacion_jefe
+WHERE participante.idparticipante=$P{idparticipante_obstaculo1} and obstaculo_aplicacion.idobstaculo_aplicacion=1),'')
+when 'FALTA DE EQUIPO Y/O MATERIAL' then
+'X' else ' '
+end as o_P,
+case COALESCE((select obstaculo
+from obstaculo_aplicacion INNER JOIN obstaculoaplicacion_evaluacionjefe
+on obstaculo_aplicacion.idobstaculo_aplicacion=obstaculoaplicacion_evaluacionjefe.idobstaculo_aplicacion
+INNER JOIN evaluacion_jefe on obstaculoaplicacion_evaluacionjefe.idevaluacion_jefe=evaluacion_jefe.idevaluacion_jefe INNER JOIN participante on evaluacion_jefe.idevaluacion_jefe=participante.idevaluacion_jefe
+WHERE participante.idparticipante=$P{idparticipante_obstaculo1} and obstaculo_aplicacion.idobstaculo_aplicacion=2),'')
+when 'FALTA DE APOYO EN EL ÁREA DE TRABAJO' then
+'X' else ' '
+end as o_P2,
+case COALESCE ((select count(evaluacion_jefe.otro_obstaculo)
+FROM evaluacion_jefe INNER JOIN participante
+on evaluacion_jefe.idevaluacion_jefe=participante.idevaluacion_jefe
+where participante.idparticipante=$P{idparticipante_obstaculo1}))
+when '1' then
+'X' else ''
+end as obstaculo_1
+from participante where idparticipante=$P{idparticipante_obstaculo1}]]>
+		</queryString>
+		<field name="o_p" class="java.lang.String"/>
+		<field name="o_p2" class="java.lang.String"/>
+		<field name="obstaculo_1" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="idparticipante" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<queryString>
+		<![CDATA[select
+curso.clave_curso,
+	concat (
+		'DEL ',
+		 EXTRACT ( DAY FROM curso.fecha_inicio ),
+		' ',
+UPPER ( to_char( to_timestamp( ( SELECT EXTRACT ( MONTH FROM curso.fecha_inicio ) ) :: TEXT, 'MM' ), 'TMMonth' )) ,
+		' ', EXTRACT ( YEAR FROM curso.fecha_inicio ) ,' AL ',
+		'DEL ',
+		 EXTRACT ( DAY FROM curso.fecha_fin ),
+		' ',
+UPPER ( to_char( to_timestamp( ( SELECT EXTRACT ( MONTH FROM curso.fecha_fin ) ) :: TEXT, 'MM' ), 'TMMonth' )),
+		' ', EXTRACT ( YEAR FROM curso.fecha_fin )
+) AS "fecha de Realizacion",
+curso.curso,
+concat(persona.nombre,' ',persona.ape_paterno,' ',persona.ape_materno) as "Nombre del participante",
+puesto.puesto,
+case when cargo.idcargo>3 then (SELECT concat(persona.nombre,' ',persona.ape_paterno,' ',persona.ape_materno)
+from persona
+INNER JOIN puesto_persona on persona.rfc=puesto_persona.rfc
+INNER JOIN cargo on puesto_persona.idcargo=cargo.idcargo
+INNER JOIN puesto on puesto.idpuesto=puesto_persona.idpuesto
+where puesto_persona.idcargo=3 and puesto.idpuesto=(SELECT puesto.idpuesto
+from persona
+INNER JOIN puesto_persona on persona.rfc=puesto_persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc
+INNER JOIN puesto on puesto.idpuesto=puesto_persona.idpuesto
+where participante.idparticipante=$P{idparticipante} and puesto_persona.idjornada_laboral=(select max(puesto_persona.idjornada_laboral)
+from puesto_persona INNER JOIN persona on puesto_persona.rfc=persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc where participante.idparticipante= $P{idparticipante})))
+when cargo.idcargo =3 then (SELECT concat(persona.nombre,' ',persona.ape_paterno,' ',persona.ape_materno) as "JEFE INMEDIATO"
+from persona
+INNER JOIN puesto_persona on persona.rfc=puesto_persona.rfc
+INNER JOIN cargo on puesto_persona.idcargo=cargo.idcargo
+INNER JOIN puesto on puesto.idpuesto=puesto_persona.idpuesto
+where puesto_persona.idcargo=2 and puesto.idsubdireccion=(SELECT puesto.idsubdireccion
+from persona
+INNER JOIN puesto_persona on persona.rfc=puesto_persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc
+INNER JOIN puesto on puesto.idpuesto=puesto_persona.idpuesto
+INNER JOIN subdireccion on puesto.idsubdireccion=subdireccion.idsubdireccion
+where participante.idparticipante=$P{idparticipante} and puesto_persona.idjornada_laboral=(select max(puesto_persona.idjornada_laboral)
+from puesto_persona INNER JOIN persona on puesto_persona.rfc=persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc where participante.idparticipante= $P{idparticipante})))
+when cargo.idcargo =2 then (SELECT concat(persona.nombre,' ',persona.ape_paterno,' ',persona.ape_materno) as "JEFE INMEDIATO"
+from persona
+INNER JOIN puesto_persona on persona.rfc=puesto_persona.rfc
+INNER JOIN cargo on puesto_persona.idcargo=cargo.idcargo
+INNER JOIN puesto on puesto.idpuesto=puesto_persona.idpuesto
+where puesto_persona.idcargo=1 and puesto.idsubdireccion=(SELECT puesto.idsubdireccion
+from persona
+INNER JOIN puesto_persona on persona.rfc=puesto_persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc
+INNER JOIN puesto on puesto.idpuesto=puesto_persona.idpuesto
+INNER JOIN subdireccion on puesto.idsubdireccion=subdireccion.idsubdireccion
+where participante.idparticipante=$P{idparticipante} and puesto_persona.idjornada_laboral=(select max(puesto_persona.idjornada_laboral)
+from puesto_persona INNER JOIN persona on puesto_persona.rfc=persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc where participante.idparticipante= $P{idparticipante})))
+else 'OTROS' end as "JEFE INMEDIATO",
+case when cargo.idcargo>3 then (SELECT puesto.puesto
+from persona
+INNER JOIN puesto_persona on persona.rfc=puesto_persona.rfc
+INNER JOIN cargo on puesto_persona.idcargo=cargo.idcargo
+INNER JOIN puesto on puesto.idpuesto=puesto_persona.idpuesto
+where puesto_persona.idcargo=3 and puesto.idpuesto=(SELECT puesto.idpuesto
+from persona
+INNER JOIN puesto_persona on persona.rfc=puesto_persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc
+INNER JOIN puesto on puesto.idpuesto=puesto_persona.idpuesto
+where participante.idparticipante=$P{idparticipante} and puesto_persona.idjornada_laboral=(select max(puesto_persona.idjornada_laboral)
+from puesto_persona INNER JOIN persona on puesto_persona.rfc=persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc where participante.idparticipante= $P{idparticipante})))
+when cargo.idcargo=3 then (SELECT subdireccion.subdireccion
+from persona
+INNER JOIN puesto_persona on persona.rfc=puesto_persona.rfc
+INNER JOIN cargo on puesto_persona.idcargo=cargo.idcargo
+INNER JOIN puesto on puesto.idpuesto=puesto_persona.idpuesto
+INNER JOIN subdireccion on puesto.idsubdireccion=subdireccion.idsubdireccion
+where puesto_persona.idcargo=2 and puesto.idsubdireccion=(SELECT puesto.idsubdireccion
+from persona
+INNER JOIN puesto_persona on persona.rfc=puesto_persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc
+INNER JOIN puesto on puesto.idpuesto=puesto_persona.idpuesto
+INNER JOIN subdireccion on puesto.idsubdireccion=subdireccion.idsubdireccion
+where participante.idparticipante=$P{idparticipante} and puesto_persona.idjornada_laboral=(select max(puesto_persona.idjornada_laboral)
+from puesto_persona INNER JOIN persona on puesto_persona.rfc=persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc where participante.idparticipante= $P{idparticipante})))
+when cargo.idcargo=2 then (SELECT puesto.puesto
+from persona
+INNER JOIN puesto_persona on persona.rfc=puesto_persona.rfc
+INNER JOIN cargo on puesto_persona.idcargo=cargo.idcargo
+INNER JOIN puesto on puesto.idpuesto=puesto_persona.idpuesto
+where puesto_persona.idcargo=1 and puesto.idsubdireccion=(SELECT puesto.idsubdireccion
+from persona
+INNER JOIN puesto_persona on persona.rfc=puesto_persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc
+INNER JOIN puesto on puesto.idpuesto=puesto_persona.idpuesto
+INNER JOIN subdireccion on puesto.idsubdireccion=subdireccion.idsubdireccion
+where participante.idparticipante=$P{idparticipante} and puesto_persona.idjornada_laboral=(select max(puesto_persona.idjornada_laboral)
+from puesto_persona INNER JOIN persona on puesto_persona.rfc=persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc where participante.idparticipante= $P{idparticipante})))
+else 'OTROS' end as "PUESTO DE LA PERSONA",
+concat('EXPLIQUE:	',upper(evaluacion_jefe.otro_obstaculo)) as CO,
+case when evaluacion_jefe.comentario IS NULL then
+upper(evaluacion_jefe.sugerencia)
+else upper(concat(evaluacion_jefe.comentario,'. SUGERENCIA: ',evaluacion_jefe.sugerencia))
+end as "COMENTARIO O SUGERENCIA",
+concat(EXTRACT ( DAY FROM evaluacion_jefe.fecha_realizacion),' DE ',
+upper (to_char( to_timestamp( ( SELECT EXTRACT ( MONTH FROM evaluacion_jefe.fecha_realizacion ) ) :: TEXT, 'MM' ), 'TMMonth' )),' DE ',
+EXTRACT ( YEAR FROM evaluacion_jefe.fecha_realizacion)) as "FECHA DE APLICACION"
+FROM ((((((persona
+     JOIN participante ON (((persona.rfc)::text = (participante.rfc)::text)))
+     JOIN curso ON ((curso.idcurso = participante.idcurso)))
+		 JOIN puesto_persona ON (((persona.rfc)::text = (puesto_persona.rfc)::text)))
+		 JOIN cargo on ((puesto_persona.idcargo= cargo.idcargo)))
+		 JOIN evaluacion_jefe on ((evaluacion_jefe.idevaluacion_jefe=participante.idevaluacion_jefe)))
+		JOIN puesto on ((puesto.idpuesto=puesto_persona.idpuesto)))
+where participante.idparticipante=$P{idparticipante} and puesto_persona.idjornada_laboral=(select max(puesto_persona.idjornada_laboral)
+from puesto_persona INNER JOIN persona on puesto_persona.rfc=persona.rfc
+INNER JOIN participante on persona.rfc=participante.rfc where participante.idparticipante= $P{idparticipante})]]>
+	</queryString>
+	<field name="clave_curso" class="java.lang.String"/>
+	<field name="fecha de Realizacion" class="java.lang.String"/>
+	<field name="curso" class="java.lang.String"/>
+	<field name="Nombre del participante" class="java.lang.String"/>
+	<field name="puesto" class="java.lang.String"/>
+	<field name="JEFE INMEDIATO" class="java.lang.String"/>
+	<field name="PUESTO DE LA PERSONA" class="java.lang.String"/>
+	<field name="co" class="java.lang.String"/>
+	<field name="COMENTARIO O SUGERENCIA" class="java.lang.String"/>
+	<field name="FECHA DE APLICACION" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="81" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="50" width="555" height="31" uuid="92223e8b-586d-4cc5-be19-7f99b8c7b8fd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Evaluación de seguimiento
+Jefe Inmediato]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="357" y="0" width="198" height="39" uuid="46fe52b7-2e60-458e-83e5-7a9eb8dbc49e"/>
+				<text><![CDATA[TECNOLÓGICO NACIONAL DE MÉXICO
+Secretaría de Administración
+Dirección de Personal
+]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="163" height="51" uuid="e674523d-6bd8-42fa-92f3-a1fcd65c3c00"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="94" splitType="Stretch">
+			<textField>
+				<reportElement x="89" y="38" width="393" height="14" uuid="39bc5efa-0b90-4734-a880-8a695b34c090"/>
+				<textFieldExpression><![CDATA[$F{curso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="10" width="77" height="14" uuid="f5fad8ee-fbd4-4940-a761-3938cd35d2ec"/>
+				<text><![CDATA[Clave del curso:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="24" width="107" height="14" uuid="a54eec4d-ea99-4639-ace5-9812a00f2e52"/>
+				<text><![CDATA[Fecha de realización:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="38" width="89" height="14" uuid="9ecbee7d-6a9f-4895-8309-e37fe18bf13d"/>
+				<text><![CDATA[Nombre del curso:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="52" width="123" height="14" uuid="a8b3d2bf-b81b-42a5-92c0-89d721b3bd02"/>
+				<text><![CDATA[Nombre del participante:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="66" width="123" height="13" uuid="a908667d-77f5-4e00-a50f-6f3037964ad7"/>
+				<text><![CDATA[Nombre del jefe inmediato:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="79" width="112" height="13" uuid="2b18eaa2-ec44-442c-a0d0-dcb88b476ced"/>
+				<text><![CDATA[Secretaría o Dirección:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="112" y="80" width="443" height="14" uuid="585afb66-cab2-42e6-bb99-d360ab209608"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[TECNOLÓGICO NACIONAL DE MÉXICO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="52" width="38" height="14" uuid="fdaeb271-32e7-46a2-a50c-49b7c70e580e"/>
+				<text><![CDATA[Puesto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="66" width="38" height="13" uuid="78721bf0-f805-40ee-9639-266d55805865"/>
+				<text><![CDATA[Puesto:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="78" y="10" width="393" height="14" uuid="9594962b-0ffb-417a-9528-ce93a0629073"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clave_curso}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="78" y="24" width="477" height="1" uuid="45c62da7-bb97-4764-b1dc-9e53d48d794d"/>
+			</line>
+			<line>
+				<reportElement x="109" y="38" width="446" height="1" uuid="e1c2a394-ee42-4688-8110-608cdd93fd3a"/>
+			</line>
+			<line>
+				<reportElement x="368" y="66" width="187" height="1" uuid="d7222f4d-d926-4c46-997a-1df1970401e4"/>
+			</line>
+			<line>
+				<reportElement x="368" y="79" width="187" height="1" uuid="89c7d0b2-4231-4853-b92c-eebde5ce2796"/>
+			</line>
+			<line>
+				<reportElement x="89" y="52" width="466" height="1" uuid="0913ecd3-0115-4a79-8b44-40a3b81e4dd0"/>
+			</line>
+			<line>
+				<reportElement x="123" y="66" width="207" height="1" uuid="a246c65a-10ef-44d8-9ed4-70b8c3de3e10"/>
+			</line>
+			<line>
+				<reportElement x="112" y="92" width="443" height="1" uuid="c5309ffb-2e97-49f4-8bbe-0e2764aa5131"/>
+			</line>
+			<line>
+				<reportElement x="123" y="78" width="207" height="1" uuid="6463bcaf-4a2c-46f3-ab36-f91e3d8c1a68"/>
+			</line>
+			<textField>
+				<reportElement x="123" y="53" width="207" height="14" uuid="e9d30e56-6058-4576-8dac-d9673cef297f"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Nombre del participante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="123" y="66" width="207" height="12" uuid="ff5310e1-0fb3-4ccb-ae3c-caa79269c76d"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{JEFE INMEDIATO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="368" y="67" width="187" height="13" uuid="b7ee6e12-b196-499e-a5de-1e22e0b2f73f"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PUESTO DE LA PERSONA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="109" y="25" width="402" height="13" uuid="b628d765-25da-430a-9968-41af06820dfa"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha de Realizacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="368" y="53" width="187" height="14" uuid="af3f635c-ed69-4be1-bdc2-c62fe3cfae94"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{puesto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="177" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="555" height="44" uuid="e3582fee-eeb6-4866-8287-d8e42fe6bc3e"/>
+				<textElement textAlignment="Justified">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[La presente encuesta tiene como finalidad determinar la relación de los cursos de capacitación y su aplicación en su área de trabajo.  Está información nos servirá para mejorar la calidad de los mismos, por lo que su opinión es de gran importancia para el proceso de capacitación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="55" width="554" height="29" uuid="52686213-6ef2-4e63-abd7-a49a553b4612"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[                         Coloque en la columna de la derecha el número correspondiente a su opinión sobre el curso en el que participó, su colaborador, considerando la siguiente escala:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="55" width="77" height="16" uuid="eaa67087-9ba3-4ffa-84ae-12a79da1ed60"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Instrucciones:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="112" y="120" width="104" height="18" uuid="75161ed3-587f-483a-9917-07192bbd5dd2"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Parcialmente de acuerdo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="236" y="120" width="53" height="18" uuid="85eaf98b-fd57-42d1-9f78-7ac107da91dc"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Indiferente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="305" y="120" width="110" height="18" uuid="0930f7d7-8212-4ba7-b302-084ce3c416d5"/>
+				<textElement verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Parcialmente en desacuerdo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="120" width="64" height="11" uuid="cc116ea3-4bcd-444d-8b4d-9d434f57f69f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[En desacuerdo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="46" y="100" width="30" height="16" uuid="622e44d6-1192-456a-ac35-d8dca73b3e7c"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="147" y="100" width="30" height="16" uuid="17ab6bf0-bc1d-4816-b02b-1a27511dc411"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="248" y="100" width="30" height="16" uuid="9ba1cd4b-df08-408d-91cd-b9ff57d26283"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="343" y="100" width="30" height="16" uuid="cc595aec-c4b2-49b5-9602-0c4b15b530b9"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="452" y="100" width="30" height="16" uuid="00a1bfed-84c7-4a97-9567-faa19c4ee736"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement key="table" x="1" y="138" width="554" height="36" uuid="d2ecef0b-a34b-46f9-9040-f6032573c397"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="tabla_jefe_123" uuid="853e62a3-8a6a-47c8-bcd0-540c9dbc6696">
+						<datasetParameter name="idparticipante_ds_jefe123">
+							<datasetParameterExpression><![CDATA[$P{idparticipante}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="22" uuid="6ec293cb-6cee-4eeb-8f0c-cb1458c64480">
+						<jr:columnFooter height="15" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="22" height="15" uuid="fde4df7f-0514-4290-8644-ee370a7a7475"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[4.]]></text>
+							</staticText>
+						</jr:columnFooter>
+						<jr:detailCell height="22" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="22" height="22" uuid="5f84896d-4260-4848-8e5e-11156890542f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{numero_evaluacion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="491" uuid="b93e411e-628d-41cf-a046-3f188ef99862">
+						<jr:columnFooter height="15" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="455" height="15" uuid="c061c267-37ba-41c0-91e6-7920fa8af72b"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[EL CURSO QUE TOMÓ SU COLABORADOR LE:]]></text>
+							</staticText>
+						</jr:columnFooter>
+						<jr:detailCell height="22" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="488" height="22" uuid="0ba8a46b-7e39-468e-92e3-159679adb837"/>
+								<textElement textAlignment="Justified" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{opinion_jefe}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="d2810ce1-d865-4f0f-9862-2bed3542e36c">
+						<jr:columnFooter height="15" rowSpan="1"/>
+						<jr:detailCell height="22" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="40" height="20" uuid="26453fc2-6654-49ad-b880-e108080c16ff"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{valor_opinion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement x="13" y="120" width="94" height="15" uuid="c7d89408-7584-4627-953c-7f960662eb05"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Totalmente de acuerdo]]></text>
+			</staticText>
+		</band>
+		<band height="15">
+			<componentElement>
+				<reportElement key="table" x="46" y="0" width="509" height="15" uuid="b0791805-8af9-4422-a083-6ec28d766e2e"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="registro4" uuid="857c846a-e390-448d-a083-93f9797a494c">
+						<datasetParameter name="idparticipante_ds_4">
+							<datasetParameterExpression><![CDATA[$P{idparticipante}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="467" uuid="9bacb975-4094-4808-80e8-91f95996cf8e">
+						<jr:detailCell height="14" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="467" height="14" uuid="30cb319e-35ee-4f6d-a96f-d33ce807cfc3"/>
+								<textElement textAlignment="Justified">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{opinion_final}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="41" uuid="523be732-6b0a-4b8c-8438-94f5d801b8e8">
+						<jr:detailCell height="14" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="1" width="41" height="13" uuid="fe438633-18aa-40c7-ae4e-9c246261e6a2"/>
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{valor_opinion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="11">
+			<componentElement>
+				<reportElement key="table" x="46" y="0" width="509" height="11" uuid="6b508486-06ee-4104-b7e2-8f4e049336d4"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="registro5" uuid="dc2144a7-5eb5-421a-88d5-b0970465b634">
+						<datasetParameter name="idparticipante_ds_5">
+							<datasetParameterExpression><![CDATA[$P{idparticipante}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="467" uuid="6f078c75-9e21-47b4-80ba-39cb440d7f82">
+						<jr:detailCell height="13" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="467" height="13" uuid="e201b349-d474-4d78-a0b9-c98fbb899a70"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{opinion_final}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="41" uuid="8141918b-b955-4d4e-9ea7-1a46b18171cd">
+						<jr:detailCell height="13" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="41" height="13" uuid="a98a4c16-9cf1-47bb-9bfe-ba6c4230c714"/>
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{valor_opinion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="11">
+			<componentElement>
+				<reportElement key="table" x="46" y="0" width="509" height="11" uuid="4c9312b4-cc40-49ef-81b7-e97e97b38928"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="registro6" uuid="745fb9be-96cd-4a83-887d-5770e0dfa228">
+						<datasetParameter name="idparticipante_ds_6">
+							<datasetParameterExpression><![CDATA[$P{idparticipante}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="467" uuid="416fc1fa-8a69-4437-837f-643c20ee78dc">
+						<jr:detailCell height="13" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="467" height="13" uuid="48bd06c0-1658-4b7d-8cff-896b8531af4f"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{opinion_final}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="41" uuid="49ee22ea-a304-4217-b09c-6988f4ca3656">
+						<jr:detailCell height="13" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="41" height="13" uuid="d7bbda74-a661-4cd1-8e59-53756ce7672e"/>
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{valor_opinion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="14">
+			<componentElement>
+				<reportElement key="table" x="46" y="0" width="509" height="14" uuid="5202a948-db1b-4f05-b29f-488ace6104bb"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="tabla_ds_7" uuid="9c3922e2-0fcf-465f-9f95-073b07f33fa2">
+						<datasetParameter name="ipaprticipante_ds_7">
+							<datasetParameterExpression><![CDATA[$P{idparticipante}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="467" uuid="60c36563-3b35-47b9-b7fa-477b7e363f99">
+						<jr:detailCell height="13" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="467" height="13" uuid="07a97278-29b8-4ba3-91a5-b23e3ff09bf6"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{opinion_final}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="41" uuid="666a4c61-b2c1-4a42-9acb-a8fe58da9c66">
+						<jr:detailCell height="13" rowSpan="1">
+							<rectangle>
+								<reportElement x="0" y="0" width="41" height="12" uuid="facb115b-1b79-4983-89e6-ecd71a98f7eb"/>
+							</rectangle>
+							<textField>
+								<reportElement x="0" y="0" width="41" height="13" uuid="4e329f73-1718-4d37-9732-f5afa6b71ab1"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{valor_opinion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="15">
+			<componentElement>
+				<reportElement key="table" x="46" y="0" width="509" height="15" uuid="71180c0a-4792-4622-98df-83743502aec5"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="registro_ds_8" uuid="7593681d-db2e-4573-99e6-befb88b0f914">
+						<datasetParameter name="idparticipante_ds_8">
+							<datasetParameterExpression><![CDATA[$P{idparticipante}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="467" uuid="3db46ec9-9a0f-4073-9939-51b0ea461f5d">
+						<jr:detailCell height="14" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="467" height="14" uuid="b7662aab-1a06-4029-9c19-cc15956d3aff"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{opinion_final}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="41" uuid="5d55bc87-4ee8-4280-b8c1-34dcf761d28a">
+						<jr:detailCell height="14" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="41" height="14" uuid="efebde8b-dfcf-4cd8-9ef3-3606e31871c6"/>
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{valor_opinion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="14">
+			<componentElement>
+				<reportElement key="table" x="46" y="0" width="509" height="14" uuid="38ed14ed-b777-4c03-a286-df60638612eb"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="tabla_ds_9" uuid="ff9a6815-67b0-461e-9319-bc558de9ce14">
+						<datasetParameter name="idparticipante_ds_9">
+							<datasetParameterExpression><![CDATA[$P{idparticipante}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="467" uuid="7ff9ca3e-9d4e-444a-92d9-979b5eb13fa7">
+						<jr:detailCell height="13" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="467" height="13" uuid="e374cfb5-6889-49bc-befe-ae7e81fbe1c5"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{opinion_final}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="41" uuid="919776b1-1851-4621-897a-da61d6113432">
+						<jr:detailCell height="13" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="41" height="13" uuid="5f2e6a29-fee5-430e-919c-c76335cd3f6e"/>
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{valor_opinion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="14">
+			<componentElement>
+				<reportElement key="table" x="46" y="0" width="509" height="14" uuid="0d85c817-1b5b-47da-a864-ca72624d290d"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="registro_10" uuid="bcf8c1e6-b164-45a4-ae57-ab06efa9e675">
+						<datasetParameter name="idparticipante_ds_10">
+							<datasetParameterExpression><![CDATA[$P{idparticipante}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="467" uuid="0db197a9-1ace-4515-8e20-042fa3545029">
+						<jr:detailCell height="15" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="467" height="15" uuid="ce75d4a1-f0c7-4145-b80d-7705ca38be3a"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{opinion_final}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="41" uuid="b1a94ca2-cd7d-4181-b047-1074c00ac278">
+						<jr:detailCell height="15" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="41" height="15" uuid="49631935-593d-48c7-acef-0ba77e533f30"/>
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{valor_opinion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="12">
+			<componentElement>
+				<reportElement key="table" x="46" y="0" width="509" height="12" uuid="7efaeba3-4494-4a9e-92d6-8a0626524c80"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="registro11" uuid="df4d5f1b-a778-42ee-afb5-e2b4962a7877">
+						<datasetParameter name="idparticipante_ds_11">
+							<datasetParameterExpression><![CDATA[$P{idparticipante}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="467" uuid="a95e5de5-6361-4e77-9741-5e4db46196af">
+						<jr:detailCell height="15" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="467" height="15" uuid="11ceca43-338d-49fa-ac18-ef403ad62504"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{opinion_final}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="41" uuid="c971ff92-6cdd-42cd-a3c4-356f08cd07fe">
+						<jr:detailCell height="15" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="41" height="15" uuid="50b37f42-72d9-45a9-8ae1-6f71f79d9bc4"/>
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{valor_opinion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="93">
+			<componentElement>
+				<reportElement key="table" x="13" y="49" width="304" height="44" uuid="5c042bc8-ee8b-4c4f-96db-f3a56fde0870"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="obstaculo_ds_1" uuid="7a459bc6-6a7c-4c05-b2c8-70b6f43e5215">
+						<datasetParameter name="idparticipante_obstaculo1">
+							<datasetParameterExpression><![CDATA[$P{idparticipante}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="25" uuid="1f4996a1-03e0-4481-8e22-50b86c32faa2">
+						<jr:columnHeader height="15" rowSpan="1">
+							<rectangle>
+								<reportElement x="0" y="0" width="25" height="14" uuid="56b870b9-b1b2-4615-876c-c09f6da8a23e"/>
+							</rectangle>
+							<textField>
+								<reportElement x="0" y="0" width="25" height="14" uuid="f8385092-1534-4193-974e-15bb621f7e0d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{o_p}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:columnFooter height="13" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="25" height="13" uuid="ebc58ac0-3345-4efa-b5b4-b6647b57c3e7"/>
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{obstaculo_1}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell height="13" rowSpan="1">
+							<rectangle>
+								<reportElement x="0" y="0" width="25" height="13" uuid="6990a00c-1097-4ef0-822b-d5457c66e891"/>
+							</rectangle>
+							<textField>
+								<reportElement x="0" y="0" width="25" height="13" uuid="bc9a66fa-92f6-4b5c-8674-11030964aeea"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{o_p2}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:columnGroup width="277" uuid="40f48abf-b18f-4d8e-857a-aee9488f9558">
+						<jr:columnHeader height="15" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="277" height="15" uuid="94a5baf7-01ec-461e-941e-8e587bf55cb0"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[	FALTA DE EQUIPO Y/O MATERIAL]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter height="13" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="277" height="13" uuid="57870442-d2d3-43ef-8a34-5502789a86bf"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[	OTRO]]></text>
+							</staticText>
+						</jr:columnFooter>
+						<jr:column width="277" uuid="f30734cb-e9ed-49e8-9ba3-1f4c8f84013d">
+							<jr:detailCell height="13" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="277" height="13" uuid="53ae6c68-b5ac-4377-830c-23179abd9d9f"/>
+									<textElement verticalAlignment="Middle">
+										<font size="8"/>
+									</textElement>
+									<text><![CDATA[	FALTA DE APOYO EN EL ÁREA DE TRABAJO]]></text>
+								</staticText>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement x="0" y="13" width="533" height="23" uuid="ab4929cd-0202-4886-b500-b70ddc4dd110"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[En caso de considerar que existen obstáculos que le impidan aplicar los conocimientos del curso, señale con una "X" el correspondiente.]]></text>
+			</staticText>
+		</band>
+		<band height="40">
+			<textField>
+				<reportElement x="78" y="0" width="477" height="40" uuid="5a531abc-eb39-4fb0-8d99-a0944fb4b076"/>
+				<textElement verticalAlignment="Top">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{co}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="147" y="11" width="408" height="1" uuid="e4850815-d769-4a69-a78e-b00632d30e38"/>
+			</line>
+			<line>
+				<reportElement x="78" y="22" width="477" height="1" uuid="25cfbbc6-78f6-49a5-834d-cae89c9988ef"/>
+			</line>
+			<line>
+				<reportElement x="78" y="33" width="477" height="1" uuid="884b2285-37e9-4c81-96a3-20de2470076d"/>
+			</line>
+		</band>
+		<band height="136">
+			<rectangle>
+				<reportElement x="13" y="0" width="542" height="12" backcolor="#CCCCCC" uuid="dc3ae09f-5c3f-4e81-a1ec-548ca80489e7"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="13" y="0" width="542" height="14" uuid="6c237f32-4b1f-4a5e-8b72-24912cb03227"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Comentarios o sugerencias]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="76" width="110" height="14" uuid="3c7d71fa-430b-4727-84d8-fa8d8ba912ec"/>
+				<text><![CDATA[Fecha de aplicación:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="91" width="554" height="20" uuid="13a3e550-69b0-486c-b354-109fde11a0df"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[¡GRACIAS!]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="123" width="100" height="13" uuid="cd05507e-de34-472e-b573-5030db5ef622"/>
+				<text><![CDATA[M00-IT-13-R06]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="123" width="100" height="13" uuid="d92370b9-2151-47b3-998a-452a1e870a19"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[REV. O]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="13" y="12" width="542" height="54" uuid="ce449935-a802-4b61-b284-5a137007a153"/>
+				<textFieldExpression><![CDATA[$F{COMENTARIO O SUGERENCIA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="123" y="76" width="302" height="14" uuid="43fe2b3e-fdfb-49a5-975c-b9adbc4b38df"/>
+				<textFieldExpression><![CDATA[$F{FECHA DE APLICACION}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="2" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="3" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="3" splitType="Stretch"/>
+	</summary>
+</jasperReport>

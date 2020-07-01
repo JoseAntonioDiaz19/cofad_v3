@@ -49,7 +49,7 @@ public class JDialog_GradosAcademicos extends javax.swing.JDialog
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 30, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 30, 0, 0);
         pnlPrincipal.add(lblGradosAcademicos, gridBagConstraints);
 
         labelId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -58,8 +58,8 @@ public class JDialog_GradosAcademicos extends javax.swing.JDialog
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
         pnlPrincipal.add(labelId, gridBagConstraints);
 
         txtId.setEditable(false);
@@ -70,7 +70,7 @@ public class JDialog_GradosAcademicos extends javax.swing.JDialog
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
         pnlPrincipal.add(txtId, gridBagConstraints);
 
         btnRegistrar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -79,7 +79,7 @@ public class JDialog_GradosAcademicos extends javax.swing.JDialog
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 145);
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 150);
         pnlPrincipal.add(btnRegistrar, gridBagConstraints);
 
         tblGradosAcademicos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -108,7 +108,7 @@ public class JDialog_GradosAcademicos extends javax.swing.JDialog
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(10, 5, 5, 5);
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 10, 5);
         pnlPrincipal.add(jScrollTablaGradosAcademicos, gridBagConstraints);
 
         labelTitulo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -118,7 +118,7 @@ public class JDialog_GradosAcademicos extends javax.swing.JDialog
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
         pnlPrincipal.add(labelTitulo, gridBagConstraints);
 
         btnEditar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -127,7 +127,7 @@ public class JDialog_GradosAcademicos extends javax.swing.JDialog
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 5);
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 10);
         pnlPrincipal.add(btnEditar, gridBagConstraints);
 
         txtGradosAcademicos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -137,7 +137,7 @@ public class JDialog_GradosAcademicos extends javax.swing.JDialog
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 2.0;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 5);
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 10);
         pnlPrincipal.add(txtGradosAcademicos, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();

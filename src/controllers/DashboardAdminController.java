@@ -24,17 +24,18 @@ import views.login.Login;
 import views.perfil.PerfilVista;
 import views.personas.Personal;
 
-public class DashboardAdminController {
-    
+public class DashboardAdminController
+{
     private final DashboardAdmin mainView;
     private final Personas personaLogueada;
     
     private int xMouse;
     private int yMouse;
     private String click;
-    Usuarios modeloUsuario;
+    private Usuarios modeloUsuario;
 
-    public DashboardAdminController(DashboardAdmin mainView, Personas personaLogueada, Usuarios modeloUsuario) {
+    public DashboardAdminController(DashboardAdmin mainView, Personas personaLogueada, Usuarios modeloUsuario)
+    {
         this.mainView = mainView;
         this.personaLogueada = personaLogueada;
         this.modeloUsuario = modeloUsuario;

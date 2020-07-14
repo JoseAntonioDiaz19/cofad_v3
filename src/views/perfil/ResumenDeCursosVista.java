@@ -19,7 +19,7 @@ public class ResumenDeCursosVista extends javax.swing.JDialog {
     public ResumenDeCursosVista(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-         jScrollTablaExperienciaLaboral.getViewport().setBackground(new Color(0, 78, 97));
+         jScrollTablaResumenCursos.getViewport().setBackground(new Color(0, 78, 97));
     }
 
     /**
@@ -32,6 +32,10 @@ public class ResumenDeCursosVista extends javax.swing.JDialog {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        menuResumenCursos = new javax.swing.JPopupMenu();
+        menuItemImprimirCedula = new javax.swing.JMenuItem();
+        menuItemEncuestaEficacia = new javax.swing.JMenuItem();
+        menuItemEncuestaOpinion = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         labelTitulo = new javax.swing.JLabel();
         panelDatos = new javax.swing.JPanel();
@@ -42,10 +46,19 @@ public class ResumenDeCursosVista extends javax.swing.JDialog {
         boxPeriodo = new javax.swing.JComboBox<>();
         boxTipoCurso = new javax.swing.JComboBox<>();
         panelBotones = new javax.swing.JPanel();
-        btnGuardarCambios = new javax.swing.JButton();
+        btnFiltrar = new javax.swing.JButton();
         panelTabla = new javax.swing.JPanel();
-        jScrollTablaExperienciaLaboral = new javax.swing.JScrollPane();
-        tblExperienciaLaboral = new javax.swing.JTable();
+        jScrollTablaResumenCursos = new javax.swing.JScrollPane();
+        tblResumenCursos = new javax.swing.JTable();
+
+        menuItemImprimirCedula.setText("Imprimir cédula de inscripción");
+        menuResumenCursos.add(menuItemImprimirCedula);
+
+        menuItemEncuestaEficacia.setText("Encuesta de eficacia");
+        menuResumenCursos.add(menuItemEncuestaEficacia);
+
+        menuItemEncuestaOpinion.setText("Encuesta de opinión");
+        menuResumenCursos.add(menuItemEncuestaOpinion);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridLayout(1, 0));
@@ -56,7 +69,7 @@ public class ResumenDeCursosVista extends javax.swing.JDialog {
         labelTitulo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         labelTitulo.setForeground(new java.awt.Color(255, 255, 255));
         labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelTitulo.setText("Experiencia laboral");
+        labelTitulo.setText("Resumen de cursos");
         labelTitulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -106,6 +119,7 @@ public class ResumenDeCursosVista extends javax.swing.JDialog {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
         panelDatos.add(boxCicloEscolar, gridBagConstraints);
 
         boxPeriodo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione --" }));
@@ -113,12 +127,15 @@ public class ResumenDeCursosVista extends javax.swing.JDialog {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
         panelDatos.add(boxPeriodo, gridBagConstraints);
 
         boxTipoCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione --" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
         panelDatos.add(boxTipoCurso, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -133,13 +150,13 @@ public class ResumenDeCursosVista extends javax.swing.JDialog {
         panelBotones.setBackground(new java.awt.Color(0, 78, 97));
         panelBotones.setLayout(new java.awt.GridBagLayout());
 
-        btnGuardarCambios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnGuardarCambios.setText("Filtrar");
-        btnGuardarCambios.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnGuardarCambios.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFiltrar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnFiltrar.setText("Filtrar");
+        btnFiltrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
-        panelBotones.add(btnGuardarCambios, gridBagConstraints);
+        panelBotones.add(btnFiltrar, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -152,8 +169,8 @@ public class ResumenDeCursosVista extends javax.swing.JDialog {
         panelTabla.setBackground(new java.awt.Color(0, 78, 97));
         panelTabla.setLayout(new java.awt.GridBagLayout());
 
-        tblExperienciaLaboral.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tblExperienciaLaboral.setModel(new javax.swing.table.DefaultTableModel(
+        tblResumenCursos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tblResumenCursos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -169,15 +186,15 @@ public class ResumenDeCursosVista extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        tblExperienciaLaboral.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollTablaExperienciaLaboral.setViewportView(tblExperienciaLaboral);
-        if (tblExperienciaLaboral.getColumnModel().getColumnCount() > 0) {
-            tblExperienciaLaboral.getColumnModel().getColumn(0).setMinWidth(50);
-            tblExperienciaLaboral.getColumnModel().getColumn(0).setPreferredWidth(60);
-            tblExperienciaLaboral.getColumnModel().getColumn(0).setMaxWidth(100);
-            tblExperienciaLaboral.getColumnModel().getColumn(2).setMinWidth(150);
-            tblExperienciaLaboral.getColumnModel().getColumn(2).setPreferredWidth(150);
-            tblExperienciaLaboral.getColumnModel().getColumn(2).setMaxWidth(180);
+        tblResumenCursos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollTablaResumenCursos.setViewportView(tblResumenCursos);
+        if (tblResumenCursos.getColumnModel().getColumnCount() > 0) {
+            tblResumenCursos.getColumnModel().getColumn(0).setMinWidth(50);
+            tblResumenCursos.getColumnModel().getColumn(0).setPreferredWidth(60);
+            tblResumenCursos.getColumnModel().getColumn(0).setMaxWidth(100);
+            tblResumenCursos.getColumnModel().getColumn(2).setMinWidth(150);
+            tblResumenCursos.getColumnModel().getColumn(2).setPreferredWidth(150);
+            tblResumenCursos.getColumnModel().getColumn(2).setMaxWidth(180);
         }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -187,7 +204,7 @@ public class ResumenDeCursosVista extends javax.swing.JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        panelTabla.add(jScrollTablaExperienciaLaboral, gridBagConstraints);
+        panelTabla.add(jScrollTablaResumenCursos, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -313,16 +330,20 @@ public class ResumenDeCursosVista extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> boxCicloEscolar;
     private javax.swing.JComboBox<String> boxPeriodo;
     private javax.swing.JComboBox<String> boxTipoCurso;
-    public javax.swing.JButton btnGuardarCambios;
+    public javax.swing.JButton btnFiltrar;
     private javax.swing.JPanel jPanel1;
-    public javax.swing.JScrollPane jScrollTablaExperienciaLaboral;
+    public javax.swing.JScrollPane jScrollTablaResumenCursos;
     private javax.swing.JLabel labelCicloEscolar;
     private javax.swing.JLabel labelPeriodo;
     private javax.swing.JLabel labelTipoCurso;
     private javax.swing.JLabel labelTitulo;
+    private javax.swing.JMenuItem menuItemEncuestaEficacia;
+    private javax.swing.JMenuItem menuItemEncuestaOpinion;
+    private javax.swing.JMenuItem menuItemImprimirCedula;
+    private javax.swing.JPopupMenu menuResumenCursos;
     private javax.swing.JPanel panelBotones;
     private javax.swing.JPanel panelDatos;
     private javax.swing.JPanel panelTabla;
-    public javax.swing.JTable tblExperienciaLaboral;
+    public javax.swing.JTable tblResumenCursos;
     // End of variables declaration//GEN-END:variables
 }

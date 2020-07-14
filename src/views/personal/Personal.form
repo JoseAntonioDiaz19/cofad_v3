@@ -11,7 +11,7 @@
     <Container class="javax.swing.JPopupMenu" name="PopupMenu">
       <Properties>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Default Cursor"/>
+          <Color id="Cursor Por defecto"/>
         </Property>
       </Properties>
       <AccessibilityProperties>
@@ -27,15 +27,15 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
       <SubComponents>
-        <MenuItem class="javax.swing.JMenuItem" name="menuItemEditar">
+        <MenuItem class="javax.swing.JMenuItem" name="menuItemEditarDatosPersonales">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Editar"/>
+            <Property name="text" type="java.lang.String" value="Editar datos personales"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </MenuItem>
-        <MenuItem class="javax.swing.JMenuItem" name="menuItemEstatusActivar">
+        <MenuItem class="javax.swing.JMenuItem" name="menuItemEditarDatosLaborales">
           <Properties>
             <Property name="text" type="java.lang.String" value="Activar"/>
           </Properties>
@@ -43,7 +43,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </MenuItem>
-        <MenuItem class="javax.swing.JMenuItem" name="menuItemEstatusDesactivar">
+        <MenuItem class="javax.swing.JMenuItem" name="menuItemExperienciaLaboral">
           <Properties>
             <Property name="text" type="java.lang.String" value="Desactivar"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -52,7 +52,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </MenuItem>
-        <MenuItem class="javax.swing.JMenuItem" name="menuitemResumen">
+        <MenuItem class="javax.swing.JMenuItem" name="menuitemProductosAcademicos">
           <Properties>
             <Property name="text" type="java.lang.String" value="Resumen de datos"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -60,6 +60,41 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="menuItemExperienciaDocente">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jMenuItem1"/>
+          </Properties>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="menuItemFormacionAcademica">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jMenuItem1"/>
+          </Properties>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="menuItemResumenCursos">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jMenuItem1"/>
+          </Properties>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="menuItemImprimirCurriculum">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jMenuItem1"/>
+          </Properties>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="menuItemInactivar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jMenuItem1"/>
+          </Properties>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="menuItemActivar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jMenuItem1"/>
+          </Properties>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="menuItemActualizar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jMenuItem1"/>
+          </Properties>
         </MenuItem>
       </SubComponents>
     </Container>
@@ -142,7 +177,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="  Registrar nuevo personal"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
@@ -235,7 +270,7 @@
                   <ComponentRef name="PopupMenu"/>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Default Cursor"/>
+                  <Color id="Cursor Por defecto"/>
                 </Property>
                 <Property name="inheritsPopupMenu" type="boolean" value="true"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">

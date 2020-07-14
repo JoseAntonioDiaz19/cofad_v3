@@ -1,22 +1,21 @@
-package views.personas;
+package views.personal;
 
 import java.awt.Color;
-
 /**
  *
- * @author campu
+ * @author Jose Manuel Estrada Diaz
  */
-public class JDialog_Personas extends javax.swing.JDialog
+public class JDialog_Jefes extends javax.swing.JDialog
 {
-    public JDialog_Personas(java.awt.Frame parent, boolean modal)
+    public JDialog_Jefes(java.awt.Frame parent, boolean modal)
     {
         super(parent, modal);
         initComponents();
-        this.setTitle("LISTA DE PERSONAL");
+        this.setTitle("LISTA DE JEFES");
         this.setSize(750, 450);
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(new Color(0, 78, 97));
-        jScrollTablaPersonas.getViewport().setBackground(new Color(0, 78, 97));
+        jScrollTablaJefes.getViewport().setBackground(new Color(0, 78, 97));
     }
 
     @SuppressWarnings("unchecked")
@@ -25,13 +24,12 @@ public class JDialog_Personas extends javax.swing.JDialog
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel4 = new javax.swing.JPanel();
-        jScrollTablaPersonas = new javax.swing.JScrollPane();
+        jScrollTablaJefes = new javax.swing.JScrollPane();
         tblPersonas = new javax.swing.JTable();
         jLabel20 = new javax.swing.JLabel();
         txtFiltrado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(227, 56));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanel4.setBackground(new java.awt.Color(0, 78, 97));
@@ -43,18 +41,18 @@ public class JDialog_Personas extends javax.swing.JDialog
 
             },
             new String [] {
-                "R.F.C.", "APELLIDO PATERNO", "APELLIDO MATERNO", "NOMBRE "
+                "R.F.C.", "NOMBRE", "CARGO", "DEPARTAMENTO", "SUBDIVISIÓN"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollTablaPersonas.setViewportView(tblPersonas);
+        jScrollTablaJefes.setViewportView(tblPersonas);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -64,7 +62,7 @@ public class JDialog_Personas extends javax.swing.JDialog
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 5, 5, 5);
-        jPanel4.add(jScrollTablaPersonas, gridBagConstraints);
+        jPanel4.add(jScrollTablaJefes, gridBagConstraints);
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
@@ -114,21 +112,23 @@ public class JDialog_Personas extends javax.swing.JDialog
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDialog_Personas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialog_Jefes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDialog_Personas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialog_Jefes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDialog_Personas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialog_Jefes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDialog_Personas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialog_Jefes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialog_Personas dialog = new JDialog_Personas(new javax.swing.JFrame(), true);
+                JDialog_Jefes dialog = new JDialog_Jefes(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -143,7 +143,7 @@ public class JDialog_Personas extends javax.swing.JDialog
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel20;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollTablaPersonas;
+    private javax.swing.JScrollPane jScrollTablaJefes;
     public javax.swing.JTable tblPersonas;
     public javax.swing.JTextField txtFiltrado;
     // End of variables declaration//GEN-END:variables

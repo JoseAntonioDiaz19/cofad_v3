@@ -1,4 +1,4 @@
-package views.personas;
+package views.personal;
 
 import java.awt.Color;
 import java.awt.Image;

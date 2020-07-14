@@ -11,7 +11,7 @@ import models.implementation.PersonasDaoImpl;
 import models.implementation.PlantelDaoImpl;
 import models.implementation.PuestosDaoImpl;
 
-import views.personas.JDialog_GestionarPersonal;
+import views.personal.JDialog_Registrar;
 import models.pojo.Personas;
 import models.pojo.Plantel;
 import util.AlertMarket;
@@ -21,12 +21,12 @@ import util.Conexion;
 
 public class RegistrarPersonalController {
     
-    JDialog_GestionarPersonal vistaGestionarPersonal;
+    JDialog_Registrar vistaGestionarPersonal;
     PersonasDAO personaDao;
     
     DefaultComboBoxModel modelCombo;
     
-    public RegistrarPersonalController(JDialog_GestionarPersonal vista)
+    public RegistrarPersonalController(JDialog_Registrar vista)
     {
         vistaGestionarPersonal = vista;
         personaDao = new PersonasDaoImpl(Conexion.getConnection());
@@ -39,7 +39,7 @@ public class RegistrarPersonalController {
         vistaGestionarPersonal.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
         vistaGestionarPersonal.btnRegistrar.addActionListener(this::btnRegistrar);
-        vistaGestionarPersonal.btnEditar.setVisible(false);
+        vistaGestionarPersonal.btnRegistrar.setVisible(false);
         
         vistaGestionarPersonal.txtApellidoMat.setDocument(new Bloq_Mayus());
         vistaGestionarPersonal.txtApellidoPat.setDocument(new Bloq_Mayus());

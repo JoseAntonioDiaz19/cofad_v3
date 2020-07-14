@@ -9,11 +9,11 @@ import javax.swing.table.DefaultTableModel;
 
 import util.Bloq_Mayus;
 import util.FrameHijo;
-import views.personas.Personal;
+import views.personal.Personal;
 import models.implementation.PersonasTblVistaDaoImpl;
 import models.pojo.PersonasTblVista;
 import util.Conexion;
-import views.personas.JDialog_GestionarPersonal;
+import views.personal.JDialog_Registrar;
 import models.dao.PersonasTblaVistaDAO;
 
 public class PersonasController {
@@ -43,9 +43,9 @@ public class PersonasController {
 
         vistaPersonas.btnRegistrarPersonal.addActionListener(this::nuevo);
 
-        vistaPersonas.menuItemEditar.addActionListener(this::itemEditarPersonal);
-        vistaPersonas.menuItemEstatusDesactivar.addActionListener(this::itemDesactivarPersonal);
-        vistaPersonas.menuItemEstatusActivar.addActionListener(this::itemActivarPersonal);
+        vistaPersonas.menuItemEditarDatosPersonales.addActionListener(this::itemEditarPersonal);
+        vistaPersonas.menuItemExperienciaLaboral.addActionListener(this::itemDesactivarPersonal);
+        vistaPersonas.menuItemEditarDatosLaborales.addActionListener(this::itemActivarPersonal);
         vistaPersonas.txtFiltrado.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent evt) {
@@ -55,7 +55,7 @@ public class PersonasController {
     }
     
     public void nuevo(ActionEvent evt) {
-        JDialog_GestionarPersonal vistaPersona = new JDialog_GestionarPersonal(FrameHijo.obtenerPadre(vistaPersonas), true);
+        JDialog_Registrar vistaPersona = new JDialog_Registrar(FrameHijo.obtenerPadre(vistaPersonas), true);
         RegistrarPersonalController ctrl = new RegistrarPersonalController(vistaPersona);
     }
 

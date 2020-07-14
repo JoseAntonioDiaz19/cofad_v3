@@ -1,4 +1,4 @@
-package views.personas;
+package views.personal;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -8,9 +8,9 @@ import javax.swing.ImageIcon;
  *
  * @author Jose Manuel Estrada Diaz
  */
-public class JDialog_GestionarPersonal extends javax.swing.JDialog
+public class JDialog_Registrar extends javax.swing.JDialog
 {
-    public JDialog_GestionarPersonal(java.awt.Frame parent, boolean modal){
+    public JDialog_Registrar(java.awt.Frame parent, boolean modal){
         super(parent, modal);
         initComponents();
         this.setTitle("Gestionar personal");
@@ -73,7 +73,6 @@ public class JDialog_GestionarPersonal extends javax.swing.JDialog
         jComboBox1 = new javax.swing.JComboBox<>();
         panelVacio = new javax.swing.JPanel();
         btnRegistrar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar datos de personal");
@@ -543,7 +542,7 @@ public class JDialog_GestionarPersonal extends javax.swing.JDialog
         btnRegistrar.setBackground(new java.awt.Color(0, 153, 153));
         btnRegistrar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnRegistrar.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegistrar.setText(" Registrar");
+        btnRegistrar.setText("Boton");
         btnRegistrar.setContentAreaFilled(false);
         btnRegistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegistrar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -554,45 +553,25 @@ public class JDialog_GestionarPersonal extends javax.swing.JDialog
         gridBagConstraints.gridy = 3;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         panelVacio.add(btnRegistrar, gridBagConstraints);
-        String urlRegistrar = "/recursos/imagenes/save.png";
-        ImageIcon imgRegistrar = new ImageIcon(getClass().getResource(urlRegistrar));
-        Icon iconRegistrar = new ImageIcon(imgRegistrar.getImage().getScaledInstance(
+        String urlEditar = "/recursos/imagenes/update.png";
+        ImageIcon imgEditar = new ImageIcon(getClass().getResource(urlEditar));
+        Icon iconEditar = new ImageIcon(imgEditar.getImage().getScaledInstance(
             22, 22, Image.SCALE_SMOOTH));
-    btnRegistrar.setIcon(iconRegistrar);
+    btnRegistrar.setIcon(iconEditar);
 
-    btnEditar.setBackground(new java.awt.Color(0, 153, 153));
-    btnEditar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-    btnEditar.setForeground(new java.awt.Color(255, 255, 255));
-    btnEditar.setText("Guardar cambios");
-    btnEditar.setContentAreaFilled(false);
-    btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-    btnEditar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-    btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-    btnEditar.setOpaque(true);
     gridBagConstraints = new java.awt.GridBagConstraints();
     gridBagConstraints.gridx = 0;
-    gridBagConstraints.gridy = 3;
-    gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
-    panelVacio.add(btnEditar, gridBagConstraints);
-    String urlEditar = "/recursos/imagenes/update.png";
-    ImageIcon imgEditar = new ImageIcon(getClass().getResource(urlEditar));
-    Icon iconEditar = new ImageIcon(imgEditar.getImage().getScaledInstance(
-        22, 22, Image.SCALE_SMOOTH));
-btnEditar.setIcon(iconEditar);
+    gridBagConstraints.gridy = 2;
+    gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+    gridBagConstraints.ipady = 10;
+    gridBagConstraints.weightx = 1.0;
+    gridBagConstraints.weighty = 0.5;
+    panelPrincipal.add(panelVacio, gridBagConstraints);
 
-gridBagConstraints = new java.awt.GridBagConstraints();
-gridBagConstraints.gridx = 0;
-gridBagConstraints.gridy = 2;
-gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-gridBagConstraints.ipady = 10;
-gridBagConstraints.weightx = 1.0;
-gridBagConstraints.weighty = 0.5;
-panelPrincipal.add(panelVacio, gridBagConstraints);
+    getContentPane().add(panelPrincipal);
 
-getContentPane().add(panelPrincipal);
-
-pack();
-}// </editor-fold>//GEN-END:initComponents
+    pack();
+    }// </editor-fold>//GEN-END:initComponents
 
     /**
      * @param args the command line arguments
@@ -611,14 +590,26 @@ pack();
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDialog_GestionarPersonal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialog_Registrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDialog_GestionarPersonal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialog_Registrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDialog_GestionarPersonal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialog_Registrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDialog_GestionarPersonal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialog_Registrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -627,7 +618,7 @@ pack();
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialog_GestionarPersonal dialog = new JDialog_GestionarPersonal(new javax.swing.JFrame(), true);
+                JDialog_Registrar dialog = new JDialog_Registrar(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -640,7 +631,6 @@ pack();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnEditar;
     public javax.swing.JButton btnRegistrar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;

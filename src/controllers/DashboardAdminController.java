@@ -22,7 +22,7 @@ import models.pojo.Usuarios;
 import views.catalogos.Otros;
 import views.login.Login;
 import views.perfil.PerfilVista;
-import views.personas.Personal;
+import views.personal.Personal;
 
 public class DashboardAdminController
 {

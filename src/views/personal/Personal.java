@@ -1,4 +1,4 @@
-package views.personas;
+package views.personal;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -25,10 +25,17 @@ public class Personal extends javax.swing.JPanel
         btnGroupPersonalExterno = new javax.swing.ButtonGroup();
         btnGroupEstadoPersona = new javax.swing.ButtonGroup();
         PopupMenu = new javax.swing.JPopupMenu();
-        menuItemEditar = new javax.swing.JMenuItem();
-        menuItemEstatusActivar = new javax.swing.JMenuItem();
-        menuItemEstatusDesactivar = new javax.swing.JMenuItem();
-        menuitemResumen = new javax.swing.JMenuItem();
+        menuItemEditarDatosPersonales = new javax.swing.JMenuItem();
+        menuItemEditarDatosLaborales = new javax.swing.JMenuItem();
+        menuItemExperienciaLaboral = new javax.swing.JMenuItem();
+        menuitemProductosAcademicos = new javax.swing.JMenuItem();
+        menuItemExperienciaDocente = new javax.swing.JMenuItem();
+        menuItemFormacionAcademica = new javax.swing.JMenuItem();
+        menuItemResumenCursos = new javax.swing.JMenuItem();
+        menuItemImprimirCurriculum = new javax.swing.JMenuItem();
+        menuItemInactivar = new javax.swing.JMenuItem();
+        menuItemActivar = new javax.swing.JMenuItem();
+        menuItemActualizar = new javax.swing.JMenuItem();
         jPanel4 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         txtFiltrado = new javax.swing.JTextField();
@@ -39,19 +46,40 @@ public class Personal extends javax.swing.JPanel
 
         PopupMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        menuItemEditar.setText("Editar");
-        PopupMenu.add(menuItemEditar);
+        menuItemEditarDatosPersonales.setText("Editar datos personales");
+        PopupMenu.add(menuItemEditarDatosPersonales);
 
-        menuItemEstatusActivar.setText("Activar");
-        PopupMenu.add(menuItemEstatusActivar);
+        menuItemEditarDatosLaborales.setText("Activar");
+        PopupMenu.add(menuItemEditarDatosLaborales);
 
-        menuItemEstatusDesactivar.setText("Desactivar");
-        menuItemEstatusDesactivar.setToolTipText("");
-        PopupMenu.add(menuItemEstatusDesactivar);
+        menuItemExperienciaLaboral.setText("Desactivar");
+        menuItemExperienciaLaboral.setToolTipText("");
+        PopupMenu.add(menuItemExperienciaLaboral);
 
-        menuitemResumen.setText("Resumen de datos");
-        menuitemResumen.setToolTipText("");
-        PopupMenu.add(menuitemResumen);
+        menuitemProductosAcademicos.setText("Resumen de datos");
+        menuitemProductosAcademicos.setToolTipText("");
+        PopupMenu.add(menuitemProductosAcademicos);
+
+        menuItemExperienciaDocente.setText("jMenuItem1");
+        PopupMenu.add(menuItemExperienciaDocente);
+
+        menuItemFormacionAcademica.setText("jMenuItem1");
+        PopupMenu.add(menuItemFormacionAcademica);
+
+        menuItemResumenCursos.setText("jMenuItem1");
+        PopupMenu.add(menuItemResumenCursos);
+
+        menuItemImprimirCurriculum.setText("jMenuItem1");
+        PopupMenu.add(menuItemImprimirCurriculum);
+
+        menuItemInactivar.setText("jMenuItem1");
+        PopupMenu.add(menuItemInactivar);
+
+        menuItemActivar.setText("jMenuItem1");
+        PopupMenu.add(menuItemActivar);
+
+        menuItemActualizar.setText("jMenuItem1");
+        PopupMenu.add(menuItemActualizar);
 
         PopupMenu.getAccessibleContext().setAccessibleParent(tblPersonal);
 
@@ -167,10 +195,17 @@ public class Personal extends javax.swing.JPanel
     private javax.swing.JLabel jLabel20;
     private javax.swing.JPanel jPanel4;
     public javax.swing.JScrollPane jScrollTablaPersonal;
-    public javax.swing.JMenuItem menuItemEditar;
-    public javax.swing.JMenuItem menuItemEstatusActivar;
-    public javax.swing.JMenuItem menuItemEstatusDesactivar;
-    public javax.swing.JMenuItem menuitemResumen;
+    private javax.swing.JMenuItem menuItemActivar;
+    private javax.swing.JMenuItem menuItemActualizar;
+    public javax.swing.JMenuItem menuItemEditarDatosLaborales;
+    public javax.swing.JMenuItem menuItemEditarDatosPersonales;
+    private javax.swing.JMenuItem menuItemExperienciaDocente;
+    public javax.swing.JMenuItem menuItemExperienciaLaboral;
+    private javax.swing.JMenuItem menuItemFormacionAcademica;
+    private javax.swing.JMenuItem menuItemImprimirCurriculum;
+    private javax.swing.JMenuItem menuItemInactivar;
+    private javax.swing.JMenuItem menuItemResumenCursos;
+    public javax.swing.JMenuItem menuitemProductosAcademicos;
     public javax.swing.JTable tblPersonal;
     public javax.swing.JTextField txtFiltrado;
     // End of variables declaration//GEN-END:variables
